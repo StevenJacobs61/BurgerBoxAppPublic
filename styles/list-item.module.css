@@ -1,0 +1,113 @@
+.title_list{
+    list-style: none;
+    text-align: center;
+    cursor: pointer;
+    border-bottom: 0.5px solid #dedbdb;
+    padding: 0 0 0.4rem;
+    text-transform: uppercase;
+}
+.upgrade{
+    font-weight: 500;
+    cursor: pointer;
+    font-size: 1.1rem;
+    padding: 0.2rem 0 0;
+    margin: 0.2rem 0 0;
+    border-top: 1px solid var(--bg-color--blue);
+    color: #134701;
+}
+.extra{
+    font-size: 1.1rem;
+    color: #737473;
+}
+.title_item{
+    margin: 0.4rem 0;
+    cursor: pointer;
+    font-size: 1.2rem;
+    text-align: center;
+    font-weight: 400;
+}
+@media screen and (min-width:480px){
+    .title_item{
+    font-size: 1.4rem;
+    }
+}
+@media screen and (min-width:769px){
+    .title_item{
+        font-size: 1.6rem;
+    }
+    .extra{
+        font-size: 1.2rem;
+    }
+    .upgrade{
+        font-size: 1.1rem;
+    }
+}
+@media screen and (min-width:1024px){
+    .title_item{
+        font-size: 1.8rem;
+    }
+    .extra{
+        font-size: 1.25rem;
+    }
+    .upgrade{
+        font-size: 1.15rem;
+    }
+}
+
+/* Buttons */
+
+.btn_container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.btn_container>*, .btn_complete, .btn_del{
+    margin: 0 0 0.5rem;
+    padding: 0.5rem 0.6rem;
+    background-color: #fff;
+    font-size: 1rem;
+    border: none;
+    box-shadow: 0 0 2px #9b9a9a;
+    border-radius: 5px;
+    text-transform: uppercase;
+    cursor: pointer;
+    opacity: 0.6;
+}
+.btn_container>*:hover{
+    transform: scale(1.03);
+    opacity: 1;
+}
+.btn_accept{
+    color: rgb(13, 198, 0);
+}
+.btn_complete{
+    color: rgb(94, 86, 255);
+}
+.btn_del{
+    color: rgb(255, 86, 86);
+}
+@media screen and (min-width:480px){
+   .btn_container>*, .btn_complete, .btn_del{
+    font-size: 1.3rem;
+   }
+}
+@media screen and (min-width:769px){
+    .btn_complete, .btn_del, .btn_container>* {
+    font-size: 1.4rem;
+    padding: 0.4rem 0.5rem;
+   }
+}
+@media screen and (min-width:1024px){
+    .btn_complete, .btn_del, .btn_container>* {
+    font-size: 1.5rem;
+    padding: 0.4rem 0.5rem;
+   }
+}
+
+
+/* Hover */
+
+.btn_container>*:hover, .btn_del:hover, .btn_complete:hover{
+    transform: scale(1.02);
+    opacity: 1;
+}

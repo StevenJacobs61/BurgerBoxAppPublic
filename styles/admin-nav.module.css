@@ -1,0 +1,65 @@
+.container{
+    z-index: 777;
+    margin: 2rem 0;
+    display: flex;
+    justify-content: space-evenly;
+    width: 100vw;
+    align-items: center;
+}
+.btn{
+    padding: 0.5rem;
+    border-radius: 8px;
+    border: 1px solid;
+    background-color: #fff;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.2rem;
+    color: rgb(78, 99, 239);
+    cursor: pointer;
+    transition: all 0.15s;
+    font-size: 1rem;
+    opacity: 0.8;
+}
+.btn:hover{
+    transform: scale(1.02);
+    opacity: 1;
+}
+.icon{
+    width: 2.3rem;
+    height: 2.3rem;
+    color: rgb(36, 36, 36);
+    margin: 0 1rem 0 0;
+    cursor: pointer;
+    opacity: 0.8;
+}
+.icon:hover, .icon:hover{
+    transform: scale(1.02);
+    opacity: 1;
+}
+@media screen and (min-width:480px){
+    .container{
+       
+    }
+    .btn{
+        font-size: 1.8rem;
+    }
+    .icon{
+        width: 3.5rem;
+        height: 3.5rem;
+    }
+}
+@media screen and (min-width:1024px){
+    .btn{
+        font-size: 2rem;
+    }
+    .icon{
+        width: 4rem;
+        height: 4rem;
+    }
+    .container{
+    }
+}
+@media screen and (min-width:1200px){
+    .container{
+    }
+}

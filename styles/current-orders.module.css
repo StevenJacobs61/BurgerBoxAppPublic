@@ -1,0 +1,163 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+.sections_container{
+    width: 95%;
+    margin: 0 0 1.5rem;
+    border: 2px solid var(--bg-color--blue);
+    padding: 0.5rem;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #fff;
+}
+@media screen and (min-width:480px){
+    .container{
+        width: 93%;
+    }
+}
+@media screen and (min-width:769px){
+    .container{
+        width: 98%;
+    }
+    .sections_container{
+        padding: 1rem 1rem;
+    }
+}
+@media screen and (min-width:1024px){
+    .container{
+        width: 80%;
+    }
+}
+@media screen and (min-width:1200px){
+}
+
+/* Headers */
+
+.hdr{
+    text-transform: uppercase;
+    font-size: 3rem;
+    margin: 0 0 2rem;
+    letter-spacing: 0.2rem;
+    font-weight: 400;
+}
+.title_hdr{
+    cursor: pointer;
+    font-size: 2rem;
+    font-weight: 400;
+    text-transform: uppercase;
+    margin: 0 0 0 1rem;
+}
+@media screen and (min-width:769px){
+    .hdr{
+        font-size: 3rem;
+    }
+    .title_hdr{
+        font-size: 2.5rem;
+        font-weight: 400;
+    }
+}
+@media screen and (min-width:1024px){
+    .hdr{
+        margin: 0 0 1.5rem;
+        letter-spacing: 0.5rem;
+    }
+    .title_hdr{
+        font-size: 3rem;
+        margin: 0.5rem;
+    }
+}
+
+
+/* Table styles */
+
+.title_container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+.table{
+    width: 100%;
+    border-spacing: 10px;
+}
+.tr{
+    font-size: 1rem;
+    font-weight: 00;
+    text-transform: lowercase;
+}
+.tr_hdr{
+    font-weight: 400;
+}
+@media screen and (min-width:769px){
+    .tr_title{
+        font-size: 1.5rem;
+    }
+}
+
+
+/* All buttons */
+
+.btn_all_container{
+    display: flex;
+    margin: 0.5rem 0;
+   }
+ .btn_all_container>*{
+    margin: 0 0.5rem 0 0;
+    font-size: 0.8rem;
+    background-color: #fff;
+    box-shadow: 0 0 2px #9b9a9a;
+    border: none;
+    border-radius: 5px;
+    text-transform: uppercase;
+    padding: 0.5rem;
+    cursor: pointer;
+    font-weight: 500;
+    opacity: 0.6;
+ }  
+.btn_accept_all{
+    color: rgb(13, 198, 0);
+}
+.btn_decline_all{
+    color: rgb(255, 98, 98);
+}
+.btn_clear{
+    margin: 0.5rem 0.5rem 1rem;
+    font-size: 0.9rem;
+    font-weight: 400;
+    background-color: #fff;
+    border: none;
+    box-shadow: 0 0 2px #9b9a9a;
+    border-radius: 5px;
+    text-transform: uppercase;
+    color: rgb(255, 86, 86);
+    padding: 0.5rem;
+    cursor: pointer;
+    opacity: 0.6;
+}
+
+@media screen and (min-width:480px){
+    .btn_all_container>*{
+        font-size: 1rem;
+    }
+    .btn_clear{
+        font-size: 1rem;
+    }
+}
+@media screen and (min-width:769px){
+    .btn_all_container>*, .btn_clear{
+        font-size: 1.8rem;
+        padding: 0.7rem;
+    }
+}
+
+/* Hover */
+
+.btn_all_container>*:hover, .btn_clear:hover{
+    transform: scale(1.01);
+    opacity: 1;
+}

@@ -1,0 +1,178 @@
+.container{
+    width: 100vw;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 80px 0 0;
+    outline: none;
+    border: 0;
+}
+.title_container{
+    margin: 2rem 0 1rem 0;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem 1rem 2rem 3rem;
+    text-align: center;
+}
+
+.header{
+    color: rgb(194, 229, 250);
+    background-color: #101010;
+    font-size: 1.5rem;
+    z-index: 777;
+    border: 1px solid;
+    border-radius: 15px;
+    padding: 0.7rem 1rem;
+    margin: 5.5rem 2rem 0rem;
+    text-transform: uppercase;
+    text-align: center;
+    font-weight: 300;
+    line-height: 2.5rem;
+    transition: all 0.2s;
+    animation: 3s animate 10s infinite alternate;
+}
+.title, .blink{
+    color: #fff;
+    font-weight: 500;
+    line-height: 4.5rem;
+    transition: all 0.2s;
+    animation: animate2 3s infinite alternate;
+}
+@keyframes animate {
+    40%{
+        opacity:1
+    }
+    42%{
+        opacity:0.8
+    }
+    43%{
+        opacity:1
+    }
+    45%{
+        opacity:0.4
+    }
+    46%{
+        opacity:1
+    }
+}
+@keyframes animate2 {
+    70%{
+        opacity:1
+    }
+    72%{
+        opacity:0.8
+    }
+    73%{
+        opacity:1
+    }
+    75%{
+        opacity:0.3
+    }
+    76%{
+        opacity:1
+    }
+}
+
+.title{
+    font-size: 5rem;
+}
+
+.blink{
+    animation: blinker 1s linear infinite;
+    margin: 1rem 0 1rem 0.5rem;
+    font-size: 4rem;
+    font-weight: 300;
+
+}
+@keyframes blinker{
+    75%{opacity:0};
+    100%{opacity: 100%};
+}
+
+@media screen and (min-width:380px){
+    .title{
+        font-size: 6rem;
+    }
+    .blink{
+        margin-bottom: 0.7rem;
+    }
+}
+@media screen and (min-width:480px){
+    .container{
+        padding: 95px 0 0;
+    }
+    .title{
+        font-size: 7rem;
+        letter-spacing: 0.2rem;
+    }
+    .blink{
+        font-size: 5rem;
+    }
+    .header{
+        font-size: 2rem;
+        margin-bottom: 2rem;
+    }
+    .title_container{
+        margin: 2rem 0 2.5rem 0;
+    }
+}
+@media screen and (min-width:768px){
+    .container{
+        padding: 90px 0 0;
+    }
+    .title{
+        font-size: 9rem;
+        font-weight: 500;
+        letter-spacing: 0.4rem;
+    }
+    .blink{     
+        font-size: 6rem;   
+        letter-spacing: 0.2rem;
+        margin: 1.5rem 0 0.8rem 1.5rem;
+    }
+    .title_container{
+        margin: 2.5rem 0 3.5rem 0;        
+    }
+    .header{
+        font-size: 2.2rem;
+    }
+}
+@media screen and (min-width:1024px){
+    .header{
+        font-size: 2.2rem;
+        margin: 2.5rem 0 2rem;
+        padding: 1.2rem 1.7rem;
+    }
+    .title{
+        font-size: 9.5rem;
+    }
+    .title_container{
+        margin: 4rem 0 5rem;
+    }
+    .container{
+        padding: 120px 0 0;
+    }
+}
+@media screen and (min-width:1200px){
+    .title{
+        font-size: 8rem;
+   
+    }
+    .blink{
+        font-size: 6rem;
+        margin: 1rem 0 0.5rem 1rem;
+    }
+    .title_container{
+        margin: 3.5rem 0 3rem;  
+        height: 100px;
+    }
+    .header{
+        font-size: 2rem;
+        padding: 1.5rem;
+        margin: 5rem 0 0rem;
+    }
+}

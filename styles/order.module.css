@@ -1,0 +1,202 @@
+/* Containers */
+.container{
+    padding: 10rem 0 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    min-height: 90vh;
+    position: relative;
+}
+.container::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("../public/img/burgerbox-logo_dark.svg");
+    background-size: 70px 45px;
+    opacity: 0.05;
+    z-index: -1;
+    background-repeat: repeat;
+    background-position: center top;
+  }
+.inner_container{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem 0 2rem;
+    height: 100%;
+}
+.wrapper{
+    width: 100%;
+    padding: 0 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Headers */
+
+.hdr{
+margin: 0 0 1rem;
+font-size: 2.5rem;
+font-weight: 400;
+text-transform: uppercase;
+letter-spacing: 0.05rem;
+text-align: center;
+}
+
+/* Info */
+.failed{
+    text-align: center;
+    font-size: 1.5rem;
+    margin: 0 0 0.5rem;
+    font-weight: 400;
+}
+
+.notice{
+    font-size: 1.2rem;
+    text-align: center;
+    color: rgb(115, 0, 0);
+    margin: 1rem 0 0;
+}
+.note_hdr{
+    font-size: 2rem;
+    font-weight: 400;
+    margin: 1rem 0 0;
+}
+.note{
+    font-size: 2.5rem;
+    font-weight: 400;
+    margin: 1rem 0 1.5rem;
+    border: 0.5px solid;
+    border-radius: 10px;
+    padding: 1rem;
+    width: 80%;
+    text-align: center;
+    letter-spacing: 0.1rem;
+}
+.total{
+    font-size: 2.5rem;
+    font-weight: 400;
+    margin: 1.5rem 0 0;
+    /* text-decoration: underline var(--bg-color--blue) 0.2rem;
+    text-underline-offset: 0.2rem; */
+}
+
+/* Buttons */
+
+#top{
+    display: none;
+}
+.btnCheckout{
+    opacity: 0.9;
+    box-shadow: 0 0 4px #6a6969;
+    cursor: pointer;
+    background-color: #fff;
+    font-weight: 300;
+    text-transform: capitalize;
+    color: #101010;
+    border-radius: 7px;
+    border: 0;
+    transition: all 0.1s;
+    font-size: 1.8rem;
+    padding: 0.5rem 0.7rem;
+    letter-spacing: 0.2rem;
+    margin: 2rem 0 1rem;
+}
+.btnCheckout:hover{
+    transform: scale(1.01);
+    opacity: 1;
+    color: var(--text--light-green);
+}
+@media screen and (min-width:480px){
+    .failed{
+        font-size: 1.7rem;
+    }
+    .inner_container{
+        width: 450px;
+    }
+    .container{
+        padding: 11rem 0 0;
+    }
+}
+@media screen and (min-width:769px){
+    .btnCheckout{
+        font-size: 2rem;
+    }
+    .inner_container{
+        width: 500px;
+    }
+    .container{
+        padding: 13rem 0 0;
+    }
+}
+@media screen and (min-width:1024px){
+    .wrapper{
+        width: 85%;
+    }
+    .hdr{
+        font-size: 3rem;
+        border: 2px solid rgb(231, 249, 255);
+        padding: 1.5rem;
+        border-radius: 7px;
+        font-weight: 400;
+        margin: 3rem 0 1rem;
+        background-color: rgba(231, 228, 228, 0.2);
+    }
+    .note_hdr{
+        font-size: 2.2rem;
+        margin: 1.5rem 0 0.5rem;
+    }
+    .notice{
+        margin: 0.5rem 0 1rem;
+    }
+    .note{
+        font-size: 2rem;
+    }
+    #top{
+        display: unset;
+        margin: 0.5rem 0 1rem;
+    }
+    #bottom{
+        display: none;
+    }
+    .btnCheckout{
+        padding: 0.7rem;
+        font-size: 2rem;
+    }
+    .inner_container{
+        width: 90%;
+        flex-direction: row;
+        align-items: flex-start;
+    }
+    .container{
+        min-height: 95vh;
+        padding: 10.5rem 0 0;
+    }
+    .total{
+        margin: 0.8rem 0 1rem;
+        font-size: 2.7rem;
+        font-weight: 400;
+        letter-spacing: unset;
+    }
+    .failed{
+        font-size: 1.5rem;
+        margin: 1rem 0 0;
+    }
+}
+@media screen and (min-width:1200px){
+    .wrapper{
+        margin-left: 5%;
+    }
+}
+/* Hover */
+
+.btn_pay:hover{
+    transform: scale(1.01);
+    opacity: 1;
+}

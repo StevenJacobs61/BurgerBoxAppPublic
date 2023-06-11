@@ -1,0 +1,89 @@
+.container, .iconContainer{
+    background-color: #101010;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    z-index: 997;
+}
+.hdr{
+    font-size: 3rem;
+    color: #fff;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
+    padding: 0.5rem;
+    width: 100%;
+    font-weight: 600;
+    border: 0;
+}
+.storesContainer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10vw;
+    width: 100%;
+    margin: 1rem 0;
+}
+.storeContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+}
+.storeTitle{
+    color: #fff;
+    font-size: 1.5rem;
+    padding: 0 0 0.5rem;
+}
+.icon{
+    width: 27px;
+    height: unset;
+    aspect-ratio: 1/1;
+    fill: #fff;
+    margin: 0 0 1rem;
+}
+@media screen and (min-width:480px){
+    .hdr{
+        font-size: 3rem;
+        letter-spacing: 0.2rem;
+    }
+    .icon{
+        width: 30px;
+        margin: 0.3rem  0 1rem;
+    }
+}
+@media screen and (min-width:769px){
+    .storeTitle{
+        font-size: 2.5rem;
+        font-weight: 400;
+    }
+    .icon{
+        width: 50px;
+    }
+    .hdr{
+        font-size: 4rem;
+    }
+}
+@media screen and (min-width:1024px){
+    .storeTitle{
+        font-size: 2.2rem;
+        font-weight: 400;
+    }
+    .icon{
+        width: 37px;
+    }
+    .hdr{
+        font-size: 2.8rem;
+    }
+}
+
+/* Hover */
+
+.storeContainer:hover .iconContainer .icon{
+    fill: var(--bg-color--blue);
+}
+.storeContainer:hover .storeTitle{
+    color: var(--bg-color--blue);
+}
+

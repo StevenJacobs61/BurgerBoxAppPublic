@@ -1,0 +1,61 @@
+.container{
+    width: 100%;
+}
+.tr_title{
+    font-size: 1.2rem;
+    font-weight: 400;
+}
+.btn_delete{
+    font-size: 0.8rem;
+    border-radius: 5px;
+    border: none;
+    box-shadow: 0 0 2px;
+    padding: 0.4rem;
+    background-color: #fff;
+    color: var(--btn--del);
+    cursor: pointer;
+    opacity: 0.6;
+    width: fit-content;
+    text-transform: uppercase;
+    }
+    .btn_delete:hover{
+        transform: scale(1.03);
+        opacity: 1;
+    }
+ 
+    @media screen and (min-width:380px){
+        .btn_delete{
+            font-size: 0.9rem;
+        }
+        .tr_title{
+            font-size: 1.3rem;
+        }
+    }
+    @media screen and (min-width:480px){
+        .btn_delete{
+            font-size: 1rem;
+            padding: 0.4rem 0.5rem;
+        }
+    }
+    @media screen and (min-width:769px){
+        .btn_delete{
+            font-size: 1.3rem;
+            padding: 0.4rem 0.7rem;
+        }
+        .tr_title{
+            font-size: 1.5rem;
+        }
+    }
+    @media screen and (min-width:1024px){
+        .btn_delete{
+            font-size: 1rem;
+            padding: 0.4rem 0.5rem;
+        }
+    }
+    @media screen and (min-width:1200px){
+        .btn_delete{
+            font-size: 1.2rem;
+            padding: 0.4rem 0.7rem;
+        }
+    }
+   

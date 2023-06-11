@@ -1,0 +1,50 @@
+.btn_small, .btn_large, .btn_med{
+    opacity: 0.9;
+    box-shadow: 0 0 4px #6a6969;
+    cursor: pointer;
+    background-color: #fff;
+    font-weight: 300;
+    text-transform: capitalize;
+    color: #101010;
+    border-radius: 7px;
+    border: 0;
+    transition: all 0.1s;
+}
+.btn_small{
+    font-size: 1.4rem;
+    padding: 0.7rem 1.2rem;
+    margin: 1.5rem 0 2rem;
+    letter-spacing: 0.4rem;
+}
+.btn_med{
+    font-size: 1.8rem;
+    padding: 0.5rem 0.7rem;
+    letter-spacing: 0.3rem;
+}
+.btn_large{
+    font-size: 2.2rem;
+    padding: 0.7rem 1rem;
+    letter-spacing: 0.2rem;
+}
+
+@media screen and (min-width:480px){
+    .btn_small{
+        font-size: 1.7rem;
+    }
+    .btn_med{
+        font-size: 2.2rem;
+    }
+
+}
+@media screen and (min-width:1024px){
+    .btn_large{
+        padding: 0.7rem;
+        font-size: 2rem;
+        margin: 0;
+    }
+}
+.btn_small:hover, .btn_large:hover, .btn_med:hover{
+    transform: scale(1.01);
+    opacity: 1;
+    color: var(--text--light-green);
+}

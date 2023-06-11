@@ -1,0 +1,37 @@
+{
+  "name": "burger-box-app",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "svg": "svgr -d public/img public/img/svgs public/img public/img/svgs"
+  },
+  "dependencies": {
+    "@reduxjs/toolkit": "^1.8.3",
+    "@stripe/stripe-js": "^1.35.0",
+    "axios": "^0.27.2",
+    "cookie": "^0.5.0",
+    "micro": "^10.0.1",
+    "mongoose": "^6.4.4",
+    "next": "12.2.2",
+    "next-compose": "^0.0.2",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-icons": "^4.4.0",
+    "react-redux": "^8.0.2",
+    "socket.io": "^4.5.3",
+    "socket.io-client": "^4.5.1",
+    "stripe": "^10.2.0",
+    "vercel": "^28.5.6"
+  },
+  "devDependencies": {
+    "@svgr/webpack": "^6.2.1",
+    "eslint": "8.19.0",
+    "eslint-config-next": "12.2.2",
+    "file-loader": "^6.2.0",
+    "nodemon": "^2.0.19"
+  }
+}

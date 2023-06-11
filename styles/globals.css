@@ -1,0 +1,45 @@
+@import url("https://fonts.googleapis.com/css2?family=Inconsolata:wght@200;300;400;500;600;700;800;900&display=swap");
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  /* font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif; */
+    font-size: 62.5%;
+    font-family: 'Inconsolata', monospace;
+    width: 100vw;
+    overflow-x: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+h1, h2, h3, h4{
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+:root{
+  --bg-color--blue: rgb(231, 249, 255);
+  --text--dark-red: rgb(104, 0, 0);
+  --text--light-green: rgb(5, 156, 0);
+  --btn--edit: rgb(0, 164, 164);
+  --btn--del: rgb(255, 67, 67);
+  --color--grey-dark: rgb(109, 109, 109);
+  --color-aqua: rgb(161, 255, 255);
+  --textShadow: 0 0 0 transparent,
+                0 0 20px var(--bg-color--blue);
+  --textShadow-green: 0 0 0 transparent,
+                      0 0 20px #0ba800,
+                      0 0 50px #fff,
+                      0 0 1px #fff;
+}

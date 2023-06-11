@@ -1,0 +1,113 @@
+/* Headers */
+
+.hdr{
+    font-size: 2.2rem;
+    text-transform: uppercase;
+    font-weight: 400;
+    margin: 1rem 0 0.5rem;
+}
+
+/* Input */
+
+.input_container{
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+    width: 100%;
+    flex-direction: column;
+    margin: 1rem;
+}
+.label_hdr{
+    font-size: 2.2rem;
+    margin: 1rem 0 2rem;
+}
+
+/* Icon */
+
+.close{
+    position: absolute;
+    top: 2%;
+    right: 5%;
+    width: 30px;
+    height: 30px;
+    opacity: 0.7;
+    cursor: pointer;
+}
+@media screen and (min-width:1024px){
+    
+}
+
+/* Buttons */
+
+.btn_container{
+    margin: 2rem 0 0;
+}
+.btnSection{
+        box-shadow: 0 0 4px #6a6969;
+        cursor: pointer;
+        font-weight: 300;
+        text-transform: uppercase;
+        color: #101010;
+        border-radius: 7px;
+        border: 0;
+        transition: all 0.1s;
+        font-size: 1.5rem;
+        padding: 0.5rem 0.7rem;
+        margin: 0.5rem 0;
+        width: 70%;
+}
+.btnSubmit{
+        box-shadow: 0 0 4px #6a6969;
+        cursor: pointer;
+        background-color: #fff;
+        font-weight: 300;
+        text-transform: capitalize;
+        color: #101010;
+        border-radius: 7px;
+        border: 0;
+        transition: all 0.1s;
+        font-size: 2rem;
+        padding: 0.7rem 1rem;
+        letter-spacing: 0.2rem;
+        z-index: 777;
+        margin: 0.3rem 0 1.5rem;
+        opacity: 0.9;
+}
+.btnSubmit:hover{
+    transform: scale(1.01);
+    opacity: 1;
+    color: var(--text--light-green);
+}
+.btnSection:hover{
+    color: var(--text--light-green);
+    transform: scale(1.01);
+}
+@media screen and (min-width:480px){
+    .btnSection{
+        width: 55%;
+        font-size: 1.8rem;
+    }
+    .btnSubmit{
+        font-size: 2.2rem;
+    }
+}
+@media screen and (min-width:1024px){
+    .hdr{
+        font-size: 2rem;
+    }
+    .btnSection{
+        font-size: 1.8rem;
+        width: 65%;
+    }
+    .btnSubmit{
+        font-size: 2.5rem;
+        margin: 0 0 2rem;
+    }
+}
+
+/* Hover */
+
+.close:hover, .btn:hover, .btn_current:hover, .btn_other:hover, .input:hover{
+    transform: scale(1.015);
+    opacity: 1;
+ }

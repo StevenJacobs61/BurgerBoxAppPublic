@@ -1,0 +1,51 @@
+.container{
+    width: 100%;
+    margin: 0 0 3rem;
+}
+.hdr{
+    margin: 0 0 1rem;
+    cursor: pointer;
+}
+.tr_title{
+    font-size: 1rem;
+    font-weight: 700;
+}
+.title_container{
+    display: flex;
+    justify-content: space-between;
+}
+.btn_all_container{
+ display: flex;
+ margin: 0 7rem 0;
+}
+.btn_accept_all{
+    margin: 1rem;
+    font-size: 0.8rem;
+    background-color: #fff;
+    border: 0.3px solid;
+    border-radius: 5px;
+    text-transform: uppercase;
+    color: rgb(13, 198, 0);
+}
+.btn_decline_all{
+    font-size: 0.9rem;
+    margin: 1rem;
+    background-color: #fff;
+    border: 0.3px solid;
+    border-radius: 5px;
+    text-transform: uppercase;
+    color: rgb(255, 98, 98);
+}
+.table{
+    width: 100%;
+    border-spacing: 10px;
+}
+.btn_clear{
+    margin: 1rem 3rem 1rem;
+    font-size: 0.8rem;
+    background-color: #fff;
+    border: 0.3px solid;
+    border-radius: 5px;
+    text-transform: uppercase;
+    color: rgb(255, 86, 86);
+}
