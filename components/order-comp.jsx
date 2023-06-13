@@ -111,6 +111,7 @@ const OrderComp = ({order, fries, total}) => {
                    <h3 className={styles.subtotal}>Subtotal: {(ord.price * ord.quantity).toLocaleString("en-US", {style: "currency", currency: "GBP"})}</h3>
                    </div>
             )}
+            {order.discount > 0 ? <h3 className={styles.discount}>Discount: -{(order.discount).toLocaleString("en-US", {style: "currency", currency: "GBP"})}</h3> :null}
            {order.delivery ? <h3 className={styles.delivery}>Delivery: {order.deliveryCost > 0 ? order.deliveryCost.toLocaleString("en-US", {style: "currency", currency: "GBP"}) : "Free!"}</h3> : null}
             <h2 className={styles.total}>Total: {total}</h2>
         </div>

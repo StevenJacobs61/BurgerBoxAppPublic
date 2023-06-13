@@ -80,12 +80,20 @@
 .subtotal{
     text-align: right;
     width: 90%;
-    margin: 1rem 0;
+    margin: 1rem 0 0;
     font-size: 1.4rem;
     font-weight: 500;
     border-top: 0.2px solid;
     padding: 1rem 0 0;
     width: 100%;
+}
+.discount{
+    text-align: right;
+    width: 90%;
+    font-size: 1.4rem;
+    font-weight: 500;
+    width: 100%;
+    color: var(--text--light-green);
 }
     @media screen and (min-width:380px){
         .orders_hdr{

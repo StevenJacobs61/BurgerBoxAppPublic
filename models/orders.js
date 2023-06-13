@@ -45,6 +45,12 @@ total:{
     maxlength:6,
     required:true
    },
+discount:{
+    type:Number,
+    maxlength:6,
+    required:true,
+    default:0
+   },
 deliveryCost:{
     type: Number,
    },

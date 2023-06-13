@@ -225,6 +225,7 @@ width: 410px;
     padding: 0.8rem 0;
     border: 0.1px solid var(--bg-color--blue);
     background-color: #101010;
+    z-index: 80;
 }
 .notice_hdr{
     text-align: center;

@@ -1,26 +1,35 @@
 import { loadStripe } from "@stripe/stripe-js";
 
-export async function CheckOut({lineItems}, id, email, location){
-	let stripePromise = null
+export async function CheckOut(details){
 
-	const getStripe = () => {
-		if(!stripePromise) {
-			stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY)
+	try {
+		const {session} = await fetch('/api/checkout', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(details)
+		}).then(res => res.json())
+		console.log(session);
+		let stripePromise = null
+	
+		const getStripe = () => {
+			if(!stripePromise) {
+				stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY)
+			};
+			return stripePromise;
 		};
-		return stripePromise;
-	};
+	
+		const stripe = await getStripe();
+	
+		
+	
+		const res = await stripe.redirectToCheckout({
+			sessionId: session.id
+		});
+	} catch (error) {
+		console.error(error)
+	}
 
-	const stripe = await getStripe();
 
-	const successUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/order/${id}?location=${location}&success=true`;
-  	const cancelUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/order/${id}?location=${location}&success=false`;
-
-	const res = await stripe.redirectToCheckout({
-		clientReferenceId: id,
-		customerEmail:email,
-		mode: 'payment',
-		lineItems,
-		successUrl,
-		cancelUrl
-	});
 };

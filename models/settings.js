@@ -57,26 +57,17 @@ const SettingsSchema = new mongoose.Schema({
             required:true,
             default:false
         },
-        type:{
+        message:{
             type:String,
             required:true,
-            default:"percent"
+            default:"",
+            maxlength:200
         },
-        code:{
-            type:String,
-            required:false,
-            default:''
-        },
-        valueOff:{
-            type:Number,
+        applied:{
+            type:Boolean,
             required:true,
-            default:0
+            default:false
         },
-        percentOff:{
-            type:Number,
-            required:true,
-            default:0
-        }
     },
     location:{
         type:String,

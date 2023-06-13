@@ -16,15 +16,10 @@ const Settings = ({settingsList, admins, setAlert, setAlertDetails}) => {
     const [notice, setNotice] = useState(settings.notice);
     const [delTime, setDelTime] = useState(settings.delTime);
     const [discountActive, setDiscountActive] = useState(settings.discount.active);
-    const [discountType, setDiscountType] = useState(settings.discount.type);
-    const [discountPercent, setDiscountPercent] = useState(settings.discount.percentOff);
-    const [discountValue, setDiscountValue] = useState(settings.discount.valueOff);
-    const [discountCode, setDiscountCode] = useState(settings.discount.code);
-    console.log(discountActive);
-    console.log(discountType);
-    console.log(discountPercent);
-    console.log(discountValue);
-    console.log(discountCode);
+    const [discountApplied, setDiscountApplied] = useState(settings.discount.applied);
+    const [discountMessage, setDiscountMessage] = useState(settings.discount.message);
+    
+ 
     const[show, setShow] = useState({
         times:false,
         offline:false,
@@ -199,10 +194,8 @@ const Settings = ({settingsList, admins, setAlert, setAlertDetails}) => {
         const update = {
             discount:{
                 active: discountActive,
-                type: discountType,
-                valueOff: discountValue || settings.discount.valueOff,
-                percentOff: discountPercent || settings.discount.percentOff,
-                code: discountCode || settings.discount.code
+                message: discountMessage,
+                applied: discountApplied,
             }
         }
         try{
@@ -468,39 +461,18 @@ const Settings = ({settingsList, admins, setAlert, setAlertDetails}) => {
         <Show setShowObject={()=>setShow({...show, discounts:false})}>
          <div className={styles.wrapper}> 
          <h2 className={styles.box_hdr}>Discounts</h2>
-            <h2 className={styles.time_text}>Discount status:</h2>
+            <h2 className={styles.time_text}>Message Status:</h2>
             <button className={styles.btn_status} 
             onClick={()=> setDiscountActive(!discountActive)}
             style={{color: !discountActive ? "rgb(109, 109, 109)" : "var(--text--light-green)"}}>{!discountActive ? "OFF" : "On"}</button>
-
-            <h3 className={styles.time_text}>Discount type:</h3>
-            <div className={styles.type_btn_container}>
+            <h2 className={styles.time_text}>Current Message:</h2>
+             <p className={styles.current_text}>&quot;{settings.discount.message}&quot;</p>
+             <h3 className={styles.update_text}>Update Message</h3>
+            <textarea type="text" className={styles.banner_input} onChange={(e) => setDiscountMessage(e.target.value)}/>
+            <h2 className={styles.time_text}>Promo codes:</h2>
             <button className={styles.btn_status} 
-            onClick={()=> setDiscountType("percent")}
-            style={{color: discountType === 'percent' ? "var(--text--light-green)" : "rgb(109, 109, 109)"}}>%</button>
-            <button className={styles.btn_status} 
-            onClick={()=> setDiscountType("value")}
-            style={{color: discountType === 'value' ? "var(--text--light-green)" : "rgb(109, 109, 109)"}}>£</button>
-            </div>
-
-            <h3 className={styles.time_text}>Discount value:</h3>
-            <div className={styles.type_btn_container}>
-            <input className={styles.off_input} 
-            type='number'
-            onChange={(e)=> setDiscountPercent(e.target.value)}
-            placeholder='%'
-            />
-            <input className={styles.off_input} 
-            type='number'
-            onChange={(e)=> setDiscountValue(e.target.value)}
-            placeholder='£'
-            />
-            </div>
-
-            <h2 className={styles.time_text}>Discount code:</h2>
-             <p className={styles.current_text}>&quot;{settings.discount.code}&quot;</p>
-             <h3 className={styles.update_text}>Update code</h3>
-            <input type="text" className={styles.discount_code_input} onChange={(e) => setDiscountCode(e.target.value)}/>
+            onClick={()=> setDiscountApplied(!discountApplied)}
+            style={{color: !discountApplied ? "rgb(109, 109, 109)" : "var(--text--light-green)"}}>{!discountApplied ? "OFF" : "On"}</button>
             <button className={styles.btn} onClick={()=> handleDiscounts()}>Submit</button>
             </div> 
             </Show>

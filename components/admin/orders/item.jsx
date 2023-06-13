@@ -6,7 +6,6 @@ const Item = ({order, setNote, handleData, settings, setTime}) => {
 
   const status = order.status
   const  [refundAm, setRefundAm] = useState(0)
-console.log(order);
   return (
     <>
             <h1 className={styles.hdr}>
@@ -121,9 +120,13 @@ console.log(order);
          <p className={styles.title}>Delivery fee:</p>
          <p className={styles.info}>{order.deliveryCost ? order.deliveryCost.toLocaleString("en-US", {style: "currency", currency: "GBP"}) : "Free"}</p>
         </div>: null}
+        {order.discount ? <div className={styles.subtotal}>
+         <p className={styles.title}>Discount:</p>
+         <p className={styles.info}>-{order.discount.toLocaleString("en-US", {style: "currency", currency: "GBP"})}</p>
+        </div>: null}
         <div className={styles.total}>
          <p className={styles.title}><strong>Total:</strong></p>
-         <p className={styles.info}><strong>{order.delivery ? (order.total + order.deliveryCost).toLocaleString("en-US", {style: "currency", currency: "GBP"}) : order.total.toLocaleString("en-US", {style: "currency", currency: "GBP"})}</strong></p>
+         <p className={styles.info}><strong>{order.delivery ? (order.total + order.deliveryCost - order.discount).toLocaleString("en-US", {style: "currency", currency: "GBP"}) : (order.total - order.discount).toLocaleString("en-US", {style: "currency", currency: "GBP"})}</strong></p>
         </div>
         {status === 2 || status === 3 || status === 4 || status === 0 ?
         <div className={styles.refunded_container}>

@@ -27,10 +27,14 @@ const webhookHandler = async (req, res) => {
     }
 
     if (event.type === 'checkout.session.completed') {
-    
+    console.log("discount "+event.data.object.total_details.amount_discount);
+    console.log("total "+event.data.object.amount_total);
+    console.log("subtotal "+event.data.object.amount_subtotal);
       const id = event.data.object.client_reference_id;
+      const discount = event.data.object.total_details.amount_discount / 100
       const data = {
-        status:1
+        status:1,
+        discount: discount
       }
       try {
         await axios.put(`${process.env.NEXT_PUBLIC_BASE_URL}/api/orders/` + id, data);

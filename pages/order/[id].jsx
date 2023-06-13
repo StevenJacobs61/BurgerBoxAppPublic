@@ -10,9 +10,8 @@ import { useRouter } from 'next/router';
 import useProductsList from '../../hooks/useProductsList';
 import redirectWithQuery from '../../functions/redirect'
 
-const Order = ({orderData, products}) => {
+const Order = ({orderData, products, settings}) => {
   const router = useRouter();
-
   useEffect(()=> {
     if(!orderData){
       redirectWithQuery("/home", router)
@@ -32,9 +31,10 @@ const Order = ({orderData, products}) => {
     onClose: ()=>setAlert(false),
     onConfirm: null,
   })
+  const discountTotal = order.total - order.discount;
   const total = order.deliveryCost ? 
-    (order.deliveryCost + order.total).toLocaleString("en-US", {style: "currency", currency: "GBP"}) 
-    : order.total.toLocaleString("en-US", {style: "currency", currency: "GBP"})
+    (order.deliveryCost + discountTotal).toLocaleString("en-US", {style: "currency", currency: "GBP"}) 
+    : discountTotal.toLocaleString("en-US", {style: "currency", currency: "GBP"})
   const success = router.query.success !== "false";
 
   
@@ -108,10 +108,14 @@ const Order = ({orderData, products}) => {
     }
   };
 const checkoutF = () => {
-  const id = order._id;
-  const email = order.details.email;
-  const location = router.query.location;
-  CheckOut({lineItems: productsList}, id, email, location)
+  const details = {
+    lineItems: productsList,
+    id: order._id,
+    email: order.details.email,
+    location: router.query.location,
+    applyDiscount: settings.discount.applied 
+  }
+  CheckOut(details)
 }
   return (
     <div className={styles.container}>
@@ -134,7 +138,16 @@ const checkoutF = () => {
            {!success ? <h2 className={styles.failed}>Your payement appears to have failed. Please check your payment method, rolad the page and try again.</h2> : null}
            <p className={styles.notice}>* Do not leave this page whilst order is in progress</p>
            <p className={styles.notice}>Please refresh the page after a short while if you haven&apos;t recived an expected update</p>
-           {order.status === 5 ? <button className={styles.btnCheckout} onClick={()=>checkoutF()}>Checkout</button> :null}
+           {order.status === 5 ? 
+           <>
+           {settings.discount.active ? 
+          <div className={styles.discountContainer}> 
+            <h2 className={styles.discountMessage}>{settings.discount.message}</h2> 
+          </div>
+          :null}
+           <button className={styles.btnCheckout} onClick={()=>checkoutF()}>Checkout</button> 
+           </>
+           :null}
            {order.note?.length >= 1 ?
        <>
        <h2 className={styles.note_hdr}>Order note:</h2>
@@ -152,15 +165,25 @@ const checkoutF = () => {
     
 
   }
-  export const getServerSideProps = async ({params}) => {
+  export const getServerSideProps = async (context) => {
+    const { params, query } = context;
+    const location = query.location;
+  
+    const locationFilter = {
+      params: {
+        location: location 
+      }
+    }
 
     const orderRes = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/orders/${params.id}`);
     const productsRes = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/products`);
+    const settingsRes = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/settings`, locationFilter);
     
     return {
       props:{
         orderData: orderRes.data,
         products: productsRes.data,
+        settings: settingsRes.data,
       }
     }
   };
