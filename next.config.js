@@ -1,5 +1,3 @@
-/** @type {import('next').NextConfig} */
-
 const compose = require('next-compose');
 
 module.exports = compose([
@@ -15,10 +13,26 @@ module.exports = compose([
     },
   },
   {
+    async headers() {
+      return [
+        {
+          source: '/',
+          headers: [
+            {
+              key: 'Content-Security-Policy',
+              value: 'default-src *',
+            },
+          ],
+        },
+      ];
+    },
+  },
+  {
     reactStrictMode: true,
     swcMinify: true,
   },
 ]);
+
 
 
 
