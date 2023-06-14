@@ -79,7 +79,7 @@ const CurrentOrders = ({orders, sets, setAlert, setAlertDetails}) => {
     return () => {
       clearInterval(intervalId);
     };
-  }, []);
+  }, [location, setAlert, setAlertDetails]);
   
   const showItem = useCallback((order) => {
     setNewOrder(order);
@@ -144,7 +144,7 @@ const CurrentOrders = ({orders, sets, setAlert, setAlertDetails}) => {
       setAlert(true);
       return;
     }
-  }, [notifications, showItem, audio]);
+  }, [notifications, showItem, audio, setAlert, setAlertDetails]);
   
   
   const handlePaid = useCallback((data) => {
@@ -200,7 +200,7 @@ const CurrentOrders = ({orders, sets, setAlert, setAlertDetails}) => {
         console.log("Socket disconnected");
       }
     };
-  }, [handleNewOrder, handlePaid]);
+  }, [handleNewOrder, handlePaid, setAlert, setAlertDetails]);
   
   useEffect(() => {
     if (newOrder) {

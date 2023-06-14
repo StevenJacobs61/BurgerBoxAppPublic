@@ -110,7 +110,7 @@ const Product = ({products, product, settings, sections}) => {
     if(price < product.price){
       setPrice(product.price)
     }
-  }, [price])
+  }, [price, product.price])
   
 
 return (

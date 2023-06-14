@@ -50,6 +50,38 @@ const Order = ({orderData, products, settings}) => {
   const socket = useRef(null);
 
   useEffect(() => {
+    const handleResponse = (res) => {
+      if (res.id === order._id || res.id === "all") {
+        setOrder((prevOrder) => {
+          const updatedOrder = { ...prevOrder };
+          if (res.accepted) {
+            updatedOrder.status = 2;
+          } else if (!res.accepted) {
+            updatedOrder.status = 0;
+          }
+          if (res.note) {
+            updatedOrder.note = res.note;
+          }
+          if (res.deliveryTime && order.delivery) {
+            updatedOrder.time = res.deliveryTime;
+          }
+          if (res.collectionTime && !order.delivery) {
+            updatedOrder.time = res.collectionTime;
+          }
+          return updatedOrder;
+        });
+      }
+    };
+    const handleCompleted = (res) => {
+      console.log('completed recieved');
+      console.log(res);
+      if ((res.id === order._id) || (res.id === "all" && res.location === order.location)) {
+        setOrder((prevOrder) => ({
+          ...prevOrder,
+          status: 3,
+        }));
+      }
+    };
     const socketInit = async () => {
       try {
         await fetch("/api/socket");
@@ -72,41 +104,10 @@ const Order = ({orderData, products, settings}) => {
         console.log("Socket disconnected");
       }
     };
-  }, []);
+  }, [order._id, order.delivery, order.location]);
 
-  const handleResponse = (res) => {
-    console.log(res);
-    if (res.id === order._id || res.id === "all") {
-      setOrder((prevOrder) => {
-        const updatedOrder = { ...prevOrder };
-        if (res.accepted) {
-          updatedOrder.status = 2;
-        } else if (!res.accepted) {
-          updatedOrder.status = 0;
-        }
-        if (res.note) {
-          updatedOrder.note = res.note;
-        }
-        if (res.deliveryTime && order.delivery) {
-          updatedOrder.time = res.deliveryTime;
-        }
-        if (res.collectionTime && !order.delivery) {
-          updatedOrder.time = res.collectionTime;
-        }
-        return updatedOrder;
-      });
-    }
-  };
-  const handleCompleted = (res) => {
-    console.log('completed recieved');
-    console.log(res);
-    if ((res.id === order._id) || (res.id === "all" && res.location === order.location)) {
-      setOrder((prevOrder) => ({
-        ...prevOrder,
-        status: 3,
-      }));
-    }
-  };
+  
+ 
 const checkoutF = () => {
   const details = {
     lineItems: productsList,

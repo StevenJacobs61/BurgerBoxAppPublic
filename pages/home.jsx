@@ -8,6 +8,7 @@ import LandingPage from '../components/landing_page/landing_page'
 import axios from 'axios'
 import { useRouter } from 'next/router'
 import Alert from '../components/alert'
+import dbConnect from '../utils/mongodb'
 
 export default function Home({ productsList, sections, settings, admin}) {
   
@@ -64,6 +65,8 @@ export const getServerSideProps = async (context) => {
       location: location 
     }
   }
+  
+  await dbConnect();
 
   const sectionsRes = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/sections`, locationFilter)
   const productsRes = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/products`, locationFilter)

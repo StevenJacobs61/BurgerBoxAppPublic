@@ -63,6 +63,7 @@ export default function SelectLocation() {
       className={styles.img} 
       src={logo} 
       objectFit='fill'
+      alt='logo'
       />
       </div>
       <h1 className={styles.selectHeader}>Select BurgerBox Branch:</h1>

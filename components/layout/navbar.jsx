@@ -30,28 +30,28 @@ const Navbar = ({setAlert, setAlertDetails}) => {
   const cartPage = router.pathname === "/cart";
   const orderPage = router.pathname === "/order/[id]";
 
-  const getStoreData = async () => {
-    const params = {
-      location: location
-    };
-    try {
-      const settingsRes = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/settings`, {params});
-      const sectionsRes = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/sections`, {params});
-      setOpen(sectionsRes?.data.some((section) => section.available));
-      setSettings(settingsRes.data);
-    } catch (error) {
-      console.error(error);
-      setAlertDetails({
-        header: "Alert",
-        message: "There was an error whilst retrieving store data. Please reload the page.",
-        type: "alert",
-        onClose: ()=>setAlert(false),
-        onConfirm: null,
-      });
-      setAlert(true);
-    }
-  }
   useEffect(() => {
+    const getStoreData = async () => {
+      const params = {
+        location: location
+      };
+      try {
+        const settingsRes = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/settings`, {params});
+        const sectionsRes = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/sections`, {params});
+        setOpen(sectionsRes?.data.some((section) => section.available));
+        setSettings(settingsRes.data);
+      } catch (error) {
+        console.error(error);
+        setAlertDetails({
+          header: "Alert",
+          message: "There was an error whilst retrieving store data. Please reload the page.",
+          type: "alert",
+          onClose: ()=>setAlert(false),
+          onConfirm: null,
+        });
+        setAlert(true);
+      }
+    }
     // Update Quantity
     const localQuantity = parseInt(localStorage.getItem("Quantity"));
     const localOrders = JSON.parse(localStorage.getItem("Orders"));
@@ -69,7 +69,7 @@ const Navbar = ({setAlert, setAlertDetails}) => {
     }
     // Get settings
     getStoreData()
-  }, [router])
+  }, [router, dispatch, location, setAlert, setAlertDetails])
 
   const sizeDetector = () => {
   if(window.innerWidth > 768){
@@ -141,6 +141,7 @@ const Navbar = ({setAlert, setAlertDetails}) => {
               className={styles.img} 
               src={logo} 
               objectFit='fill'
+              alt='logo'
               />
             </div>
             { click && mobileScreen ? null :<div className={styles.pagelinks} style={{display: click && mobileScreen ?"none":"flex"}}>

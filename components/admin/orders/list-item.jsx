@@ -56,7 +56,7 @@ const ListItem = ({ order, handleData, showItem }) => {
     const totalTime = order.time * 60 * 1000; // Convert order time to milliseconds
     const endTime = acceptedTime.getTime() + totalTime; // Calculate end time
     setTime(endTime); // Set the end time for the timer
-  }, []);
+  }, [order?.acceptedAt, order.time]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -71,7 +71,7 @@ const ListItem = ({ order, handleData, showItem }) => {
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [time]);
+  }, [time, order?.acceptedAt]);
 
   
     const isPastDate = (date) => {

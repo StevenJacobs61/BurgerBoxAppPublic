@@ -30,7 +30,7 @@ const Layout = ({ children }) => {
       } else{
         setAdmin(false)
       }
-    }, [router])
+    }, [router, dispatch])
 
   return (
     <>{alert ? <Alert {...alertDetails}/> : null}
