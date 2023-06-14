@@ -8,16 +8,8 @@ import LandingPage from '../components/landing_page/landing_page'
 import axios from 'axios'
 import { useRouter } from 'next/router'
 import Alert from '../components/alert'
-import settings from '../models/settings'
-import dbConnect from '../utils/mongodb'
-import products from '../models/products'
-import sections from '../models/sections'
 
-export default function Home({ productsString, sectionsString, settingsString, admin}) {
-
-  const settings = JSON.parse(settingsString)
-  const productsList = JSON.parse(productsString)
-  const sections= JSON.parse(sectionsString)
+export default function Home({ productsList, sections, settings, admin}) {
   
   const sectionsList = sections.filter((section) => section.title !== "Extra Toppings" && section.title !== "Upgrades")
   const dispatch = useDispatch()
@@ -73,29 +65,16 @@ export const getServerSideProps = async (context) => {
     }
   }
 
-  // const sectionsRes = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/sections`, locationFilter)
-  // const productsRes = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/products`, locationFilter)
-  // const settingsRes = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/settings`, locationFilter)
-
-  dbConnect()
-  const settingsList = await settings.findOne(query); 
-  const settingsRes = JSON.stringify(settingsList);
-
-  const itemsList = await products.find(query);
-  const productsRes = JSON.stringify(itemsList);
-
-  const sectionsList = await sections.find(query);
-  const sectionsRes = JSON.stringify(sectionsList);
+  const sectionsRes = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/sections`, locationFilter)
+  const productsRes = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/products`, locationFilter)
+  const settingsRes = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/settings`, locationFilter)
+  
   return {
     props:{
-          productsString: productsRes,
-          sectionsString: sectionsRes, 
-          settingsString: settingsRes,
+          productsList: productsRes.data,
+          sections: sectionsRes.data, 
+          settings: settingsRes.data,
           admin
-          // productsList: productsRes.data,
-          // sections: sectionsRes.data, 
-          // settings: settingsRes.data,
-          // admin
         }
     }
 }
