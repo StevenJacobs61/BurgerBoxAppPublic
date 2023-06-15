@@ -9,11 +9,8 @@ import axios from 'axios'
 import { useRouter } from 'next/router'
 import Alert from '../components/alert'
 import dbConnect from '../utils/mongodb'
-import settings from '../models/settings'
 
-export default function Home({ productsList, sections, settingsList, admin}) {
-  const settings = JSON.parse(settingsList)[0]
-  console.log(settings);
+export default function Home({ productsList, sections, settings, admin}) {
   
   const sectionsList = sections.filter((section) => section.title !== "Extra Toppings" && section.title !== "Upgrades")
   const dispatch = useDispatch()
@@ -73,14 +70,14 @@ export const getServerSideProps = async (context) => {
 
   const sectionsRes = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/sections`, locationFilter)
   const productsRes = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/products`, locationFilter)
-  // const settingsRes = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/settings`, locationFilter)
-  const settingsList = await settings.find(); 
+  const settingsRes = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/settings`, locationFilter)
+  
   
   return {
     props:{
           productsList: productsRes.data,
           sections: sectionsRes.data, 
-          settingsList: JSON.stringify(settingsList),
+          settings: settingsRes.data,
           admin
         }
     }
