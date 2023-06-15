@@ -10,6 +10,7 @@ import { setAdmin } from '../../redux/userSlice'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import Alert from '../../components/alert'
+import dbconnect from '../../utils/mongodb'
 
 
 const Admin = ({productsList, admins, sectionsList, settings, admin}) => {
@@ -266,6 +267,7 @@ export const getServerSideProps = async (ctx) => {
       ...axiosConfig,
       ...locationFilter,
     };
+    await dbconnect()
 
   const sectionsRes = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/sections`, locationFilter)
   const productsRes = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/products`, locationFilter)
