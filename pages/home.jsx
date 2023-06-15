@@ -66,7 +66,7 @@ export const getServerSideProps = async (context) => {
     }
   }
   
-  // await dbConnect();
+  await dbConnect();
 
   const sectionsRes = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/sections`, locationFilter)
   const productsRes = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/products`, locationFilter)
