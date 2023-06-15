@@ -4,7 +4,7 @@ import Stripe from 'stripe';
 import { io } from "socket.io-client";
 
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+const stripe = new Stripe(process.env.NEXT_PUBLIC_SECRET_KEY);
 
 export const config = {
   api: {
@@ -20,7 +20,7 @@ const webhookHandler = async (req, res) => {
     let event;
 
     try {
-      event = stripe.webhooks.constructEvent(buf.toString(), sig, process.env.STRIPE_WEBHOOK_SECRET);
+      event = stripe.webhooks.constructEvent(buf.toString(), sig, process.env.NEXT_PUBLIC_STRIPE_WEBHOOK_SECRET);
     } catch (err) {
       // Invalid webhook signature
       return res.status(400).end();

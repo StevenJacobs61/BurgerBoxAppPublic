@@ -168,7 +168,7 @@ const CurrentOrders = ({orders, sets, setAlert, setAlertDetails}) => {
   useEffect(() => {
     const socketInit = async () => {
       try {
-        await fetch("/api/socket");
+        await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/socket`);
         socket.current = io();
   
         socket.current.on('connect', () => {

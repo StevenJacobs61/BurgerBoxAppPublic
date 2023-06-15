@@ -47,10 +47,9 @@ const [showItem, setShowItem] = useState(false)
 
 
 const socket = useRef(null);
-
 const socketInit = async () => {
   try {
-    await fetch("/api/socket");
+    await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/socket`);
     socket.current = io();
     socket.current.on('connect', () => {
       console.log("Socket connected");

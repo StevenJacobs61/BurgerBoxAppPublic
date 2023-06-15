@@ -4,6 +4,7 @@ import axios from 'axios'
 import CurrentOrders from '../../components/admin/orders/current-orders'
 import { useRouter } from 'next/router'
 import Alert from '../../components/alert'
+import dbconnect from '../../utils/mongodb'
 
 const Orders = ({ordersList, settings}) => {
   const router = useRouter();
@@ -59,6 +60,8 @@ export const getServerSideProps = async (ctx) => {
       ...axiosConfig,
       ...locationFilter,
     };
+    
+    await dbconnect();
  
     const settingsRes = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/settings`, locationFilter)
     const ordersRes = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/orders`, requestConfig)

@@ -5,7 +5,7 @@ export default async function handler(req, res) {
 const { method, cookies, query } = req;
 
 const token = cookies.token;
-dbConnect()
+await dbConnect()
 
 if (method === 'GET'){
     const propCookies = req.headers.cookie
