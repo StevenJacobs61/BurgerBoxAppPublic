@@ -1,7 +1,7 @@
 import mongoose from 'mongoose'
 
 async function dbConnect() {
-const MONGO_URL = process.env.MONGO_URL
+const MONGO_URL = process.env.NEXT_PUBLIC_MONGO_URL
 
 
 if (!MONGO_URL) {
