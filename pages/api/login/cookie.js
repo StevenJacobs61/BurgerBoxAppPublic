@@ -9,7 +9,7 @@ const handler = (req, res) => {
     ) {
       res.setHeader(
         "Set-Cookie",
-        cookie.serialize("token", process.env.TOKEN, {
+        cookie.serialize("token", process.env.NEXT_PUBLIC_TOKEN, {
           maxAge: 60 * 60 * 24,
           sameSite: "strict",
           path: "/",
@@ -28,7 +28,7 @@ const handler = (req, res) => {
     try{
     res.setHeader(
       "Set-Cookie",
-      cookie.serialize("token", process.env.TOKEN, {
+      cookie.serialize("token", process.env.NEXT_PUBLIC_TOKEN, {
         maxAge:0,
         sameSite:"Strict",
         path:"/",

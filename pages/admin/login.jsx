@@ -24,9 +24,9 @@ const [alert, setAlert] = useState(false);
 const handleUser = async () => {
   const location = router.query.location;
   try{
-    const res = await axios.post("/api/login", {username, password, location, isApp:true})
+    const res = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/api/login`, {username, password, location, isApp:true})
     if(res.data){
-      const cookieRes = await axios.post("/api/login/cookie", {adminMatch:true})
+      const cookieRes = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/api/login/cookie`, {adminMatch:true})
     if(cookieRes.data){
       await redirectWithQuery("/admin/orders", router)
     }

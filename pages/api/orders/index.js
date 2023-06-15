@@ -9,7 +9,7 @@ const token = cookies.token;
 
     if (method === 'GET'){
       const propCookies = req.headers.cookie
-      if((!propCookies || propCookies !== process.env.TOKEN) && (!token || token !== process.env.TOKEN)){
+      if((!propCookies || propCookies !== process.env.NEXT_PUBLIC_TOKEN) && (!token || token !== process.env.NEXT_PUBLIC_TOKEN)){
           return res.status(401).json("Not authenticated!")
         }
         try{
@@ -20,7 +20,7 @@ const token = cookies.token;
         }
     }
     if (method === "PATCH"){
-      if(!token || token !== process.env.TOKEN){
+      if(!token || token !== process.env.NEXT_PUBLIC_TOKEN){
         return res.status(401).json("Not authenticated!")
       }
         const {filter, update} = req.body;
