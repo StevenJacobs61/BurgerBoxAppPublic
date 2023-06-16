@@ -4,7 +4,7 @@ import Stripe from 'stripe';
 import { io } from "socket.io-client";
 
 
-const stripe = new Stripe(process.env.NEXT_PUBLIC_SECRET_KEY);
+const stripe = new Stripe(process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY);
 
 export const config = {
   api: {

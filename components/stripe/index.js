@@ -3,7 +3,7 @@ import { loadStripe } from "@stripe/stripe-js";
 export async function CheckOut(details){
 
 	try {
-		const {session} = await fetch('/api/checkout', {
+		const {session} = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/checkout`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
