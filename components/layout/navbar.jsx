@@ -36,8 +36,8 @@ const Navbar = ({setAlert, setAlertDetails}) => {
         location: location
       };
       try {
-        const settingsRes = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/settings`, {params});
-        const sectionsRes = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/sections`, {params});
+        const settingsRes = await axios.get(`/api/settings`, {params});
+        const sectionsRes = await axios.get(`/api/sections`, {params});
         setOpen(sectionsRes?.data.some((section) => section.available));
         setSettings(settingsRes.data);
       } catch (error) {
