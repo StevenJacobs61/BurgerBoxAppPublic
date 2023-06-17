@@ -57,7 +57,7 @@ const CurrentOrders = ({orders, sets, setAlert, setAlertDetails}) => {
         ...locationFilter,
       };
       try {
-        const allOrdersRes = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/orders`, requestConfig);
+        const allOrdersRes = await axios.get(`/api/orders`, requestConfig);
         const allOrders = allOrdersRes.data;
         setOrdersList(allOrders);
       } catch (error) {
@@ -88,7 +88,7 @@ const CurrentOrders = ({orders, sets, setAlert, setAlertDetails}) => {
   
   const handleNewOrder = useCallback(async (id) => {
     try {
-      const orderRes = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/orders/${id}`);
+      const orderRes = await axios.get(`/api/orders/${id}`);
       const foundOrder = orderRes.data;
       console.log(foundOrder);
   
@@ -168,7 +168,7 @@ const CurrentOrders = ({orders, sets, setAlert, setAlertDetails}) => {
   useEffect(() => {
     const socketInit = async () => {
       try {
-        await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/socket`);
+        await fetch(`/api/socket`);
         socket.current = io();
   
         socket.current.on('connect', () => {
