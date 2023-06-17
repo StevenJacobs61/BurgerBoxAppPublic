@@ -20,13 +20,12 @@ const webhookHandler = async (req, res) => {
     let event;
 
     try {
-      event = stripe.webhooks.constructEvent(req.body, sig, process.env.NEXT_PUBLIC_STRIPE_WEBHOOK_SECRET);
+      event = stripe.webhooks.constructEvent(buf, sig, process.env.NEXT_PUBLIC_STRIPE_WEBHOOK_SECRET);
     } catch (err) {
       // Invalid webhook signature
-      const errorMessage = `Webhook Error: ${err.message}`;
-    console.error(errorMessage);
-    return res.status(400).send(errorMessage).end();
-  }
+      const message = err.message;
+      console.error(message);
+      return res.status(400).send(`Webhook Error: ${message}`).end();
     }
 
     if (event.type === 'checkout.session.completed') {
