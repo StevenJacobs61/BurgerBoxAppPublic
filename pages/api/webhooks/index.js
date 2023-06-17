@@ -23,13 +23,13 @@ const webhookHandler = async (req, res) => {
       event = stripe.webhooks.constructEvent(req.body, sig, process.env.NEXT_PUBLIC_STRIPE_WEBHOOK_SECRET);
     } catch (err) {
       // Invalid webhook signature
-      return res.status(400).send(`Webhook Error: ${err}`).end();
+      const errorMessage = `Webhook Error: ${err.message}`;
+    console.error(errorMessage);
+    return res.status(400).send(errorMessage).end();
+  }
     }
 
     if (event.type === 'checkout.session.completed') {
-    console.log("discount "+event.data.object.total_details.amount_discount);
-    console.log("total "+event.data.object.amount_total);
-    console.log("subtotal "+event.data.object.amount_subtotal);
       const id = event.data.object.client_reference_id;
       const discount = event.data.object.total_details.amount_discount / 100
       const data = {
