@@ -7,7 +7,7 @@ const Item = ({order, setNote, handleData, settings, setTime}) => {
   const status = order.status
   const  [refundAm, setRefundAm] = useState(0)
   return (
-    <>
+    <div className={styles.container}>
             <h1 className={styles.hdr}>
                 {order.status === 0 ? 'Declined Order' 
                 : order.status === 1 ? 'New Order' 
@@ -125,8 +125,8 @@ const Item = ({order, setNote, handleData, settings, setTime}) => {
          <p className={styles.info}>-{order.discount.toLocaleString("en-US", {style: "currency", currency: "GBP"})}</p>
         </div>: null}
         <div className={styles.total}>
-         <p className={styles.title}><strong>Total:</strong></p>
-         <p className={styles.info}><strong>{order.delivery ? (order.total + order.deliveryCost - order.discount).toLocaleString("en-US", {style: "currency", currency: "GBP"}) : (order.total - order.discount).toLocaleString("en-US", {style: "currency", currency: "GBP"})}</strong></p>
+         <p className={styles.title} style={{fontWeight: "400"}}>Total:</p>
+         <p className={styles.info}>{order.delivery ? (order.total + order.deliveryCost - order.discount).toLocaleString("en-US", {style: "currency", currency: "GBP"}) : (order.total - order.discount).toLocaleString("en-US", {style: "currency", currency: "GBP"})}</p>
         </div>
         {status === 2 || status === 3 || status === 4 || status === 0 ?
         <div className={styles.refunded_container}>
@@ -152,7 +152,7 @@ const Item = ({order, setNote, handleData, settings, setTime}) => {
         >Refund</button>
     </div> 
     : null}
-   </>
+   </div>
   )
 }
 

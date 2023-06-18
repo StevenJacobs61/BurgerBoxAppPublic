@@ -2,50 +2,6 @@ import React, { useEffect } from 'react'
 import styles from '../../../styles/list-item.module.css'
 import { useState } from 'react'
 
-// const ListItem = ({ order, handleData, showItem }) => {
-//   const [status, setStatus] = useState(order?.status);
-//   const [timer, setTimer] = useState();
-//   const [intervalId, setIntervalId] = useState(null);
-
-//   useEffect(() => {
-//     const acceptedDate = new Date(order?.acceptedAt);
-//     const targetTime = new Date(acceptedDate.getTime() + order.time * 60 * 1000);
-//     const currentTime = new Date();
-
-//     if (currentTime > targetTime) {
-//       setTimer("Due");
-//     } else {
-//       const interval = setInterval(() => {
-//         const remainingTime = targetTime - new Date();
-
-//         if (remainingTime <= 0) {
-//           clearInterval(intervalId);
-//           if (isPastDate(order?.acceptedAt)) {
-//             setTimer("Expired");
-//           } else {
-//             setTimer("Due");
-//           }
-//         } else {
-//           const minutes = Math.floor((remainingTime / 1000 / 60) % 60);
-//           setTimer(minutes >= 0 ? minutes : "Due");
-//         }
-//       }, 1000);
-//       setIntervalId(interval);
-//     }
-
-//     return () => clearInterval(intervalId);
-//   }, [order]);
-
-//   const isPastDate = (date) => {
-//     const acceptedDate = new Date(date);
-//     const currentDate = new Date();
-
-//     // Set hours, minutes, seconds, and milliseconds to 0
-//     acceptedDate.setHours(0, 0, 0, 0);
-//     currentDate.setHours(0, 0, 0, 0);
-
-//     return acceptedDate < currentDate;
-//   };
 const ListItem = ({ order, handleData, showItem }) => {
   const [status, setStatus] = useState(order?.status);
   const [timer, setTimer] = useState();
@@ -94,7 +50,7 @@ const ListItem = ({ order, handleData, showItem }) => {
             <td>
              <ul className={styles.title_list}onClick={() => showItem(order)}>
                {order.orders.map((order) => 
-              <div key={order.id}>
+              <div key={Math.random(1000)}>
                 <li className={styles.title_item}>{order.product.title}</li>
               {order.extraOptions.map((extra) => 
               <li key={Math.random(1000)} className={styles.extra}>{extra.title}</li>)}

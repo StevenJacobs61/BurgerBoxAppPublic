@@ -146,24 +146,6 @@ const CurrentOrders = ({orders, sets, setAlert, setAlertDetails}) => {
   }, [notifications, showItem, audio, setAlert, setAlertDetails]);
   
   
-  const handlePaid = useCallback((data) => {
-    const foundOrder = ordersList.find((o) => o._id === data);
-    if (foundOrder) {
-      if (notifications) {
-        showItem(foundOrder);
-      }
-      setOrdersList((prevOrdersList) => {
-        return prevOrdersList.map((order) => {
-          if (order._id === orderId) {
-            return { ...order, status: 2 };
-          }
-          return order;
-        });
-      });
-    }
-  }, [notifications, ordersList, showItem]);
-  
-  
   useEffect(() => {
     const socketInit = async () => {
       try {
@@ -173,7 +155,6 @@ const CurrentOrders = ({orders, sets, setAlert, setAlertDetails}) => {
         socket.current.on('connect', () => {
           console.log("Socket connected");
           socket.current.on("getNewOrder", handleNewOrder);
-          socket.current.on("paid", handlePaid);
         });
       } catch (error) {
         console.error("Socket initialization error:", error);
@@ -194,12 +175,11 @@ const CurrentOrders = ({orders, sets, setAlert, setAlertDetails}) => {
     return () => {
       if (socket.current) {
         socket.current.off("getNewOrder", handleNewOrder);
-        socket.current.off("paid", handlePaid);
         socket.current.disconnect();
         console.log("Socket disconnected");
       }
     };
-  }, [handleNewOrder, handlePaid, setAlert, setAlertDetails]);
+  }, [handleNewOrder, setAlert, setAlertDetails]);
   
   useEffect(() => {
     if (newOrder) {
@@ -845,7 +825,7 @@ const CurrentOrders = ({orders, sets, setAlert, setAlertDetails}) => {
               return aTotalTime - bTotalTime; 
             })
             .map((item, i) => 
-            <ListItem key={i} 
+            <ListItem key={Math.random(1000)} 
             order={item} 
             showItem={showItem}
            handleData={handleData}
@@ -853,7 +833,7 @@ const CurrentOrders = ({orders, sets, setAlert, setAlertDetails}) => {
             ) :
             ordersList?.filter((order) => order.status === orderSection)
             .map((item) => 
-            <ListItem key={item._id} 
+            <ListItem key={Math.random(1000)} 
             order={item} 
             showItem={showItem}
            handleData={handleData}

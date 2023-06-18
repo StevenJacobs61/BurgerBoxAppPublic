@@ -2,7 +2,7 @@ import axios from 'axios'
 import styles from '../../styles/admin.module.css'
 import ManageProducts from '../../components/admin/menu/manage-products'
 import Item from '../../components/admin/orders/item'
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useMemo, useCallback } from 'react'
 import { io } from 'socket.io-client'
 import { useDispatch, useSelector } from 'react-redux'
 import Settings from '../../components/admin/settings/settings'
@@ -11,9 +11,10 @@ import Head from 'next/head'
 import { useRouter } from 'next/router'
 import Alert from '../../components/alert'
 import dbconnect from '../../utils/mongodb'
+import Show from '../../components/show'
 
 
-const Admin = ({productsList, admins, sectionsList, settings, admin}) => {
+const Admin = ({productsList, admins, sectionsList, settings, admin, orders}) => {
   const dispatch = useDispatch()
   const router = useRouter()
   const [alert, setAlert] = useState(false);
@@ -32,93 +33,56 @@ const Admin = ({productsList, admins, sectionsList, settings, admin}) => {
   // Get notifiations status from redux
 
   const cart = useSelector((state) => state.cart);
-const [notifications, setNotifications] = useState(cart.notifications);
-
-
-// Show sections on click
   const[showProducts, setShowProducts] = useState(false);
-  const [showSettings, setShowSettings] = useState(false)
-
-
-// Websocket receive order notifications
-
-const [newOrder, setNewOrder] = useState()
-const [showItem, setShowItem] = useState(false)
-
-
-const socket = useRef(null);
-const socketInit = async () => {
-  try {
-    await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/socket`);
-    socket.current = io();
-    socket.current.on('connect', () => {
-      console.log("Socket connected");
-    });
-    socket.current.emit("hi", "hi");
-  } catch (error) {
-    console.error("Socket initialization error:", error);
-  }
-};
-useEffect(() => {
-
-  socketInit();
-
-  // Cleanup function
-  return () => {
-    if (socket.current) {
-      socket.current.disconnect();
-      console.log("Socket disconnected");
-    }
-  };
-}, [])
-
-  useEffect(() => {
-    const handleNewOrder = (data) => {
-      console.log(data);
-      if (notifications) {
-        setNewOrder(data);
-        setShowItem(true);
-      }
-      const audio = new Audio('../../../public/sounds/alert.mp3');
-      audio.play();
-    };
-  
-    if (!socket.current) {
-      socketInit();
-    }
-    if(socket.current){
-      socket.current.on("getNewOrder", handleNewOrder);
-    }
-  
-    return () => {
-      if (socket.current) {
-        socket.current.off("getNewOrder", handleNewOrder);
-      }
-    };
-  }, [socket, notifications, setNewOrder, setShowItem]);
-  
-  
-  // Functions for managing pop up notificiations
-
+  const [showSettings, setShowSettings] = useState()
+  const [newOrder, setNewOrder] = useState(null)
+  const [show, setShow] = useState(false)
+  const audio = useMemo(() => new Audio('/sounds/alert.mp3'), []);
+  const socket = useRef(null);
+  const [ordersList, setOrdersList] = useState(orders)
+  const [settingsObj, setSettingsObj] = useState(settings)
   const [note, setNote] = useState();
+  const [time, setTime] = useState();
 
-  const handleAccept = async (id) => {
-    const newData = {
-      status: 5
-    }
-    try{
-      const res = await axios.put(`${process.env.NEXT_PUBLIC_BASE_URL}/api/orders/` + id, newData, {
-        params:{
-          location:router.query.location
+  const showItem = useCallback((order) => {
+    console.log("showing item");
+    setNewOrder(order);
+    console.log(newOrder);
+    setShow(true);
+    console.log(show);
+  }, []);
+
+  const handleNewOrder = useCallback(async (id) => {
+    try {
+      const orderRes = await axios.get(`/api/orders/${id}`);
+      const foundOrder = orderRes.data;
+  
+      console.log("Order received");
+      if (foundOrder) {
+        console.log("found");
+        if (cart.notifications) {
+          console.log("notification on");
+          showItem(foundOrder);
+          if (!audio.paused) {
+            audio.pause();
+            audio.currentTime = 0;
+          }
+          audio.play();
         }
-      });
-      socket.current.emit("respond", {id, res: true}, note);
-      setShowItem(false);
-    }catch(err){
-      console.log(err);
+
+        setOrdersList((prev) => {
+          const orderExists = prev.some((order) => order._id === foundOrder._id);
+          if (!orderExists) {
+            return [...prev, foundOrder];
+          }
+          return prev; 
+        });
+      }
+    } catch (error) {
+      console.error(error);
       setAlertDetails({
         header: "Alert",
-        message: "There was an error whilst accepting this order. Please reload the page and try again.",
+        message: "There was an issue recieving an order. Please reload the page.",
         type: "alert",
         onClose: ()=>setAlert(false),
         onConfirm: null,
@@ -126,57 +90,203 @@ useEffect(() => {
       setAlert(true);
       return;
     }
+  }, [cart.notifications, showItem, audio, setAlert, setAlertDetails]);
+  console.log(cart.notifications);
+  
+  useEffect(() => {
+    const socketInit = async () => {
+      try {
+        await fetch(`/api/socket`);
+        socket.current = io();
+  
+        socket.current.on('connect', () => {
+          console.log("Socket connected");
+          socket.current.on("getNewOrder", handleNewOrder);
+        });
+      } catch (error) {
+        console.error("Socket initialization error:", error);
+        setAlertDetails({
+          header: "Alert",
+          message: "There was an issue connecting to customers. Please reload the page.",
+          type: "alert",
+          onClose: ()=>setAlert(false),
+          onConfirm: null,
+        });
+        setAlert(true);
+        return;
+      }
+    };
+  
+    socketInit();
+  
+    return () => {
+      if (socket.current) {
+        socket.current.off("getNewOrder", handleNewOrder);
+        socket.current.disconnect();
+        console.log("Socket disconnected");
+      }
+    };
+  }, [handleNewOrder, setAlert, setAlertDetails]);
+  
+  useEffect(() => {
+    if (newOrder) {
+      showItem(newOrder);
+    }
+  }, [newOrder, showItem]);
+  
+  useEffect(() => {
+    return () => {
+      audio.pause();
+      audio.currentTime = 0;
+    };
+  }, [audio]);
+
+
+  const handleData = (method, order) => {
+    const id = order._id;
+    if(method === "accept"){
+      handleAccept(order)
+    } else if(method === "decline"){
+        handleDecline(id)
+    }
+  }
+
+  const handleAccept = async (order) => {
+    const id = order._id
+    const delivery = order.delivery
+    const newTime = time ? parseInt(time) : delivery ? settingsObj.delTime : settingsObj.colTime
+    const newData = {
+      status: 2,
+      time: newTime,
+      acceptedAt: new Date()
+    }
+    const update = {}
+    if(delivery){
+      update.delTime = newTime
+    } else {
+      update.colTime = newTime
+    }
+    const filter = {
+      location: router.query.location
+    };
+    try{
+      const res = await axios.put(`${process.env.NEXT_PUBLIC_BASE_URL}/api/orders/` + id, newData, {
+        params:{
+          location: router.query.location
+        }
+      });
+      const settingsRes = await axios.patch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/settings`, {filter, update}, {
+        params: {
+          location: router.query.location
+        },
+      });
+      setOrdersList(ordersList.map((item) => {
+        if (item._id === id){
+          item.status = 2;
+          item.time = newTime,
+          item.acceptedAt = new Date()
+        } return item;
+      }))
+      const tSets = settingsObj;
+      if(delivery){
+        tSets.delTime = newTime
+      }else{
+        tSets.colTime = newTime
+      }
+      setSettingsObj(tSets)
+      socket.current.emit("respond", {id, accepted: true, note, deliveryTime: newTime, collectionTime: newTime});
+      console.log("response submitted");
+      setNote()
+      setTime()
+      setShow(false);
+      setNewOrder(null)
+    }catch(err){
+      console.log(err);
+      setAlertDetails({
+        header: "Alert",
+        message: "There was an error accepting this order. Please reload the page and check refund status.",
+        type: "alert",
+        onClose: ()=>setAlert(false),
+        onConfirm: null,
+        });
+        setAlert(true);
+        return;
+    }
   }
     
   const handleDecline = async (id) => {
+    setAlertDetails({
+      header: "Are you sure?",
+      message: "Please confirm you would like to decline this order.",
+      type: "confirm",
+      onClose: ()=>setAlert(false),
+      onConfirm: ()=>decline(id),
+    });
+    setAlert(true);
+  }
+  const decline = async (id) => {
     const newData = {
       status: 0
     }
-     try{
+    let success = false;
+    let amount = 0;
+    const location = router.query.location;
+    try {
+      const refund = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/api/refund`, {id, amount, location})
+      success = refund.data.success
+    } catch (error) {
+    console.log(error);
+    setAlertDetails({
+      header: "Alert",
+      message: "There was an issue declining this order and the refund may not have been unsuccessful. Please reload the page and try again.",
+      type: "alert",
+      onClose: ()=>setAlert(false),
+      onConfirm: null,
+    });
+    setAlert(true);
+    return;
+    }
+    if(success){
+      try{
         const res = await axios.put(`${process.env.NEXT_PUBLIC_BASE_URL}/api/orders/` + id, newData, {
           params:{
-            location:router.query.location
+            location: location
           }
         })
-        socket.current.emit("respond", {id, res: false}, note);
-      setShowItem(false)
+        setOrdersList(ordersList.map((item) => {
+        if (item._id === id){
+          item.status = 0;
+        } return item;
+        }))
+        socket.current.emit("respond", {id, accepted: false, note});
+        setShow(false);
+        setNote();
+        setNewOrder(null)
       }catch(err){
-         console.log(err);
-         setAlertDetails({
-          header: "Alert",
-          message: "There was an error whilst declining this order. Please reload the page and try again.",
-          type: "alert",
-          onClose: ()=>setAlert(false),
-          onConfirm: null,
-        });
-        setAlert(true);
-        return;
-     }}
-
-     const handleComplete = async (id) => {
-      const newData = {
-        status: 3
-      }
-    try{
-       const res = await axios.put(`${process.env.NEXT_PUBLIC_BASE_URL}/api/orders/` + id, newData, {
-        params:{
-          location:router.query.location
-        }
-      })
-       setShowItem(false);
-    }catch(err){
         console.log(err);
         setAlertDetails({
-          header: "Alert",
-          message: "There was an error whilst completing this order. Please reload the page and try again.",
-          type: "alert",
-          onClose: ()=>setAlert(false),
-          onConfirm: null,
+        header: "Alert",
+        message: "There was an error updating this order. Please reload the page and check refund status.",
+        type: "alert",
+        onClose: ()=>setAlert(false),
+        onConfirm: null,
         });
         setAlert(true);
         return;
+      }
     }
-    }
+    if (!success){
+      setAlertDetails({
+        header: "Alert",
+        message: "There was an error refunding this order. Please reload the page and try again.",
+        type: "alert",
+        onClose: ()=>setAlert(false),
+        onConfirm: null,
+      });
+      setAlert(true);
+      return;
+    };
+  };
 
     // Change meneu width style on expand
 
@@ -230,14 +340,17 @@ useEffect(() => {
             : null}
           </div>
       </div> 
-        {showItem ? <Item 
-        handleDecline={handleDecline} 
-        handleAccept={handleAccept}
-        handleComplete={handleComplete}
-        order={newOrder} 
-        setShowItem={setShowItem} 
-        status={newOrder.status}
-        setNote={setNote}/> 
+        {show && newOrder ?
+        <Show setShow={setShow}>
+          <Item 
+          handleData={handleData} 
+          order={newOrder} 
+          setShowItem={setShow} 
+          status={newOrder.status}
+          setNote={setNote}
+          settings={settingsObj}
+          setTime={setTime}/> 
+        </Show>
         : null}
       </div>
     </div>
@@ -288,6 +401,7 @@ export const getServerSideProps = async (ctx) => {
   const productsRes = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/products`, locationFilter)
   const settingsRes = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/settings`, locationFilter)
   const adminRes = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/admin`, requestConfig)
+  const ordersRes = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/orders`, requestConfig)
 
     return {
       props:{
@@ -295,6 +409,7 @@ export const getServerSideProps = async (ctx) => {
             admins: adminRes.data,
             sectionsList: sectionsRes.data, 
             settings: settingsRes.data,
+            orders: ordersRes.data,
             admin
           }
       }
