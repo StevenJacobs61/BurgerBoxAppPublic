@@ -29,6 +29,7 @@ const Navbar = ({setAlert, setAlertDetails}) => {
   const loginPage = router.pathname === "/admin/login";
   const cartPage = router.pathname === "/cart";
   const orderPage = router.pathname === "/order/[id]";
+  const franchisePage = router.pathname === "/franchise";
 
   useEffect(() => {
     const getStoreData = async () => {
@@ -135,7 +136,7 @@ const Navbar = ({setAlert, setAlertDetails}) => {
              {click ?  <HiMenu className={styles.chevron} onClick={() => setClick(!click)}/> :  <HiMenuAlt3 className={styles.chevron} onClick={() => setClick(!click)}/>}
             </div>
             <div className={styles.logo}
-            style={{transform: !click ? "scale(1.2)" : '', left: !click ? "8%" : ''}}>
+            style={{transform: !click ? "scale(1.05)" : '', left: !click ? "2%" : ''}}>
               <Image
               onClick={async ()=> await redirectWithQuery('/home', router)} 
               className={styles.img} 
@@ -147,6 +148,7 @@ const Navbar = ({setAlert, setAlertDetails}) => {
             { click && mobileScreen ? null :<div className={styles.pagelinks} style={{display: click && mobileScreen ?"none":"flex"}}>
               <div className={styles.pagelink} onClick={async () => {return setClick(!click), await redirectWithQuery("/home", router)}}>Order</div>
               <div className={styles.pagelink} onClick={async () => {return setClick(!click), redirectWithQuery("/cart", router)}}>Checkout</div>
+              <div className={styles.pagelink} onClick={async () => {return setClick(!click), redirectWithQuery("/franchise", router)}}>Franchise</div>
               <div className={styles.pagelink} onClick={async () => {return setClick(!click), redirectWithQuery("/admin", router)}}>Admin</div>
           </div>}
           { click && mobileScreen ? null :<div className={styles.contact}>
@@ -156,12 +158,12 @@ const Navbar = ({setAlert, setAlertDetails}) => {
             </div>
           </div>}
         </div>
-        {!orderPage ? <div className={styles.locationsContainer}>
+        {!orderPage && !franchisePage ? <div className={styles.locationsContainer}>
         <div className={styles.location}><p>Branch:</p><p>{location}</p></div>
         <div className={styles.changeLocation}><p className={styles.changeLocationText} onClick={()=>handleLocationChange()}>Wrong Store? (Change Location)</p></div>
         </div> :null}
         </div>
-    {!loginPage && !cartPage && !settings?.offline && open ? <div className={styles.basket} style={{top: showNav && mobileScreen ? "8.5rem" : showNav && !mobileScreen ? "11rem" : !showNav ? "2rem" : ""}}>
+    {!loginPage && !cartPage && !settings?.offline && !franchisePage && open ? <div className={styles.basket} style={{top: showNav && mobileScreen ? "8.5rem" : showNav && !mobileScreen ? "11rem" : !showNav ? "2rem" : ""}}>
           <p className={styles.quantity}>{cart.quantity}</p>
           <BsBasket className={styles.basket_icon} onClick={async () => await redirectWithQuery("/cart", router)}/>
               </div>:null}
