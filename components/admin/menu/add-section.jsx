@@ -15,7 +15,11 @@ const AddSection = ({setSections, setShow, setAlert, setAlertDetails}) => {
       location: router.query.location
     }
     try {
-      const res = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/api/sections`, newSection)
+      const res = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/api/sections`, newSection, {
+        params:{
+          location:router.query.location
+        }
+      })
       setSections((prev) => ([...prev, res.data]))
       setShow(false)
     } catch (error) {

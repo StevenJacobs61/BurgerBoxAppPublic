@@ -4,6 +4,9 @@ import sections from "../../../models/sections";
 export default async function handler(req, res) {
     const { method, cookies, query } = req;
     const token = cookies.token;
+    const envToken = query.location === "Seaford" ? process.env.NEXT_PUBLIC_SEAFORD_TOKEN 
+        : query.location === "Eastbourne" ? process.env.NEXT_PUBLIC_EASTBOURNE_TOKEN
+        : null;
 
     await dbConnect()
 
@@ -16,7 +19,7 @@ export default async function handler(req, res) {
         }
     }
     if (method === "PATCH") {
-        if(!token || token !== process.env.NEXT_PUBLIC_TOKEN){
+        if(!token || token !== envToken){
           return res.status(401).json("Not authenticated!")
         }
         const {filter, update} = req.body;
@@ -28,7 +31,7 @@ export default async function handler(req, res) {
           }
         }
     if (method === 'POST'){
-        if(!token || token !== process.env.NEXT_PUBLIC_TOKEN){
+        if(!token || token !== envToken){
             return res.status(401).json("Not authenticated!")
           }
         try{

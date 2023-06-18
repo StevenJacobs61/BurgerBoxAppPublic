@@ -6,13 +6,14 @@ import Add from './add'
 import axios from 'axios'
 import ManageExtras from './manage-extras'
 import Show from '../../show'
+import { useRouter } from 'next/router'
 
 const ManageSection = ({section, sections, products, setProducts, setSections, setAlert, setAlertDetails}) => {
   
   const[showProducts, setShowProducts] = useState(false);
   const [showAdd, setShowAdd] = useState(false);
-  const [showExtras, setShowExtras] = useState(false)
-
+  const [showExtras, setShowExtras] = useState(false);
+  const router = useRouter();
 
   const handleAvailable = async () => {
     const id = section._id;
@@ -20,7 +21,11 @@ const ManageSection = ({section, sections, products, setProducts, setSections, s
        available: !section.available
       }
      try{
-        const res = await axios.put(`${process.env.NEXT_PUBLIC_BASE_URL}/api/sections/` + id, newData)
+        const res = await axios.put(`${process.env.NEXT_PUBLIC_BASE_URL}/api/sections/` + id, newData, {
+          params:{
+            location:router.query.location
+          }
+        })
         setSections(sections.map((sect) => {
           if (sect._id === section._id) {
             sect.available = !sect.available;

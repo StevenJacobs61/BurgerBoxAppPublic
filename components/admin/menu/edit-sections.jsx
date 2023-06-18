@@ -35,7 +35,11 @@ const EditSections = ({sections, setSections, setAlert, setAlertDetails}) => {
         available:newOpen
       };
       try{
-        const res = await axios.patch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/sections`, {filter, update});
+        const res = await axios.patch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/sections`, {filter, update}, {
+          params:{
+            location:router.query.location
+          }
+        });
         setSections(sections.map((sect) => {
         sect.available = update.available;
         return sect;

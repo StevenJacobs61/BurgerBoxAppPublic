@@ -52,7 +52,11 @@ const ViewProduct = ({product, setShow, setProducts, products, setAlert, setAler
       }else{
       try{
         // Submit to MDB
-      const res = await axios.put(`${process.env.NEXT_PUBLIC_BASE_URL}/api/products/` + id, newData)
+      const res = await axios.put(`${process.env.NEXT_PUBLIC_BASE_URL}/api/products/` + id, newData, {
+        params:{
+          location:router.query.location
+        }
+      })
       // Update products array to render new info
       //  without refresh
       setProducts((products.map((prod) => {

@@ -19,7 +19,11 @@ const EditSection = ({section, sections, setSections, setAlert, setAlertDetails}
   const deleteSection = async (id) => {
       try {
         const res = await axios.delete(
-          `${process.env.NEXT_PUBLIC_BASE_URL}/api/sections/` + id
+          `${process.env.NEXT_PUBLIC_BASE_URL}/api/sections/` + id, {
+            params:{
+              location:router.query.location
+            }
+          }
         );
         setSections(sections.filter((sect) => sect._id !== id));
       } catch (err) {

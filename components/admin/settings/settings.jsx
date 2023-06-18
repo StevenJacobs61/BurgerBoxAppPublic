@@ -41,7 +41,11 @@ const Settings = ({settingsList, admins, setAlert, setAlertDetails}) => {
             delTime: parseInt(!delTime || delTime < 1 ? settings.delTime : delTime)
          };
         try{
-        const res = await axios.patch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/settings`, {filter, update})
+        const res = await axios.patch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/settings`, {filter, update}, {
+            params:{
+              location:router.query.location
+            }
+          })
         setSettings({...settings, colTime:parseInt(update.colTime), delTime:parseInt(update.delTime)})
         setShow({...show, times:false})
         } catch(err){
@@ -63,7 +67,11 @@ const Settings = ({settingsList, admins, setAlert, setAlertDetails}) => {
             offline:!settings.offline
         };
         try{
-        const res = await axios.patch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/settings`, {filter, update});
+        const res = await axios.patch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/settings`, {filter, update}, {
+            params:{
+              location:router.query.location
+            }
+          });
         setSettings({...settings, offline:!settings.offline})
         setShow({...show, offline:false})
         } catch (err){
@@ -87,7 +95,11 @@ const Settings = ({settingsList, admins, setAlert, setAlertDetails}) => {
             banner: newBanner
         };
         try{
-        const res = await axios.patch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/settings`, {filter, update});
+        const res = await axios.patch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/settings`, {filter, update}, {
+            params:{
+              location:router.query.location
+            }
+          });
         setSettings({...settings, banner:newBanner});
         setShow({...show, banner:false})
         }catch(err) {
@@ -110,7 +122,11 @@ const Settings = ({settingsList, admins, setAlert, setAlertDetails}) => {
         };
        
         try{
-            const res = await axios.patch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/settings`, {filter, update});
+            const res = await axios.patch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/settings`, {filter, update}, {
+                params:{
+                  location:router.query.location
+                }
+              });
             setSettings({...settings, bannerOn:!settings.bannerOn})
             }catch(err) {
                 console.log(err);
@@ -131,7 +147,11 @@ const Settings = ({settingsList, admins, setAlert, setAlertDetails}) => {
             notice: !notice ? settings.notice : notice
         };
         try{
-        const res = await axios.patch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/settings`, {filter, update});
+        const res = await axios.patch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/settings`, {filter, update}, {
+            params:{
+              location:router.query.location
+            }
+          });
         setSettings({...settings, notice:update.notice})
         setShow({...show, notice:false})
         }catch(err) {
@@ -153,7 +173,11 @@ const Settings = ({settingsList, admins, setAlert, setAlertDetails}) => {
             noticeOn: !settings.noticeOn
         };
         try{
-            const res = await axios.patch("/api/settings", {filter, update});
+            const res = await axios.patch("/api/settings", {filter, update}, {
+                params:{
+                  location:router.query.location
+                }
+              });
             setSettings({...settings, noticeOn:!settings.noticeOn})
         }catch(err) {
             console.log(err);
@@ -174,7 +198,11 @@ const Settings = ({settingsList, admins, setAlert, setAlertDetails}) => {
             del:!settings.del
         };
         try{
-        const res = await axios.patch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/settings`, {filter, update});
+        const res = await axios.patch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/settings`, {filter, update}, {
+            params:{
+              location:router.query.location
+            }
+          });
         setSettings({...settings, del:!settings.del})
         setShow({...show, delivery:false})
         } catch (err){
@@ -199,7 +227,11 @@ const Settings = ({settingsList, admins, setAlert, setAlertDetails}) => {
             }
         }
         try{
-            const res = await axios.patch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/settings`, {filter, update});
+            const res = await axios.patch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/settings`, {filter, update}, {
+                params:{
+                  location:router.query.location
+                }
+              });
             setSettings({...settings, ...update})
             setShow({...show, discounts:false})
             } catch (err){
@@ -292,7 +324,11 @@ const Settings = ({settingsList, admins, setAlert, setAlertDetails}) => {
         return;
         }   
        try{
-         const res = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/api/admin`, data)
+         const res = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/api/admin`, data, {
+            params:{
+              location:router.query.location
+            }
+          })
          setAccounts((prev) => ([...prev, res.data]))
      } catch(err) {
          console.log(err),

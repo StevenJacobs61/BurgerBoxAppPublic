@@ -47,7 +47,11 @@ const ManageProduct = ({product, setProducts, products, sections, setAlert, setA
   const deleteProduct = async () => {
     try {
       const res = await axios.delete(
-        `${process.env.NEXT_PUBLIC_BASE_URL}/api/products/` + id
+        `${process.env.NEXT_PUBLIC_BASE_URL}/api/products/` + id, {
+          params:{
+            location:router.query.location
+          }
+        }
       );
       setProducts(products.filter((item) => item._id !== id));
       setShowProduct(false)
@@ -70,7 +74,11 @@ const ManageProduct = ({product, setProducts, products, sections, setAlert, setA
     available: !product.available
    }
   try{
-     const res = await axios.put(`${process.env.NEXT_PUBLIC_BASE_URL}/api/products/` + id, newData)
+     const res = await axios.put(`${process.env.NEXT_PUBLIC_BASE_URL}/api/products/` + id, newData, {
+      params:{
+        location:router.query.location
+      }
+    })
      setProducts(products.map((prod) => {
       if (prod._id === id) {
         prod.available = newData.available;
@@ -93,7 +101,11 @@ const ManageProduct = ({product, setProducts, products, sections, setAlert, setA
     upgrade: !product.upgrade
    }
    try{
-     const res = await axios.put(`${process.env.NEXT_PUBLIC_BASE_URL}/api/products/` + id, newData)
+     const res = await axios.put(`${process.env.NEXT_PUBLIC_BASE_URL}/api/products/` + id, newData, {
+      params:{
+        location:router.query.location
+      }
+    })
      setProducts(products.map((prod) => {
       if (prod._id === id) {
         prod.upgrade = newData.upgrade;

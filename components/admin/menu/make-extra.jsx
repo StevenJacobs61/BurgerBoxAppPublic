@@ -14,15 +14,18 @@ const handleAddExtra = (section) => {
         setCurrentES((prev) => [...prev, section])
     )
 }
-console.log(currentES);
-// mongoose put to change extraSections array of product
+
 const handleAddExtras = async () => {
     const id = product._id;
     const newData = {
         extraSection: currentES,
     }
     try{
-        const res = await axios.put(`${process.env.NEXT_PUBLIC_BASE_URL}/api/products/` + id, newData)
+        const res = await axios.put(`${process.env.NEXT_PUBLIC_BASE_URL}/api/products/` + id, newData, {
+            params:{
+              location:router.query.location
+            }
+          })
         setShow(false);
         if(currentES.length){
         setIsExtra(true);
@@ -68,20 +71,6 @@ const handleAddExtras = async () => {
                  {section.title}
               </button>
               )}
-              {/* {
-                currentES.map((ces) => 
-                <button key={Math.random(10000)} className={styles.btn_current} onClick={() => handleRemoveExtra(ces)}>
-                    {ces}
-                </button>
-                )
-              }
-              {
-                otherES.map((oes, i) => 
-                <button key={i} className={styles.btn_other} onClick={() => handleAddExtra(oes)}>
-                {oes}
-            </button>
-                )
-              } */}
             </div> 
             <div className={styles.btn_container}>
                 <button className={styles.btnSubmit} onClick={()=>handleAddExtras()}>Submit</button>

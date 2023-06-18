@@ -33,7 +33,11 @@ const Add = ({section, setProducts, setShow, setAlert, setAlertDetails}) => {
       location: router.query.location
     }
     try {
-      const res = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/api/products`, newProduct)
+      const res = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/api/products`, newProduct, {
+        params:{
+          location:router.query.location
+        }
+      })
       setShow(false)
     setProducts((prev) => ([...prev, res.data]))
     } catch (error) {

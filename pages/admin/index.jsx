@@ -107,7 +107,11 @@ useEffect(() => {
       status: 5
     }
     try{
-      const res = await axios.put(`${process.env.NEXT_PUBLIC_BASE_URL}/api/orders/` + id, newData);
+      const res = await axios.put(`${process.env.NEXT_PUBLIC_BASE_URL}/api/orders/` + id, newData, {
+        params:{
+          location:router.query.location
+        }
+      });
       socket.current.emit("respond", {id, res: true}, note);
       setShowItem(false);
     }catch(err){
@@ -129,7 +133,11 @@ useEffect(() => {
       status: 0
     }
      try{
-        const res = await axios.put(`${process.env.NEXT_PUBLIC_BASE_URL}/api/orders/` + id, newData)
+        const res = await axios.put(`${process.env.NEXT_PUBLIC_BASE_URL}/api/orders/` + id, newData, {
+          params:{
+            location:router.query.location
+          }
+        })
         socket.current.emit("respond", {id, res: false}, note);
       setShowItem(false)
       }catch(err){
@@ -150,7 +158,11 @@ useEffect(() => {
         status: 3
       }
     try{
-       const res = await axios.put(`${process.env.NEXT_PUBLIC_BASE_URL}/api/orders/` + id, newData)
+       const res = await axios.put(`${process.env.NEXT_PUBLIC_BASE_URL}/api/orders/` + id, newData, {
+        params:{
+          location:router.query.location
+        }
+      })
        setShowItem(false);
     }catch(err){
         console.log(err);

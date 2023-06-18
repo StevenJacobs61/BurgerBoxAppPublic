@@ -16,7 +16,11 @@ const ManageExtra = ({product, products, setProducts, section, setAlert, setAler
        available: !products[index].available
       }
      try{
-        const res = await axios.put(`${process.env.NEXT_PUBLIC_BASE_URL}/api/products/` + id, newData)
+        const res = await axios.put(`${process.env.NEXT_PUBLIC_BASE_URL}/api/products/` + id, newData, {
+          params:{
+            location:router.query.location
+          }
+        })
         setProducts(products.map((prod) => {
           if (prod._id === id) {
             prod.available = newData.available;
@@ -63,7 +67,11 @@ const ManageExtra = ({product, products, setProducts, section, setAlert, setAler
         const id = product._id;
         try {
           const res = await axios.delete(
-            `${process.env.NEXT_PUBLIC_BASE_URL}/api/products/` + id
+            `${process.env.NEXT_PUBLIC_BASE_URL}/api/products/` + id, {
+              params:{
+                location:router.query.location
+              }
+            }
           );
             setProducts(products.filter((prod) =>  prod._id !== id))
         } catch (err) {
@@ -86,7 +94,11 @@ const ManageExtra = ({product, products, setProducts, section, setAlert, setAler
       }
         try {
           const res = await axios.put(
-            `${process.env.NEXT_PUBLIC_BASE_URL}/api/products/` + id, newData);
+            `${process.env.NEXT_PUBLIC_BASE_URL}/api/products/` + id, newData, {
+              params:{
+                location:router.query.location
+              }
+            });
             setProducts(products.map((prod) => {
               if (prod._id === id){
                 prod.extraSection = extraSections
