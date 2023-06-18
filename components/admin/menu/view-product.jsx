@@ -4,6 +4,7 @@ import {AiOutlineClose} from 'react-icons/ai';
 import { useState } from 'react';
 import axios from 'axios';
 import SubmitBtn from '../../buttons/submitBtn';
+import { useRouter } from 'next/router';
 
 const ViewProduct = ({product, setShow, setProducts, products, setAlert, setAlertDetails}) => {
 
@@ -14,7 +15,7 @@ const ViewProduct = ({product, setShow, setProducts, products, setAlert, setAler
   const [stripeId, setStripeId] = useState(product.stripeId);
   const [price, setPrice] = useState(product.price);
   const [veg, setVeg] = useState(product.veg)
-  
+  const router = useRouter();
 
   //** Submit new details to update the product in MDB
 
