@@ -177,6 +177,7 @@
     .text{
         font-size: 2rem;
         margin: 1.8rem 0 3rem;
+        width: 60%;
     }
     .container{
         padding: 105px 0 40px;
@@ -202,6 +203,11 @@
     }
     .label{
         font-size: 1.8rem;
+    }
+}
+@media screen and (min-width:1200px){
+    .text{
+        width: 50%;
     }
 }
 .btn:hover{
