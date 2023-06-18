@@ -5,7 +5,11 @@ export default async function handler(req, res) {
 const { method, cookies, query } = req;
 
     const token = cookies.token;
-    dbConnect()
+    const envToken = query.location === "Seaford" ? process.env.NEXT_PUBLIC_SEAFORD_TOKEN 
+        : query.location === "Eastbourne" ? process.env.NEXT_PUBLIC_EASTBOURNE_TOKEN
+        : null;
+
+    await dbConnect()
 
     if (method === 'GET'){
         try{
@@ -16,7 +20,7 @@ const { method, cookies, query } = req;
         }
     }
     if (method === 'POST'){
-        if(!token || token !== process.env.NEXT_PUBLIC_TOKEN){
+        if(!token || token !== envToken){
             return res.status(401).json("Not authenticated!")
           }
         try{

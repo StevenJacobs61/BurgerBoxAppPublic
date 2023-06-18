@@ -17,6 +17,9 @@ try {
         success_url: successUrl,
         cancel_url: cancelUrl,
         allow_promotion_codes: applyDiscount,
+        metadata: {
+            location: location,
+          },
       };
     const session = await stripe.checkout.sessions.create(sessionData);
     return res.status(201).json({session})

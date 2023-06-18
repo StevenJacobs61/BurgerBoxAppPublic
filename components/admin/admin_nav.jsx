@@ -20,7 +20,6 @@ const AdminNav = ({setAlert, setAlertDetails}) => {
   const cart = useSelector((state) => state.cart)
   const router =useRouter();
   const [notifications, setNotifications] = useState(cart.notifications);
-  const [confirm, setConfirm] = useState(false);
 
   useEffect(() => {
     if (window.localStorage.getItem("Notifications") === null){
@@ -55,7 +54,11 @@ const handleLogout = async () => {
     
 const logout = async () => {
   try {
-    await axios.delete("/api/login/cookie");
+    await axios.delete("/api/login/cookie", {
+      params:{
+        location: router.query.location
+      }
+    });
     redirectWithQuery("/home", router);
     setAlert(false)
     dispatch(setAdmin(false));

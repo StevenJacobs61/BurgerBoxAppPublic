@@ -19,6 +19,7 @@ const Layout = ({ children }) => {
     onClose: ()=>setAlert(false),
     onConfirm: null,
   })
+
     useEffect(() => { 
       if(!router.query.location){
         router.push("/")
@@ -31,10 +32,10 @@ const Layout = ({ children }) => {
         setAdmin(false)
       }
     }, [router, dispatch])
-
+    
   return (
     <>{alert ? <Alert {...alertDetails}/> : null}
-         {admin ? <AdminNav {...{setAlert, setAlertDetails}}/> : <Navbar {...{setAlert, setAlertDetails}}/>}
+         {!admin ?  <Navbar {...{setAlert, setAlertDetails}}/>  : <AdminNav {...{setAlert, setAlertDetails}}/>}
           {children}
           {!admin ? <Footer/> : null}
       </>

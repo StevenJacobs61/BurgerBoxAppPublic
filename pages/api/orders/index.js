@@ -4,12 +4,15 @@ import orders from "../../../models/orders";
 export default async function handler(req, res) {
 const { method, cookies, query } = req;
 const token = cookies.token;
+const envToken = query.location === "Seaford" ? process.env.NEXT_PUBLIC_SEAFORD_TOKEN 
+: query.location === "Eastbourne" ? process.env.NEXT_PUBLIC_EASTBOURNE_TOKEN
+: null;
 
-    dbConnect()
+   await dbConnect()
 
     if (method === 'GET'){
       const propCookies = req.headers.cookie
-      if((!propCookies || propCookies !== process.env.NEXT_PUBLIC_TOKEN) && (!token || token !== process.env.NEXT_PUBLIC_TOKEN)){
+      if((!propCookies || propCookies !== envToken) && (!token || token !== envToken)){
           return res.status(401).json("Not authenticated!")
         }
         try{
@@ -20,7 +23,7 @@ const token = cookies.token;
         }
     }
     if (method === "PATCH"){
-      if(!token || token !== process.env.NEXT_PUBLIC_TOKEN){
+      if(!token || token !== envToken){
         return res.status(401).json("Not authenticated!")
       }
         const {filter, update} = req.body;
@@ -40,6 +43,9 @@ const token = cookies.token;
         }
     }
     if (method === "DELETE"){
+      if(!token || token !== envToken){
+        return res.status(401).json("Not authenticated!")
+      }
       const {filter} = req.body;
       try{
         await orders.deleteMany(filter, {new:true});

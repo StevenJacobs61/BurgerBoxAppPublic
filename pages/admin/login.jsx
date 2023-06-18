@@ -26,7 +26,7 @@ const handleUser = async () => {
   try{
     const res = await axios.post(`/api/login`, {username, password, location, isApp:true})
     if(res.data){
-      const cookieRes = await axios.post(`/api/login/cookie`, {adminMatch:true})
+      const cookieRes = await axios.post(`/api/login/cookie`, {adminMatch:true, location})
     if(cookieRes.data){
       await redirectWithQuery("/admin/orders", router)
     }
@@ -64,3 +64,25 @@ const handleUser = async () => {
 
 export default Login
 
+export const getServerSideProps = async (ctx) => {
+  const { req, query } = ctx;
+  const location = query.location;
+    const myCookie = req?.cookies || "";
+    let token = 
+      location === "Seaford" ? process.env.NEXT_PUBLIC_SEAFORD_TOKEN 
+    : location === "Eastbourne" ? process.env.NEXT_PUBLIC_EASTBOURNE_TOKEN
+    : null;
+    if (myCookie.token === token) {
+      const queryString = new URLSearchParams(query).toString();
+      return {
+        redirect: {
+          destination: `/admin/orders?${queryString}`,
+          permanent: false,
+        },
+      };
+    }else {
+      return {
+        props:{}
+      }
+  } 
+}

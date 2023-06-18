@@ -3,21 +3,24 @@ import settings from "../../../models/settings";
 
 export default async function handler(req, res) {
     const { method, cookies, query } = req;
-    const token = cookies.token;
-
+    
     await dbConnect()
-
+    
     if (method === 'GET'){
-        try{
-            const settingsList = await settings.findOne(query); 
-            res.status(200).json(settingsList);
-        } catch(err){
-            res.status(500).json(err)
-        }
+      try{
+        const settingsList = await settings.findOne(query); 
+        res.status(200).json(settingsList);
+      } catch(err){
+        res.status(500).json(err)
+      }
     }
-
+    
     if (method === "PATCH") {
-        if(!token || token !== process.env.NEXT_PUBLIC_TOKEN){
+      const token = cookies.token;
+      const envToken = query.location === "Seaford" ? process.env.NEXT_PUBLIC_SEAFORD_TOKEN 
+        : query.location === "Eastbourne" ? process.env.NEXT_PUBLIC_EASTBOURNE_TOKEN
+        : null;
+        if(!token || token !== envToken){
           return res.status(401).json("Not authenticated!")
         }
         const {filter, update} = req.body;

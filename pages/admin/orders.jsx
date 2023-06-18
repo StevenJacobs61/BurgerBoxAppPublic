@@ -34,8 +34,12 @@ export const getServerSideProps = async (ctx) => {
     const location = query.location;
     const myCookie = req?.cookies || "";
     let admin = false
-    const queryString = new URLSearchParams(query).toString();
-    if (myCookie.token !== process.env.NEXT_PUBLIC_TOKEN) {
+    let token = 
+    location === "Seaford" ? process.env.NEXT_PUBLIC_SEAFORD_TOKEN 
+    : location === "Eastbourne" ? process.env.NEXT_PUBLIC_EASTBOURNE_TOKEN
+    : null;
+    if (myCookie.token !== token) {
+      const queryString = new URLSearchParams(query).toString();
       return {
         redirect: {
           destination: `/admin/login?${queryString}`,

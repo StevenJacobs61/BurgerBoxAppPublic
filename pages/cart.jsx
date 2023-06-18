@@ -31,7 +31,27 @@ const Cart = ({settings}) => {
 export default Cart
 
 export const getServerSideProps = async (context) => {
-  const location = context.query?.location;
+  const { query, req } = context;
+  const location = query.location;
+  const myCookie = req?.cookies || "";
+
+  let token = 
+      location === "Seaford" ? process.env.NEXT_PUBLIC_SEAFORD_TOKEN 
+    : location === "Eastbourne" ? process.env.NEXT_PUBLIC_EASTBOURNE_TOKEN
+    : null;
+
+  if (myCookie.token === token){
+    const locationQuery = {
+      location: query?.location
+    };
+    const queryString = new URLSearchParams(locationQuery).toString();
+    return {
+      redirect: {
+        destination: `/admin/orders?${queryString}`,
+        permanent: false,
+      },
+    };
+  }
 
   const locationFilter = {
     params: {

@@ -3,8 +3,16 @@ import Stripe from 'stripe';
 const stripe = new Stripe(process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY);
 
 export default async function handler(req, res) {
-    const {method} = req;
-    let {id, amount} = req.body;
+    const {method, cookies} = req;
+    let {id, amount, location} = req.body;
+    const token = cookies.token;
+    const envToken = location === "Seaford" ? process.env.NEXT_PUBLIC_SEAFORD_TOKEN 
+      : location === "Eastbourne" ? process.env.NEXT_PUBLIC_EASTBOURNE_TOKEN
+      : null;
+    if(!token || token !== envToken){
+      return res.status(401).json("Not authenticated!")
+    }
+
    if (method === "POST"){
 
   let list = [];

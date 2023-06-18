@@ -35,11 +35,18 @@ const webhookHandler = async (req, res) => {
         status:1,
         discount: discount
       }
+      const location = event.data.object.metadata.location;
+      const token = location === "Seaford" ? process.env.NEXT_PUBLIC_SEAFORD_TOKEN 
+        : location === "Eastbourne" ? process.env.NEXT_PUBLIC_EASTBOURNE_TOKEN
+        : null;
+        
       try {
-        await axios.put(`${process.env.NEXT_PUBLIC_BASE_URL}/api/orders/` + id, data);
-        console.log("order updated");
-        console.log(id);
-
+        await axios.put(`${process.env.NEXT_PUBLIC_BASE_URL}/api/orders/` + id, data,{
+          params:{
+            location:location,
+            webhookToken:token
+          }
+        });
 
             const socket = io(`${process.env.NEXT_PUBLIC_BASE_URL}`)
             socket.on("connect", () => {
@@ -47,7 +54,6 @@ const webhookHandler = async (req, res) => {
             });
             socket.emit("newOrder", id);
          
-    
       } catch (error) {
         console.error('Error updating order:', error);
       }

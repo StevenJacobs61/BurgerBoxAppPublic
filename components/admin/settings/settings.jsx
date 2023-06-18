@@ -245,8 +245,13 @@ const Settings = ({settingsList, admins, setAlert, setAlertDetails}) => {
         }
     };
     const accountDelete = async (id) => {
+        const location = router.query.location
         try {
-            const res = await axios.delete(`${process.env.NEXT_PUBLIC_BASE_URL}/api/admin/` + id)
+            const res = await axios.delete(`${process.env.NEXT_PUBLIC_BASE_URL}/api/admin/${id}`, {
+                params: {
+                  location: location,
+                },
+              });
             setAccounts(accounts.filter((ac)=> ac._id !== id))
         } catch (err) {
             console.log(err);

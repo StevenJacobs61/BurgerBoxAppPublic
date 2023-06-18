@@ -5,12 +5,13 @@ export default async function handler(req, res) {
     const {
       method,
       cookies,
-      query: { id }
+      query: { id, location, webhookToken }
     } = req;
-  
-  const token = cookies.token;
-
-    dbConnect();
+    const token = webhookToken || cookies.token;
+    const envToken = location === "Seaford" ? process.env.NEXT_PUBLIC_SEAFORD_TOKEN 
+    : location === "Eastbourne" ? process.env.NEXT_PUBLIC_EASTBOURNE_TOKEN
+    : null;
+    await dbConnect();
   
     if (method === "GET") {
       try {
@@ -21,7 +22,9 @@ export default async function handler(req, res) {
       }
     }
     if (method === "PUT") {
-      
+      if(!token || token !== envToken){
+        return res.status(401).json("Not authenticated!")
+      }
       try {
         const orderUpdate = await orders.findByIdAndUpdate(id, req.body, {new:true,});
         res.status(200).json(orderUpdate);
@@ -30,6 +33,9 @@ export default async function handler(req, res) {
       }
     }
     if (method === "DELETE") {
+      if(!token || token !== envToken){
+        return res.status(401).json("Not authenticated!")
+      }
       try {
         await orders.findByIdAndDelete(id);
         res.status(200).json("The order has been deleted!"); 

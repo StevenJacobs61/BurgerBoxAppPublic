@@ -66,7 +66,14 @@ time:{
 status:{
     type:Number,
     maxlength:1,
-    required:true
+    required:true,
+    default: 5,
+      validate: {
+        validator: function (value) {
+          return value === 5;
+        },
+        message: "Status must be 5.",
+      },
 },
 refunded:{
     type:Number,

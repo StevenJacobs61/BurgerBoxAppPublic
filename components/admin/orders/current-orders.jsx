@@ -90,7 +90,6 @@ const CurrentOrders = ({orders, sets, setAlert, setAlertDetails}) => {
     try {
       const orderRes = await axios.get(`/api/orders/${id}`);
       const foundOrder = orderRes.data;
-      console.log(foundOrder);
   
       console.log("Order received");
       if (foundOrder) {
@@ -262,8 +261,16 @@ const CurrentOrders = ({orders, sets, setAlert, setAlertDetails}) => {
       location: router.query.location
     };
     try{
-      const res = await axios.put(`${process.env.NEXT_PUBLIC_BASE_URL}/api/orders/` + id, newData);
-      const settingsRes = await axios.patch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/settings`, {filter, update});
+      const res = await axios.put(`${process.env.NEXT_PUBLIC_BASE_URL}/api/orders/` + id, newData, {
+        params:{
+          location: location
+        }
+      });
+      const settingsRes = await axios.patch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/settings`, {filter, update}, {
+        params: {
+          location: location,
+        },
+      });
       setOrdersList(ordersList.map((item) => {
         if (item._id === id){
           item.status = 2;
@@ -303,7 +310,11 @@ const CurrentOrders = ({orders, sets, setAlert, setAlertDetails}) => {
       status: 3
     }
   try{
-    const res = await axios.put(`${process.env.NEXT_PUBLIC_BASE_URL}/api/orders/` + id, newData)
+    const res = await axios.put(`${process.env.NEXT_PUBLIC_BASE_URL}/api/orders/` + id, newData, {
+      params:{
+        location: location
+      }
+    })
     setOrdersList(ordersList.map((item) => {
       if (item._id === id){
         item.status = 3;
@@ -344,8 +355,9 @@ const CurrentOrders = ({orders, sets, setAlert, setAlertDetails}) => {
     }
     let success = false;
     let amount = 0;
+    const location = router.query.location;
     try {
-      const refund = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/api/refund`, {id, amount})
+      const refund = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/api/refund`, {id, amount, location})
       success = refund.data.success
     } catch (error) {
     console.log(error);
@@ -361,7 +373,11 @@ const CurrentOrders = ({orders, sets, setAlert, setAlertDetails}) => {
     }
     if(success){
       try{
-        const res = await axios.put(`${process.env.NEXT_PUBLIC_BASE_URL}/api/orders/` + id, newData)
+        const res = await axios.put(`${process.env.NEXT_PUBLIC_BASE_URL}/api/orders/` + id, newData, {
+          params:{
+            location: location
+          }
+        })
         setOrdersList(ordersList.map((item) => {
         if (item._id === id){
           item.status = 0;
@@ -426,8 +442,9 @@ const CurrentOrders = ({orders, sets, setAlert, setAlertDetails}) => {
     total = total * 100
     const id = order._id
     let success = false;
+    const location = router.query.location;
     try {
-      const refund = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/api/refund`, {id, amount})
+      const refund = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/api/refund`, {id, amount, location})
       success = refund.data.success
     } catch (error) {
       console.log(error);
@@ -455,7 +472,12 @@ const CurrentOrders = ({orders, sets, setAlert, setAlertDetails}) => {
           refunded: newRefunded
         }
         try{
-          const res = await axios.put(`${process.env.NEXT_PUBLIC_BASE_URL}/api/orders/` + id, data)
+          const res = await axios.put(`${process.env.NEXT_PUBLIC_BASE_URL}/api/orders/` + id, data, {
+            params:{
+              location:router.query.location
+            }
+          }
+          )
           setOrdersList(ordersList.map((ord) => {
             if(ord._id === id){
               ord.refunded = data.refunded
@@ -501,7 +523,11 @@ const CurrentOrders = ({orders, sets, setAlert, setAlertDetails}) => {
 
   const deleteOne = async (id) => {
     try{
-      const res = await axios.delete(`${process.env.NEXT_PUBLIC_BASE_URL}/api/orders/` + id)
+      const res = await axios.delete(`${process.env.NEXT_PUBLIC_BASE_URL}/api/orders/` + id, {
+        params:{
+          location: location
+        }
+      })
       setOrdersList(ordersList.filter((item) => item._id !== id));
       setShow(false);
     }catch(err){
@@ -523,7 +549,11 @@ const CurrentOrders = ({orders, sets, setAlert, setAlertDetails}) => {
       status: 4
     }
     try{
-        const res = await axios.put(`${process.env.NEXT_PUBLIC_BASE_URL}/api/orders/` + id, newData)
+        const res = await axios.put(`${process.env.NEXT_PUBLIC_BASE_URL}/api/orders/` + id, newData, {
+          params:{
+            location: location
+          }
+        })
         setOrdersList(ordersList.map((item) => {
         if(item._id === id){
           item.status = 4;
@@ -566,8 +596,16 @@ const CurrentOrders = ({orders, sets, setAlert, setAlertDetails}) => {
       time: settings.colTime
     }
   try{
-    const resDel = await axios.patch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/orders`, {filterDelivery, updateDelivery})
-    const resCol = await axios.patch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/orders`, {filterCollection, updateCollection})
+    const resDel = await axios.patch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/orders`, {filterDelivery, updateDelivery}, {
+      params:{
+        location: location
+      }
+    })
+    const resCol = await axios.patch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/orders`, {filterCollection, updateCollection}, {
+      params:{
+        location: location
+      }
+    })
     setOrdersList(ordersList.map((item) => {
       if(item.status === 1){
         item.status = 2;
@@ -624,9 +662,13 @@ const CurrentOrders = ({orders, sets, setAlert, setAlertDetails}) => {
         if(ord.status === 1){
           const id = ord._id;
           const amount = 0;
-        const refund = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/api/refund`, {id, amount})
+        const refund = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/api/refund`, {id, amount, location})
         if(refund.data.success){
-          const res = await axios.put(`${process.env.NEXT_PUBLIC_BASE_URL}/api/orders/` + id, update)
+          const res = await axios.put(`${process.env.NEXT_PUBLIC_BASE_URL}/api/orders/` + id, update, {
+            params:{
+              location: location
+            }
+          })
           setOrdersList(ordersList.map((item) => {
             if (item._id === id){
               item.status = 0;
@@ -662,7 +704,11 @@ const CurrentOrders = ({orders, sets, setAlert, setAlertDetails}) => {
     status: 3
     }
     try{
-    const res = await axios.patch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/orders`, {filter, update})
+    const res = await axios.patch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/orders`, {filter, update}, {
+      params:{
+        location: location
+      }
+    })
     setOrdersList(ordersList.map((item) => {
       if(item.status === 2){
         item.status = 3;
@@ -703,7 +749,11 @@ const CurrentOrders = ({orders, sets, setAlert, setAlertDetails}) => {
       location: location
     }
   try {
-  await axios.delete(`${process.env.NEXT_PUBLIC_BASE_URL}/api/orders`, filter);
+  await axios.delete(`${process.env.NEXT_PUBLIC_BASE_URL}/api/orders`, filter, {
+    params:{
+      location: location
+    }
+  });
   setOrdersList(ordersList.filter((item) => item.status !== orderSection));
   setShow(false);
   } catch (error) {
@@ -731,7 +781,11 @@ const CurrentOrders = ({orders, sets, setAlert, setAlertDetails}) => {
   status: 4
   }
   try{
-  const res = await axios.patch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/orders`, {filter, update})
+  const res = await axios.patch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/orders`, {filter, update}, {
+    params:{
+      location: location
+    }
+  })
   setShow(false)
   setOrdersList(ordersList.map((item) => {
     if(item.status === 3){

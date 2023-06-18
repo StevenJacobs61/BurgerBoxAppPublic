@@ -90,3 +90,31 @@ export default function SelectLocation() {
   </div> 
   )
 }
+
+export const getServerSideProps = async (context) => {
+  const { req } = context;
+  const myCookie = req?.cookies.token || "";
+let location = 
+    myCookie === process.env.NEXT_PUBLIC_SEAFORD_TOKEN ? "Seaford"
+  :  myCookie === process.env.NEXT_PUBLIC_EASTBOURNE_TOKEN ? "Eastbourne"
+  : null;
+
+if (myCookie){
+  const locationQuery = {
+    location: location
+  };
+  const queryString = new URLSearchParams(locationQuery).toString();
+
+  return {
+    redirect: {
+      destination: `/admin/orders?${queryString}`,
+      permanent: false,
+    },
+  };
+}
+else{
+  return {
+    props:{}
+  }
+  }
+}
