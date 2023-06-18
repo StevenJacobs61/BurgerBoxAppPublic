@@ -1,5 +1,5 @@
 .container{
-    min-height: 78vh;
+    min-height: 90vh;
     padding: 80px 0 0;
     position: relative;
 }
@@ -33,11 +33,14 @@
     padding: 0.5rem 1rem;
     border-radius: 7px;
     background-color: #fff;
+    text-transform: uppercase;
 }
 .text{
     text-align: center;
     font-size: 1.3rem;
     color: rgb(69, 68, 68);
+    margin: 1rem 0 2rem;
+    font-weight: 300;
 }
 .formWrapper, .form{
     display: flex;
@@ -50,10 +53,11 @@
 .formWrapper{
     margin: 1.5rem 0;
     border: 1px solid var(--bg-color--blue);
-    background-color: rgb(255, 255, 255, 0.7);
+    box-shadow: 0 0 20px 5px var(--bg-color--blue);
+    background-color: rgb(255, 255, 255);
     width: 80%;
     padding: 2rem 0 2.5rem;
-    border-radius: 7px;
+    border-radius: 5px;
 }
 .contactHdr{
     margin:  0 0 2rem 0;
@@ -71,6 +75,7 @@
     background-color: var(--bg-color--blue);
     color: #595959;
     padding: 0.2rem;
+    width: 70%;
 }
 .inputField{
     margin: 0 0 1rem;
@@ -79,7 +84,6 @@
     margin: 0 0 2rem;
     height: 5rem;
     font-size: 1rem;
-    width: 60%;
 }
 .btn{
     box-shadow: 0 0 3px #6a6969;
@@ -101,11 +105,21 @@
     .formWrapper{
         width: 250px;
         margin: 2rem 0 0;
+        padding: 2rem 0 3rem;
+    }
+    .text{
+        width: 75%;
     }
 }
 @media screen and (min-width:480px) {
     .container{
-        padding: 100px 0 20px;
+        padding: 110px 0 60px;
+    }
+    .hdr{
+        font-size: 3rem;
+    }
+    .text{
+     font-size: 1.5rem;   
     }
     .contactHdr{
         font-size: 2rem;
@@ -126,34 +140,68 @@
     .textArea{
         height: 6rem;
         width: 70%;
+        margin: 0 0 2.5rem;
     }
 }
 @media screen and (min-width:769px) {
-    .hdr{
-        font-size: 2.5rem;
+    .container{
+        padding: 100px 0 70px;
     }
-    .text{
-        font-size: 1.5rem;
-        width: 70%;
-    }
-
-}
-@media screen and (min-width:1024px) {
-    .hdr{
-        font-size: 2.8rem;
-        padding: 1.5rem;
+    .formWrapper{
+        width: 400px;
     }
     .text{
         font-size: 1.8rem;
+        width: 70%;
+        margin: 1rem 0 3rem;
+    }
+    .inputField{
+        width: 55%;
+    }
+    .textArea{
+        width: 60%;
+    }
+    .label{
+        margin: 0.5rem 0 0.7rem;
+    }
+    .btn{
+        font-size: 1.7rem;
+        margin: 1rem 0;
+    }
+}
+@media screen and (min-width:1024px) {
+    .hdr{
+        font-size: 3.2rem;
+        padding: 1.8rem 2rem;
+    }
+    .text{
+        font-size: 2rem;
+        margin: 1.8rem 0 3rem;
     }
     .container{
         padding: 105px 0 40px;
     }
     .formWrapper{
-        width: 380px;
+        width: 450px;
+    }
+    .inputField{
+        width: 50%;
     }
     .textArea{
         width: 60%;
+        font-size: 1.2rem;
+    }
+    .container{
+        padding: 110px 0 80px;
+    }
+    .contactHdr{
+        font-size: 2.2rem;
+    }
+    .btn{
+        font-size: 2rem;
+    }
+    .label{
+        font-size: 1.8rem;
     }
 }
 .btn:hover{

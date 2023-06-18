@@ -14,8 +14,8 @@ const Franchise = () => {
   return (
     <div className={styles.container}>
         <div className={styles.wrapper}>
-            <h1 className={styles.hdr}>Join Our Franchise</h1>
-            <p className={styles.text}>Send a message to our admins to enquire about joining our franchise family and start your new exciting venture with us!</p>
+            <h1 className={styles.hdr}>Join our Franchise</h1>
+            <p className={styles.text}>Complete the contact form below to enquire about opening your own BurgerBox store, or joining one of our existing teams and start your exciting venture with us!</p>
             <div className={styles.formWrapper}>
                 <h2 className={styles.contactHdr}>Contact Form</h2>
                 {status && <p className={styles.statusText}>{status}</p>}
