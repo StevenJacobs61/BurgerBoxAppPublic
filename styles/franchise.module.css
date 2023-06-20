@@ -26,7 +26,7 @@
     padding: 0 1rem;
 }
 .hdr{
-    font-size: 2rem;
+    font-size: 2.5rem;
     font-weight: 500;
     margin: 1rem 0;
     border: 1px solid var(--bg-color--blue);
@@ -60,9 +60,15 @@
     border-radius: 5px;
 }
 .contactHdr{
-    margin:  0 0 2rem 0;
-    font-size: 1.5rem;
+    font-size: 1.7rem;
+    margin:  0 0 1.5rem;
     font-weight: 400;
+}
+.statusText{
+    margin:  0 0 1rem;
+    color: #595959;
+    font-size: 1.5rem;
+    text-transform: capitalize;
 }
 .label{
     font-size: 1.3rem;
@@ -112,6 +118,9 @@
     }
 }
 @media screen and (min-width:480px) {
+    .formWrapper{
+        width: 320px;
+    }
     .container{
         padding: 110px 0 60px;
     }
@@ -149,11 +158,15 @@
     }
     .formWrapper{
         width: 400px;
+        padding: 3rem 0;
     }
     .text{
         font-size: 1.8rem;
         width: 70%;
         margin: 1rem 0 3rem;
+    }
+    .statusText{
+        font-size: 1.8rem;
     }
     .inputField{
         width: 55%;

@@ -7,14 +7,14 @@
     z-index: 997;
 }
 .hdr{
-    font-size: 3rem;
+    font-size: 2.8rem;
     color: #fff;
     text-align: center;
     text-transform: uppercase;
     letter-spacing: 0.1rem;
-    padding: 0.5rem;
+    padding: 0.5rem 0 0.2rem;
     width: 100%;
-    font-weight: 600;
+    font-weight: 500;
     border: 0;
 }
 .storesContainer{
@@ -23,7 +23,7 @@
     justify-content: center;
     gap: 10vw;
     width: 100%;
-    margin: 1rem 0;
+    margin: 0.5rem 0;
 }
 .storeContainer{
     display: flex;
