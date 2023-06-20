@@ -9,44 +9,45 @@ import {GiHamburger} from 'react-icons/gi';
 
 export default function SelectLocation() {
   
-  const [location, setLocation] = useState(null)
+  // const [location, setLocation] = useState(null)
 
   // Suggest closest location using geolocater
-  useEffect(() => {
-    const seafordLatitude = 50.7725
-    const seafordLongitude = 0.0967
-    const eastbourneLatitude = 50.7687
-    const eastbourneLongitude = 0.2845
-    const getLocation = () => {
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(
-          (position) => {
-            const { latitude, longitude } = position.coords;
-            // Calculate the distance between the user's location and Seaford and Eastbourne
-            const distanceToSeaford = calculateDistance(latitude, longitude, seafordLatitude, seafordLongitude);
-            const distanceToEastbourne = calculateDistance(latitude, longitude, eastbourneLatitude, eastbourneLongitude);
+  // useEffect(() => {
+  //   const seafordLatitude = 50.7725
+  //   const seafordLongitude = 0.0967
+  //   const eastbourneLatitude = 50.7687
+  //   const eastbourneLongitude = 0.2845
+  //   const getLocation = () => {
+  //     if (navigator.geolocation) {
+  //       navigator.geolocation.getCurrentPosition(
+  //         (position) => {
+  //           const { latitude, longitude } = position.coords;
+  //           // Calculate the distance between the user's location and Seaford and Eastbourne
+  //           const distanceToSeaford = calculateDistance(latitude, longitude, seafordLatitude, seafordLongitude);
+  //           const distanceToEastbourne = calculateDistance(latitude, longitude, eastbourneLatitude, eastbourneLongitude);
   
-            // Set the default location based on proximity
-            setLocation(distanceToSeaford <= distanceToEastbourne ? locations[0].title : locations[1].title);
-          },
-          () => {
-            // If the user denies permission, set the default location to locations[0]
-            setLocation(locations[0].title);
-          }
-        );
-      } else {
-        // Geolocation is not supported by the browser, set default location to locations[0]
-        setLocation(locations[0].title);
-      }
-    };
-    getLocation();
-  }, []);
-  // Helper function to calculate the distance between two coordinates
-  const calculateDistance = (lat1, lon1, lat2, lon2) => {
-    const dx = lat2 - lat1;
-    const dy = lon2 - lon1;
-    return Math.sqrt(dx * dx + dy * dy);
-  };
+  //           // Set the default location based on proximity
+  //           setLocation(distanceToSeaford <= distanceToEastbourne ? locations[0].title : locations[1].title);
+  //         },
+  //         () => {
+  //           // If the user denies permission, set the default location to locations[0]
+  //           setLocation(locations[0].title);
+  //         }
+  //       );
+  //     } else {
+  //       // Geolocation is not supported by the browser, set default location to locations[0]
+  //       setLocation(locations[0].title);
+  //     }
+  //   };
+  //   getLocation();
+  // }, []);
+  // // Helper function to calculate the distance between two coordinates
+  // const calculateDistance = (lat1, lon1, lat2, lon2) => {
+  //   const dx = lat2 - lat1;
+  //   const dy = lon2 - lon1;
+  //   return Math.sqrt(dx * dx + dy * dy);
+  // };
+  
   const clearCart = () =>{
     localStorage.setItem("Orders", "[]")
   }
@@ -70,15 +71,21 @@ export default function SelectLocation() {
       {navigator.geolocation && !location ? <h2 className={styles.findingStore}>Finding nearest store...</h2> : null}
       <div className={styles.locationsContainer}>
       {locations.map((l, i) =>
-          <Link href={{ pathname: '/home', query: { location: l.title } }} key={i} >
+         <Link href={l.title === "Eastbourne" ? "/" : { pathname: '/home', query: { location: l.title } }} key={i} >
           <div key={i} className={styles.locationContainer} onClick={()=>clearCart()}>
-          {l.title === location ? <h2 className={styles.nearestStoreText}>Your nearest Store</h2> : null}
+          {/* {l.title === location ? <h2 className={styles.nearestStoreText}>Your nearest Store</h2> : null} */}
                     <h2 
                     className={styles.storeTitle}
-                    style={{color: l.title === location ? "var(--bg-color--blue)" : ""}}
-                    >{l.title}</h2>
+                    style={{color: l.title === "Seaford" ? "var(--bg-color--blue)" : "", opacity: l.title === "Eastbourne" ? "0.5" : ""}}
+                    >{l.title === "Seaford" ? (
+                      l.title
+                    ) : (
+                      <>
+                        Eastbourne <br /> Opening Soon
+                      </>
+                    )}</h2>
                 <div className={styles.iconContainer}>
-                    <GiHamburger className={styles.icon} style={{fill: l.title === location ? 'var(--bg-color--blue)' : ''}}/>
+                    <GiHamburger className={styles.icon} style={{fill: l.title === "Seaford" ? 'var(--bg-color--blue)' : '', opacity: l.title === "Eastbourne" ? "0.5" : ""}}/>
                 </div>
                 </div>
           </Link>

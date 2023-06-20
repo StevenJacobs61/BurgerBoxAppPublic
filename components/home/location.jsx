@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import styles from "../../styles/home/location.module.css"
 import Link from 'next/link'
 import {GiHamburger} from 'react-icons/gi';
