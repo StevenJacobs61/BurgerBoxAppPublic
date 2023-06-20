@@ -33,9 +33,9 @@ export default async function handler(req, res) {
         }
 
     // if (method === 'POST'){
-        // if(!token || token !== process.env.NEXT_PUBLIC_TOKEN){
-        //     return res.status(401).json("Not authenticated!")
-        //   }
+    //     // if(!token || token !== process.env.NEXT_PUBLIC_TOKEN){
+    //     //     return res.status(401).json("Not authenticated!")
+    //     //   }
     //     try{
     //         const setting = await settings.create(req.body);
     //         res.status(201).json(setting);

@@ -5,6 +5,6 @@ export const locations = [
     },
     {
         title: 'Eastbourne',
-        link: ""
+        link: "/"
     }
 ]
