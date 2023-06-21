@@ -75,11 +75,6 @@
     overflow: hidden;
     margin: 0 0 1rem;
 }
-.icon{
-    width: 80px;
-    aspect-ratio: 1/1;
-    height: unset;
-}
 .title{
     margin: 1rem;
     font-size: 3.5rem;

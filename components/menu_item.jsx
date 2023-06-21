@@ -1,9 +1,9 @@
 import Image from 'next/image'
-import React, { useState } from 'react'
+import React from 'react'
 import styles from '../styles/menu_item.module.css'
 import { useRouter } from 'next/router';
-import {MdChildCare, MdOutlineFastfood, MdOutlineLocalDrink} from "react-icons/md"
-import {GiHotMeal, GiCakeSlice, GiKetchup} from "react-icons/gi"
+import {MdChildCare} from "react-icons/md"
+import {GiHotMeal, GiKetchup} from "react-icons/gi"
 import redirectWithQuery from "../functions/redirect"
 
 const MenuItem = ({item, section, settings, setAlert, setAlertDetails}) => {
@@ -27,24 +27,29 @@ const MenuItem = ({item, section, settings, setAlert, setAlertDetails}) => {
   }
   const title = section.title.toLowerCase()
   return (
-    <div className={styles.section}>
-      <div className={styles.container} onClick={() => handleSelect()}>
-            <h1 className={styles.title}>{item.title}</h1>
-             <div className={styles.img_wrapper}>
+    <div className={title === "sides" ? styles.sidesSection : styles.section}>
+      <div className={styles.container} onClick={() => handleSelect()} style={{borderRadius: title === "sides" ? "50px" : ""}}>
+            <h1 className={styles.title} style={{transform: title === "kids box meals" ? "scale(0.8)" : ""}}>{item.title}</h1>
+             {title !== "sides" ? <div className={styles.img_wrapper}>
              {item.img ? 
                 <Image className={styles.img} src={item.img} alt='kids burger' layout='fill'/>
               : title === "burgers" ?
-              <MdOutlineFastfood className={styles.icon}/>
+              <Image className={styles.icon} src="/img/burger.webp" layout='fill'/>
               : title === "kids box meals" ?
               <MdChildCare className={styles.icon}/>
               : title === "dips" ?
               <GiKetchup className={styles.icon}/>
+              : title === "freakshakes" ?
+              <Image className={styles.icon} src="/img/milkshake.svg" width="90%" height="90%"/>
+              : title === "dynamite prawns" ?
+              <Image className={styles.icon} src="/img/shrimp.svg" width="90%" height="90%" style={{color:"#fff"}}/>
               : title === "dessert" ?
-              <GiCakeSlice className={styles.icon}/>
+              <Image className={styles.icon} src="/img/waffle.svg" width="95%" height="95%"/>
               : title === "drinks" ?
-              <MdOutlineLocalDrink className={styles.icon}/>
-              : <GiHotMeal className={styles.icon}/>}
-              </div>
+              <Image className={styles.icon} src="/img/drink.svg" width="95%" height="95%"/>
+              :
+              <GiHotMeal className={styles.icon}/>}
+              </div>: null}
             <div className={styles.price_container}>
               <p className={styles.from}>from</p>
               <h3 className={styles.price}>{item.price.toLocaleString("en-US", {style: "currency", currency: "GBP"})}</h3>

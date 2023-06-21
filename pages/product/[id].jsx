@@ -8,6 +8,7 @@ import {MdChildCare, MdOutlineFastfood, MdOutlineLocalDrink} from "react-icons/m
 import {GiHotMeal, GiCakeSlice, GiKetchup} from "react-icons/gi"
 import axios from "axios"
 import redirectWithQuery from "../../functions/redirect"
+import Image from 'next/image';
 
 const Product = ({products, product, settings, sections}) => {
 
@@ -117,17 +118,7 @@ return (
   <div className={styles.container}>
     <div className={styles.left}>
       <div className={styles.img_container}>
-        {section === "burgers" ?
-          <MdOutlineFastfood className={styles.icon}/>
-          : section === "kids box meals" ?
-          <MdChildCare className={styles.icon}/>
-          : section === "dips" ?
-          <GiKetchup className={styles.icon}/>
-          : section === "dessert" ?
-          <GiCakeSlice className={styles.icon}/>
-          : section === "drinks" ?
-          <MdOutlineLocalDrink className={styles.icon}/>
-          : <GiHotMeal className={styles.icon}/>}
+          <Image src="/img/cart.svg" width="70%" height="70%" className={styles.icon}/>
       </div>
        <h1 className={styles.title}>{product.title}</h1>
        {settings.offline || !available ? <h2 className={styles.offline}>Unavailable</h2> : <h2 className={styles.price}>Total: {(Math.round(price * quantity * 100) / 100).toLocaleString('en-US', {
