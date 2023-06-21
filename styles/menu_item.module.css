@@ -25,7 +25,7 @@
     align-items: center;
     margin: 0 0 0.5rem;
     background: #101010;
-    padding: 1rem 1rem;
+    padding: 1.5rem 1rem 1.5rem;
     justify-content: space-between;
     cursor: pointer;
 }
@@ -84,7 +84,7 @@
     font-weight: 300;
 }
 .icon{
-    opacity:0.6;
+    opacity:0.8;
     fill: #fff;
     width: 75%;
     height: 75%;
