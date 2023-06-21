@@ -6,6 +6,7 @@ import  {MdOutlineNotificationsOff} from 'react-icons/md'
 import  {MdOutlineNotificationsNone} from 'react-icons/md'
 import  {MdOutlineNextPlan} from 'react-icons/md'
 import  {HiOutlineLogout} from 'react-icons/hi'
+import  {AiOutlineFullscreen, AiOutlineFullscreenExit} from 'react-icons/ai'
 import { useDispatch } from 'react-redux';
 import { changeNotif } from '../../redux/cartSlice';
 import { useSelector } from 'react-redux';
@@ -20,6 +21,7 @@ const AdminNav = ({setAlert, setAlertDetails}) => {
   const cart = useSelector((state) => state.cart)
   const router =useRouter();
   const [notifications, setNotifications] = useState(cart.notifications);
+  const [isFullScreen, setIsFullScreen] = useState(false)
 
   useEffect(() => {
     if (window.localStorage.getItem("Notifications") === null){
@@ -74,6 +76,15 @@ const logout = async () => {
     setAlert(true);
   }
 }
+const toggleFullScreen = () => {
+  if (document.fullscreenElement) {
+    document.exitFullscreen();
+    setIsFullScreen(false)
+  } else {
+    document.documentElement.requestFullscreen();
+    setIsFullScreen(true)
+  }
+};
 
   return (
     <div className={styles.container}>
@@ -96,6 +107,10 @@ const logout = async () => {
           className={styles.icon}/>
           </div>
         }
+        <div className={styles.icon_container}>
+        { !isFullScreen ? <AiOutlineFullscreen onClick={()=>toggleFullScreen()} className={styles.icon}/> 
+        : <AiOutlineFullscreenExit onClick={()=>toggleFullScreen()} className={styles.icon}/>}
+          </div>
     </div> 
   )
 }
