@@ -2,9 +2,10 @@ import React from 'react'
 import styles from '../../../styles/make-extra.module.css'
 import axios from 'axios';
 import { useState } from 'react';
+import { useRouter } from 'next/router';
 
 const MakeExtra = ({product, products, sections, setShow, setProducts, setIsExtra, setAlert, setAlertDetails}) => {
-
+const router = useRouter()
 const [currentES, setCurrentES] = useState(product.extraSection === true | product.extraSection?.length ? product.extraSection : [])
 
 const handleAddExtra = (section) => {

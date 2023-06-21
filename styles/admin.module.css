@@ -73,7 +73,7 @@
 
 @media screen and (min-width:1024px) {
    .items_container{
-      flex-direction: row;
+      flex-direction: row-reverse;
       align-items: flex-start;
       padding: 0 2rem 0 8rem;
    }
