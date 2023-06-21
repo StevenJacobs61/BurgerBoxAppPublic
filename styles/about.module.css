@@ -5,19 +5,21 @@
     align-items: center;
 }
 .hdrContainer{
-    background-color: #908f8f;
+    background-color: #5c5c5c;
     padding: 1rem;
 }
 .hdr{
     font-size: 3rem;
     font-weight: 400;
-    color: rgb(241, 252, 243, 0.9);
+    color: rgb(231, 249, 255, 0.8);
+    /* color: rgb(241, 252, 243, 0.9); */
     
 }
 .contentContainer{
     padding: 0.5rem 1rem 1rem;
     position: relative;
-    background-color: rgb(241, 252, 243, 0.5);
+    /* background-color: rgb(231, 249, 255, 0.1); */
+    /* rgb(241, 252, 243, 0.5); */
 }
 .contentContainer::after {
     content: "";

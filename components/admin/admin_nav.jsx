@@ -61,8 +61,10 @@ const logout = async () => {
         location: router.query.location
       }
     });
+    setIsFullScreen(false);
+    toggleFullScreen();
     redirectWithQuery("/home", router);
-    setAlert(false)
+    setAlert(false);
     dispatch(setAdmin(false));
   } catch (error) {
     console.error(error);
