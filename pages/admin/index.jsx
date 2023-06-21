@@ -33,8 +33,8 @@ const Admin = ({productsList, admins, sectionsList, settings, admin, orders}) =>
   // Get notifiations status from redux
 
   const cart = useSelector((state) => state.cart);
-  const[showProducts, setShowProducts] = useState(false);
-  const [showSettings, setShowSettings] = useState()
+  const[showProducts, setShowProducts] = useState(true);
+  const [showSettings, setShowSettings] = useState(true)
   const [newOrder, setNewOrder] = useState(null)
   const [show, setShow] = useState(false)
   const audio = useMemo(() => new Audio('/sounds/alert.mp3'), []);
@@ -91,7 +91,6 @@ const Admin = ({productsList, admins, sectionsList, settings, admin, orders}) =>
       return;
     }
   }, [cart.notifications, showItem, audio, setAlert, setAlertDetails]);
-  console.log(cart.notifications);
   
   useEffect(() => {
     const socketInit = async () => {
