@@ -320,15 +320,6 @@ const Admin = ({productsList, admins, sectionsList, settings, admin, orders}) =>
         Admin
         </h1>
       <div className={styles.items_container} style={{margin: showProducts ? null : "2rem 0"}}>
-        <div className={styles.item} style={{width: showProducts && width < 1024 ? "90%" : null}}>
-        <h1 className={styles.hdr}
-        onClick={() => {if (window.innerWidth>=1024){null} else {setShowProducts(!showProducts)}}}>Menu</h1>
-             {showProducts ?  <ManageProducts
-         productsList={productsList}
-         sectionsList={sectionsList}
-         {...{setAlert, setAlertDetails}}
-         /> : null}
-            </div>
           <div className={styles.item} style={{width: showSettings && width < 1024 ? "90%": null}}>
           <h1 className={styles.hdr}
           onClick={() => {if (window.innerWidth>=1024){null} else {setShowSettings(!showSettings)}}}>Settings</h1>
@@ -338,6 +329,15 @@ const Admin = ({productsList, admins, sectionsList, settings, admin, orders}) =>
            {...{setAlert, setAlertDetails}}/>
             : null}
           </div>
+        <div className={styles.item} style={{width: showProducts && width < 1024 ? "90%" : null}}>
+        <h1 className={styles.hdr}
+        onClick={() => {if (window.innerWidth>=1024){null} else {setShowProducts(!showProducts)}}}>Menu</h1>
+             {showProducts ?  <ManageProducts
+         productsList={productsList}
+         sectionsList={sectionsList}
+         {...{setAlert, setAlertDetails}}
+         /> : null}
+            </div>
       </div> 
         {show && newOrder ?
         <Show setShow={setShow}>
