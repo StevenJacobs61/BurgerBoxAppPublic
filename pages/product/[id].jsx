@@ -4,8 +4,6 @@ import { useRouter } from 'next/router';
 import { useDispatch } from 'react-redux';
 import { addQuantity } from '../../redux/cartSlice';
 import { setOffline } from '../../redux/userSlice';
-import {MdChildCare, MdOutlineFastfood, MdOutlineLocalDrink} from "react-icons/md"
-import {GiHotMeal, GiCakeSlice, GiKetchup} from "react-icons/gi"
 import axios from "axios"
 import redirectWithQuery from "../../functions/redirect"
 import Image from 'next/image';
