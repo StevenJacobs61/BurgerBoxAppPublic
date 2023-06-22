@@ -61,8 +61,9 @@ const logout = async () => {
         location: router.query.location
       }
     });
-    setIsFullScreen(false);
-    toggleFullScreen();
+    if(document.fullscreenElement){
+      toggleFullScreen();
+    }
     redirectWithQuery("/home", router);
     setAlert(false);
     dispatch(setAdmin(false));
@@ -87,7 +88,6 @@ const toggleFullScreen = () => {
     setIsFullScreen(true)
   }
 };
-
   return (
     <div className={styles.container}>
           <MdOutlineNextPlan className={styles.icon}

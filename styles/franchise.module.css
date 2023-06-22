@@ -34,6 +34,8 @@
     border-radius: 7px;
     background-color: #fff;
     text-transform: uppercase;
+    border: 1px solid var(--bg-color--blue);
+    box-shadow: 0 0 20px 3px var(--bg-color--blue);
 }
 .text{
     text-align: center;
@@ -51,7 +53,7 @@
     width: 100%;
 }
 .formWrapper{
-    margin: 1.5rem 0;
+    margin: 1.5rem 0 5rem;
     border: 1px solid var(--bg-color--blue);
     box-shadow: 0 0 20px 5px var(--bg-color--blue);
     background-color: rgb(255, 255, 255);
@@ -110,7 +112,7 @@
 @media screen and (min-width:380px) {
     .formWrapper{
         width: 250px;
-        margin: 2rem 0 0;
+        margin: 2rem 0 5rem;
         padding: 2rem 0 3rem;
     }
     .text{
@@ -156,6 +158,9 @@
     .container{
         padding: 100px 0 70px;
     }
+    .hdr{
+        font-size: 3.5rem;
+    }
     .formWrapper{
         width: 400px;
         padding: 3rem 0;
@@ -184,7 +189,7 @@
 }
 @media screen and (min-width:1024px) {
     .hdr{
-        font-size: 3.2rem;
+        font-size: 4rem;
         padding: 1.8rem 2rem;
     }
     .text{

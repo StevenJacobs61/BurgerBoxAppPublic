@@ -52,9 +52,9 @@ const handleUser = async () => {
         <span className={styles.login_container}>
             <h2 className={styles.hdr}>Admin Login</h2>
             <label htmlFor="username" className={styles.label}>username:</label>
-            <input type="text" onChange={(e) => setUsername(e.target.value)} className={styles.input}/>
+            <input type="text" onChange={(e) => setUsername(e.target.value)} className={styles.inputField}/>
             <label htmlFor="input" className={styles.label}>password:</label>
-            <input type="password" onChange={(e) => setPassword(e.target.value)}  className={styles.input}/>
+            <input type="password" onChange={(e) => setPassword(e.target.value)}  className={styles.inputField}/>
               <button className={styles.button} onClick={()=>handleUser()}>login</button> 
         </span>
 
