@@ -33,7 +33,7 @@ const Info = ({sections, settings, complete}) => {
         {  settings.noticeOn ? 
         <div className={styles.notice_container}>
     <h3 className={styles.notice_hdr} >Notice!</h3>
-    <p className={styles.notice}>This is test version for the purpose of showcase. User cannot write in db. Please browse the features: Create orders, Pay via Stripe API, RealTime notifications with socket.io, Manage discount tokens, Menu items and Settings, Receipt printingg with the Epson SDK. Admin username = &quot;a&quot;, Admin password = &quot;a&quot;. Live app URL https://www.burgerbox-uk.com. The food is great!</p>
+    <p className={styles.notice}>This is test version for the purpose of showcase. User cannot write in db. Please browse the features: Create orders, Pay via Stripe API, RealTime notifications with socket.io, Manage discount tokens, Menu items and Settings, Receipt printingg with the Epson SDK. Admin username = &quot;a&quot;, Admin password = &quot;a&quot;. Live app URL https://www.burgerbox-uk.com. The food is great, try!</p>
     </div>
     : null}
         {!settings.del ? <h2 className={styles.noDel}>
