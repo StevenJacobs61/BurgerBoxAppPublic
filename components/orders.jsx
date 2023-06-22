@@ -2,7 +2,7 @@ import styles from '../styles/orders.module.css'
 import { useRouter } from 'next/router';
 import { useDispatch } from 'react-redux'
 import { addQuantity } from '../redux/cartSlice'
-import { getTotal } from '../functions/total';
+import { getTotal } from '../functions/local';
 import redirectWithQuery from '../functions/redirect';
 
 const Orders = ({total, setTotal, setOrders, orders}) => {

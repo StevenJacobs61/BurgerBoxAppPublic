@@ -4,9 +4,8 @@ import ManageProducts from '../../components/admin/menu/manage-products'
 import Item from '../../components/admin/orders/item'
 import { useState, useEffect, useRef, useMemo, useCallback } from 'react'
 import { io } from 'socket.io-client'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import Settings from '../../components/admin/settings/settings'
-import { setAdmin } from '../../redux/userSlice'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import Alert from '../../components/alert'
@@ -15,7 +14,6 @@ import Show from '../../components/show'
 
 
 const Admin = ({productsList, admins, sectionsList, settings, admin, orders}) => {
-  const dispatch = useDispatch()
   const router = useRouter()
   const [alert, setAlert] = useState(false);
     const [alertDetails, setAlertDetails] = useState({
@@ -25,10 +23,6 @@ const Admin = ({productsList, admins, sectionsList, settings, admin, orders}) =>
     onClose: ()=>setAlert(false),
     onConfirm: null,
   })
-  
-  useEffect(()=>{
-    dispatch(setAdmin(admin))
-  }, [dispatch, admin])
 
   // Get notifiations status from redux
 

@@ -39,7 +39,7 @@ const CurrentOrders = ({orders, sets, setAlert, setAlertDetails}) => {
   // Mute
   useEffect(() => {
     setNotifications(cart.notifications)
-  }, [cart, cart.notifications])
+  }, [cart.notifications])
 
   // Update orders list every 30 mins
   useEffect(() => {

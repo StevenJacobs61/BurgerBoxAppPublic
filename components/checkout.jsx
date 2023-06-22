@@ -182,7 +182,7 @@ const createOrder = async (data) => {
       const res = await axios.post("/api/orders", data);
       if (res.status === 201) {
         // Change quantity for redux state (basket icon)
-        dispatch(addQuantity());
+        dispatch(addQuantity(0));
         // redirect to order page
        await redirectWithQuery(`/order/${res.data._id}`, router);
       }

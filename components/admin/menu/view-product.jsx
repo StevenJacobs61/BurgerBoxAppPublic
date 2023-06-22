@@ -3,7 +3,6 @@ import styles from "../../../styles/view-product.module.css"
 import {AiOutlineClose} from 'react-icons/ai';
 import { useState } from 'react';
 import axios from 'axios';
-import SubmitBtn from '../../buttons/submitBtn';
 import { useRouter } from 'next/router';
 
 const ViewProduct = ({product, setShow, setProducts, products, setAlert, setAlertDetails}) => {

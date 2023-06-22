@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import styles from '../../../styles/add.module.css'
 import axios from 'axios';
-import SubmitBtn from '../../buttons/submitBtn';
 import InputField from '../../inputs/input_field';
 import { useRef } from 'react';
 import { useRouter } from 'next/router';

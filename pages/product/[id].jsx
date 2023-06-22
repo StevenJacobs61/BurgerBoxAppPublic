@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { useDispatch } from 'react-redux';
 import { addQuantity } from '../../redux/cartSlice';
-import { setOffline } from '../../redux/userSlice';
 import axios from "axios"
 import redirectWithQuery from "../../functions/redirect"
 import Image from 'next/image';
@@ -36,8 +35,7 @@ const Product = ({products, product, settings, sections}) => {
   const [width, setWidth] = useState();
   useEffect(() => {
     setWidth(window.innerWidth)
-    dispatch(setOffline(settings.offline))
-  }, [dispatch, settings.offline])
+  }, [])
 
   useEffect(() => {
     window.addEventListener("resize", () =>setWidth(window.innerWidth));

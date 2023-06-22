@@ -1,6 +1,6 @@
 .container{
     min-height: 90vh;
-    padding: 80px 0 0;
+    padding: 90px 0 20px;
     position: relative;
 }
 .container::after {

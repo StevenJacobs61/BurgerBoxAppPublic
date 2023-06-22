@@ -30,6 +30,8 @@ const Navbar = ({setAlert, setAlertDetails}) => {
   const cartPage = router.pathname === "/cart";
   const orderPage = router.pathname === "/order/[id]";
   const franchisePage = router.pathname === "/franchise";
+  const showBasket = !loginPage && !cartPage && !settings?.offline && !franchisePage && open
+  const showLocations = !orderPage && !franchisePage
 
   useEffect(() => {
     const getStoreData = async () => {
@@ -158,12 +160,12 @@ const Navbar = ({setAlert, setAlertDetails}) => {
             </div>
           </div>}
         </div>
-        {!orderPage && !franchisePage ? <div className={styles.locationsContainer}>
+        {showLocations ? <div className={styles.locationsContainer}>
         <div className={styles.location}><p>Branch:</p><p>{location}</p></div>
         <div className={styles.changeLocation}><p className={styles.changeLocationText} onClick={()=>handleLocationChange()}>Wrong Store? (Change Location)</p></div>
         </div> :null}
         </div>
-    {!loginPage && !cartPage && !settings?.offline && !franchisePage && open ? <div className={styles.basket} style={{top: showNav && mobileScreen ? "8.5rem" : showNav && !mobileScreen ? "11rem" : !showNav ? "2rem" : ""}}>
+    {showBasket ? <div className={styles.basket} style={{top: showNav && mobileScreen ? "8.5rem" : showNav && !mobileScreen ? "11rem" : !showNav ? "2rem" : ""}}>
           <p className={styles.quantity}>{cart.quantity}</p>
           <BsBasket className={styles.basket_icon} onClick={async () => await redirectWithQuery("/cart", router)}/>
               </div>:null}

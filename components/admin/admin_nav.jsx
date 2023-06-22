@@ -10,7 +10,6 @@ import  {AiOutlineFullscreen, AiOutlineFullscreenExit} from 'react-icons/ai'
 import { useDispatch } from 'react-redux';
 import { changeNotif } from '../../redux/cartSlice';
 import { useSelector } from 'react-redux';
-import { setAdmin } from '../../redux/userSlice'
 import axios from 'axios'
 import redirectWithQuery from '../../functions/redirect'
 
@@ -20,7 +19,6 @@ const AdminNav = ({setAlert, setAlertDetails}) => {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart)
   const router =useRouter();
-  const [notifications, setNotifications] = useState(cart.notifications);
   const [isFullScreen, setIsFullScreen] = useState(false)
 
   useEffect(() => {
@@ -28,17 +26,15 @@ const AdminNav = ({setAlert, setAlertDetails}) => {
       window.localStorage.setItem("Notifications", "false");
     }
     const local = JSON.parse(localStorage.getItem("Notifications"));
-    setNotifications(local)
     dispatch(changeNotif(local))
   }, [dispatch])
 
   const handleMute = () => {
     try{
-      window.localStorage.setItem("Notifications", JSON.stringify(!notifications))
-      dispatch(changeNotif(!notifications))
-    setNotifications(!notifications)
+      window.localStorage.setItem("Notifications", JSON.stringify(!cart.notifications))
+      dispatch(changeNotif(!cart.notifications))
     router.reload()
-  } catch(err) {
+  } catch(error) {
     console.log(error);
   }
 }
@@ -66,7 +62,6 @@ const logout = async () => {
     }
     redirectWithQuery("/home", router);
     setAlert(false);
-    dispatch(setAdmin(false));
   } catch (error) {
     console.error(error);
     setAlertDetails({
@@ -97,7 +92,7 @@ const toggleFullScreen = () => {
           }}/>
           <HiOutlineLogout className={styles.icon}
           onClick={()=> handleLogout()}/>
-        {!notifications ?
+        {!cart.notifications ?
         <div className={styles.icon_container}>
         <MdOutlineNotificationsOff 
         className={styles.icon} 

@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react'
 import {  useRouter } from 'next/router'
 import MenuItem from './menu_item'
 import redirectWithQuery from '../functions/redirect'
-import { getTotal } from '../functions/total'
+import { getTotal } from '../functions/local'
 
 
 const Menu = ({sectionsList, productsList, settings, setAlert, setAlertDetails}) => {

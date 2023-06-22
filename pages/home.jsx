@@ -1,9 +1,7 @@
 import Head from 'next/head'
 import Menu from '../components/menu'
 import styles from '../styles/Home.module.css'
-import { useDispatch } from 'react-redux'
-import { setAdmin, setOffline} from '../redux/userSlice'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import LandingPage from '../components/landing_page/landing_page'
 import axios from 'axios'
 import { useRouter } from 'next/router'
@@ -14,7 +12,6 @@ import About from '../components/about'
 export default function Home({ productsList, sections, settings, admin}) {
   
   const sectionsList = sections.filter((section) => section.title !== "Extra Toppings" && section.title !== "Upgrades")
-  const dispatch = useDispatch()
   const router = useRouter()
   const [alert, setAlert] = useState(false);
   const [alertDetails, setAlertDetails] = useState({
@@ -25,10 +22,6 @@ export default function Home({ productsList, sections, settings, admin}) {
     onConfirm: null,
   })
   
-  useEffect(()=>{
-    dispatch(setAdmin(admin))
-    dispatch(setOffline(settings.offline))
-  }, [dispatch, admin, settings])
 
   return (
     <div className={styles.container}>

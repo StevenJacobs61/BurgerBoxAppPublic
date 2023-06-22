@@ -2,14 +2,11 @@ import React, { useEffect, useState } from 'react'
 import Footer from './footer'
 import Navbar from './navbar'
 import { useRouter } from 'next/router'
-import { useDispatch } from 'react-redux'
-import { changeLocation } from '../../redux/locationSlice'
 import AdminNav from '../admin/admin_nav'
 import Alert from "../alert.jsx"
 
 const Layout = ({ children }) => {
     const router =useRouter()
-    const dispatch = useDispatch()
     const [admin, setAdmin] = useState()
     const [alert, setAlert] = useState(false);
     const [alertDetails, setAlertDetails] = useState({
@@ -23,15 +20,13 @@ const Layout = ({ children }) => {
     useEffect(() => { 
       if(!router.query.location){
         router.push("/")
-      }else{
-          dispatch(changeLocation(router.query.location))
       }
       if(router.pathname === "/admin/orders" || router.pathname === "/admin"){
         setAdmin(true)
       } else{
         setAdmin(false)
       }
-    }, [router, dispatch])
+    }, [router])
     
   return (
     <>{alert ? <Alert {...alertDetails}/> : null}

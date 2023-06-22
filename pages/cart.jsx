@@ -3,7 +3,7 @@ import Checkout from '../components/checkout'
 import Orders from '../components/orders'
 import styles from '../styles/cart.module.css'
 import axios from 'axios'
-import {getOrders, getTotal} from '../functions/total'
+import {getOrders, getTotal} from '../functions/local'
 
 
 const Cart = ({settings}) => {
