@@ -143,7 +143,7 @@ const checkoutF = () => {
            <>
            {settings.discount.active ? 
           <div className={styles.discountContainer}> 
-            <h2 className={styles.discountMessage}>{settings.discount.message}</h2> 
+            <h2 className={styles.discountMessage}><strong>Discounts:</strong> <br/>{settings.discount.message}</h2> 
           </div>
           :null}
            <button className={styles.btnCheckout} onClick={()=>checkoutF()}>Checkout</button> 

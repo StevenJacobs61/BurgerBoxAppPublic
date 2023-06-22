@@ -165,7 +165,7 @@ const Navbar = ({setAlert, setAlertDetails}) => {
         <div className={styles.changeLocation}><p className={styles.changeLocationText} onClick={()=>handleLocationChange()}>Wrong Store? (Change Location)</p></div>
         </div> :null}
         </div>
-    {showBasket ? <div className={styles.basket} style={{top: showNav && mobileScreen ? "8.5rem" : showNav && !mobileScreen ? "11rem" : !showNav ? "2rem" : ""}}>
+    {showBasket ? <div className={styles.basket} style={{top: showNav && mobileScreen ? "10rem" : showNav && !mobileScreen ? "11rem" : !showNav ? "2rem" : ""}}>
           <p className={styles.quantity}>{cart.quantity}</p>
           <BsBasket className={styles.basket_icon} onClick={async () => await redirectWithQuery("/cart", router)}/>
               </div>:null}
