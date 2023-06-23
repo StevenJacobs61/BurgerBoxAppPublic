@@ -152,7 +152,7 @@ const checkoutF = () => {
            {order.note?.length >= 1 ?
        <>
        <h2 className={styles.note_hdr}>Order note:</h2>
-        <p className={styles.note}>&quot;{note}&quot;</p>
+        <p className={styles.note}>&quot;{order.note}&quot;</p>
         </> : null}
         <p className={styles.total} id={styles.total}>Total: {total}</p>
        </div>
