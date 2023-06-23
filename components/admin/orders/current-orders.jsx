@@ -229,7 +229,8 @@ const CurrentOrders = ({orders, sets, setAlert, setAlertDetails}) => {
     const newData = {
       status: 2,
       time: newTime,
-      acceptedAt: new Date()
+      acceptedAt: new Date(),
+      note:note
     }
     const update = {}
     if(delivery){
@@ -331,7 +332,8 @@ const CurrentOrders = ({orders, sets, setAlert, setAlertDetails}) => {
   }
   const decline = async (id) => {
     const newData = {
-      status: 0
+      status: 0,
+      note:note
     }
     let success = false;
     let amount = 0;

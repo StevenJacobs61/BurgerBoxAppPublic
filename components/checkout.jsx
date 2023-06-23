@@ -106,6 +106,7 @@ const handleOrder = async ()=>{
        deliveryCost: deliveryCost,
        delivery: showDeliver,
        time:0,
+       note:"",
        status: 5,
        refunded: 0,
        location: router.query.location
@@ -129,7 +130,6 @@ const handleOrder = async ()=>{
       const cleanedPostcode = postcode.replace(/\s/g, '').toLowerCase();
       try {
         const postcodeRes = await axios.get(`https://api.postcodes.io/postcodes/${cleanedPostcode}`);
-        console.log(postcode.data);
         const outcode = postcodeRes.data.result.outcode.toLowerCase();
         if (outcode !== 'bn9' && outcode !== 'bn10' && outcode !== 'bn25' && outcode !== 'bn26') {
           setAlertDetails({
@@ -179,7 +179,7 @@ const createOrder = async (data) => {
     return;
   }
   try {
-      const res = await axios.post("/api/orders", data);
+      const res = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/api/orders`, data);
       if (res.status === 201) {
         // Change quantity for redux state (basket icon)
         dispatch(addQuantity(0));

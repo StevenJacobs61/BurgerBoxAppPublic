@@ -63,6 +63,11 @@ time:{
     required: true,
     maxlength:8
 },
+note:{
+    type:String,
+    maxlength:300,
+    default:""
+},
 status:{
     type:Number,
     maxlength:1,
