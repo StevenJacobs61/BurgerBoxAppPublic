@@ -12,41 +12,41 @@ export default function SelectLocation() {
   const [location, setLocation] = useState(null)
 
   // Suggest closest location using geolocater
-  useEffect(() => {
-    const seafordLatitude = 50.7725
-    const seafordLongitude = 0.0967
-    const eastbourneLatitude = 50.7687
-    const eastbourneLongitude = 0.2845
-    const getLocation = () => {
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(
-          (position) => {
-            const { latitude, longitude } = position.coords;
-            // Calculate the distance between the user's location and Seaford and Eastbourne
-            const distanceToSeaford = calculateDistance(latitude, longitude, seafordLatitude, seafordLongitude);
-            const distanceToEastbourne = calculateDistance(latitude, longitude, eastbourneLatitude, eastbourneLongitude);
+  // useEffect(() => {
+  //   const seafordLatitude = 50.7725
+  //   const seafordLongitude = 0.0967
+  //   const eastbourneLatitude = 50.7687
+  //   const eastbourneLongitude = 0.2845
+  //   const getLocation = () => {
+  //     if (navigator.geolocation) {
+  //       navigator.geolocation.getCurrentPosition(
+  //         (position) => {
+  //           const { latitude, longitude } = position.coords;
+  //           // Calculate the distance between the user's location and Seaford and Eastbourne
+  //           const distanceToSeaford = calculateDistance(latitude, longitude, seafordLatitude, seafordLongitude);
+  //           const distanceToEastbourne = calculateDistance(latitude, longitude, eastbourneLatitude, eastbourneLongitude);
   
-            // Set the default location based on proximity
-            setLocation(distanceToSeaford <= distanceToEastbourne ? locations[0].title : locations[1].title);
-          },
-          () => {
-            // If the user denies permission, set the default location to locations[0]
-            setLocation(locations[0].title);
-          }
-        );
-      } else {
-        // Geolocation is not supported by the browser, set default location to locations[0]
-        setLocation(locations[0].title);
-      }
-    };
-    getLocation();
-  }, []);
-  // Helper function to calculate the distance between two coordinates
-  const calculateDistance = (lat1, lon1, lat2, lon2) => {
-    const dx = lat2 - lat1;
-    const dy = lon2 - lon1;
-    return Math.sqrt(dx * dx + dy * dy);
-  };
+  //           // Set the default location based on proximity
+  //           setLocation(distanceToSeaford <= distanceToEastbourne ? locations[0].title : locations[1].title);
+  //         },
+  //         () => {
+  //           // If the user denies permission, set the default location to locations[0]
+  //           setLocation(locations[0].title);
+  //         }
+  //       );
+  //     } else {
+  //       // Geolocation is not supported by the browser, set default location to locations[0]
+  //       setLocation(locations[0].title);
+  //     }
+  //   };
+  //   getLocation();
+  // }, []);
+  // // Helper function to calculate the distance between two coordinates
+  // const calculateDistance = (lat1, lon1, lat2, lon2) => {
+  //   const dx = lat2 - lat1;
+  //   const dy = lon2 - lon1;
+  //   return Math.sqrt(dx * dx + dy * dy);
+  // };
   
   const clearCart = () =>{
     localStorage.setItem("Orders", "[]")
@@ -68,7 +68,7 @@ export default function SelectLocation() {
       />
       </div>
       <h1 className={styles.selectHeader}>Select BurgerBox Branch:</h1>
-      {navigator.geolocation && !location ? <h2 className={styles.findingStore}>Finding nearest store...</h2> : null}
+      {/* {navigator.geolocation && !location ? <h2 className={styles.findingStore}>Finding nearest store...</h2> : null} */}
       <div className={styles.locationsContainer}>
       {locations.map((l, i) =>
          <Link href={l.title === "Eastbourne" ? "/" : { pathname: '/home', query: { location: l.title } }} key={i} >

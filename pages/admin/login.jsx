@@ -24,7 +24,8 @@ const [alert, setAlert] = useState(false);
 const handleUser = async () => {
   const location = router.query.location;
   try{
-    if(username === "a" && password === "a"){
+    const res = await axios.post(`/api/login`, {username, password, location, isApp:true})
+    if(res.data){
       const cookieRes = await axios.post(`/api/login/cookie`, {adminMatch:true, location})
     if(cookieRes.data){
       await redirectWithQuery("/admin/orders", router)

@@ -729,11 +729,12 @@ const CurrentOrders = ({orders, sets, setAlert, setAlertDetails}) => {
       location: location
     }
   try {
-  await axios.delete(`${process.env.NEXT_PUBLIC_BASE_URL}/api/orders`, filter, {
-    params:{
-      location: location
-    }
-  });
+    await axios.delete(`${process.env.NEXT_PUBLIC_BASE_URL}/api/orders`, {
+      params: {
+        location: location
+      },
+      data: filter
+    });
   setOrdersList(ordersList.filter((item) => item.status !== orderSection));
   setShow(false);
   } catch (error) {

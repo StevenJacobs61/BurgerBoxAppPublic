@@ -46,7 +46,7 @@ const envToken = query.location === "Seaford" ? process.env.NEXT_PUBLIC_SEAFORD_
       if(!token || token !== envToken){
         return res.status(401).json("Not authenticated!")
       }
-      const {filter} = req.body;
+        const filter = req.body;
       try{
         await orders.deleteMany(filter, {new:true});
         res.status(200).json('Orders deleted.');}
