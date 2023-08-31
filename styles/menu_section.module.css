@@ -10,6 +10,7 @@
     margin: 0.5rem 2rem;
     cursor: pointer;
     z-index: 2;
+    
 }
 .title_wrapper{
     display: flex;
