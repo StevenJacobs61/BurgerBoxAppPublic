@@ -32,7 +32,7 @@ const Hero = ({settings, complete, setComplete}) => {
   }
 
   const h2Style = {
-    textShadow: !complete ? null : "var(--textShadow)", 
+    textShadow: !complete ? null : "0 0 1px #101010", 
     animation: !complete ? "animate2 3s infinite alternate" : null
   }
 

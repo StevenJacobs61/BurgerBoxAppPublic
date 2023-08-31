@@ -1,6 +1,6 @@
 .container {
     position: relative; /* Required for the pseudo-element */
-    background-color: #111;
+    background-color: #fff;
   }
   
   .container::after {
@@ -10,7 +10,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url("../../public/img/logo-light.svg");
+    background-image: url("../../public/img/burgerbox-logo_dark.svg");
     background-size: 70px 45px;
     opacity: 0.1;
     background-repeat: repeat;

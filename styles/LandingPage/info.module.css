@@ -17,7 +17,7 @@
 
 /* Open */
 .open_text, .open_word{
-    color: #fff;
+    color: #101010;
     font-size: 3rem;
     text-transform: uppercase;
     padding: 1rem;
@@ -48,7 +48,7 @@
 }
  
 .order_below{
-    color: #fff;
+    color: #101010;
     font-size: 4rem;
     font-weight: 300;
     text-transform: uppercase;
@@ -58,7 +58,7 @@
     margin-top: 1rem;
 }
 .opening_times{
-    color: #fff;
+    color: #101010;
     font-size: 1.7rem;
     font-weight: 200;
     text-align: center;
@@ -135,13 +135,13 @@
 }
 .offline_notice{
     font-size: 2rem;
-    color: #fff;
+    color: #101010;
     text-align: center;
     line-height: 2.5rem;
     font-weight: 400;
 }
 .justeat{
-    color: #fff;
+    color: #101010;
     text-align: center;   
     font-size: 5rem;
     text-transform: uppercase;
@@ -197,7 +197,7 @@ width: 410px;
 /* Icons */
 
 .icon{
-    fill: #fff;
+    fill: #101010;
     width: 40px;
     height: unset;
     aspect-ratio: 1/1;

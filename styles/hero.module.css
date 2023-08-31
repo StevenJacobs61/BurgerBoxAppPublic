@@ -36,7 +36,7 @@
     animation: 3s animate 10s infinite alternate;
 }
 .title, .blink{
-    color: #fff;
+    color: #101010;
     font-weight: 500;
     line-height: 4.5rem;
     transition: all 0.2s;
