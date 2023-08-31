@@ -22,11 +22,11 @@
     /* color: rgb(194, 229, 250); */
     color: #fff;
     background-color: #101010;
-    font-size: 1.5rem;
+    font-size: 1.7rem;
     z-index: 777;
     border: 1px solid;
     border-radius: 15px;
-    padding: 0.7rem 1rem;
+    padding: 0.9rem 1rem;
     margin: 5.5rem 2rem 0rem;
     text-transform: uppercase;
     text-align: center;
@@ -34,6 +34,7 @@
     line-height: 2.5rem;
     transition: all 0.2s;
     animation: 3s animate 10s infinite alternate;
+    width: fit-content;
 }
 .title, .blink{
     color: #101010;
@@ -113,7 +114,7 @@
         font-size: 5rem;
     }
     .header{
-        font-size: 2rem;
+        font-size: 2.2rem;
         margin-bottom: 2rem;
     }
     .title_container{

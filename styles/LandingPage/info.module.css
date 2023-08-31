@@ -59,8 +59,8 @@
 }
 .opening_times{
     color: #101010;
-    font-size: 1.7rem;
-    font-weight: 400;
+    font-size: 1.9rem;
+    font-weight: 500;
     text-align: center;
     margin: 1rem 0;
     line-height: 2.5rem;
@@ -90,7 +90,6 @@
     .opening_times{
         font-size: 2rem;
         line-height: 3rem;
-        font-weight: 300;
     }
     .order_below{
         margin: 1rem 0 0;
@@ -140,23 +139,32 @@
     line-height: 2.5rem;
     font-weight: 400;
 }
-.justeat{
+.justeat, .deliveroo{
     color: #101010;
     text-align: center;   
-    font-size: 5rem;
+    font-size: 4rem;
     text-transform: uppercase;
-    margin: 2rem 0 0;
+    margin: 1rem 0 0;
     font-weight: 900;
     letter-spacing: 0.1rem;
     word-spacing: -1.5rem;
     font-style: oblique;
     cursor: pointer;
     z-index: 5;
+    color: #ff9100;
+}
+.deliveroo{
+    font-style: normal;
+    margin: 0.5rem 0 0;
+    color: #00CDBC;
 }
 .justeat:hover{
     transform: scale(1.01);
-    color: #ff9100;
+    color: #101010;
 }
+/* .deliveroo:hover{
+    transform: scale(1.01);
+} */
 .noDel{
     font-size: 1.5rem;
     width: 60%;

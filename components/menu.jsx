@@ -29,7 +29,7 @@ useEffect(() => {
   return (
     <section className={styles.section}>
         <div className={styles.container}>
-          <h1 className={styles.hdr}>ORDER</h1>
+          {/* <h1 className={styles.hdr}>ORDER</h1> */}
           {settings.discount.active ? 
           <div className={styles.discountContainer}> 
             <h2 className={styles.discountMessage}>{settings.discount.message}</h2> 
