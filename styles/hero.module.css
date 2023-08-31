@@ -18,9 +18,9 @@
     padding: 2rem 1rem 2rem 3rem;
     text-align: center;
 }
-
 .header{
-    color: rgb(194, 229, 250);
+    /* color: rgb(194, 229, 250); */
+    color: #fff;
     background-color: #101010;
     font-size: 1.5rem;
     z-index: 777;
@@ -30,7 +30,7 @@
     margin: 5.5rem 2rem 0rem;
     text-transform: uppercase;
     text-align: center;
-    font-weight: 300;
+    font-weight: 400;
     line-height: 2.5rem;
     transition: all 0.2s;
     animation: 3s animate 10s infinite alternate;

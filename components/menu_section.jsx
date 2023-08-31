@@ -21,14 +21,14 @@ useEffect(() => {
   }
 }, [width, expand])
 
-
+// rgb(241, 249, 254)
 const chevStyle = {
   color: !section.available ? '#fff' : selected || expand ? "#fff" : '#101010',
   transform: expand ? "rotate(180deg)" : selected ? "rotate(-90deg)" : null,
   width: selected ? "37px" : null
 }
 const contStyle = {
-  background: !section.available ? "#101010" : expand || selected ? "#101010" : "rgb(241, 249, 254)", 
+  background: !section.available ? "#101010" : expand || selected ? "#101010" : "#fff", 
   width: expand && width >= 480 ? "90vw" : null,
 }
 const titleStyle= {

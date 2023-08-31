@@ -32,7 +32,7 @@ useEffect(() => {
           <h1 className={styles.hdr}>ORDER</h1>
           {settings.discount.active ? 
           <div className={styles.discountContainer}> 
-            <h2 className={styles.discountMessage}><strong>Discounts:</strong> <br/>{settings.discount.message}</h2> 
+            <h2 className={styles.discountMessage}>{settings.discount.message}</h2> 
           </div>
           :null}
           <div className={styles.menu_container}>

@@ -60,7 +60,7 @@
 .opening_times{
     color: #101010;
     font-size: 1.7rem;
-    font-weight: 200;
+    font-weight: 400;
     text-align: center;
     margin: 1rem 0;
     line-height: 2.5rem;
@@ -219,9 +219,9 @@ width: 410px;
 /* Notice */
 
 .notice_container{
-    width: 50%;
+    width: 80%;
     margin: 2rem 0;
-    border-radius: 45px;
+    border-radius: 100px;
     padding: 0.8rem 0;
     border: 0.1px solid var(--bg-color--blue);
     background-color: #101010;
@@ -264,7 +264,9 @@ width: 410px;
     .notice{
       font-size: 1.5rem;
     }
-
+    .notice_container{
+        width: 60%;
+    }
     .notice_hdr{
         font-size: 1.8rem;
     }
