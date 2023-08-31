@@ -31,15 +31,15 @@ const About = () => {
             <Image 
               className={styles.img} 
               layout='fill' 
-              src="/img/shake2.jpg"/>
+              src="/img/fries.jpg"
+              style={{transform: 'rotate(-90deg)'}}
+              />
           </div>
           <div className={styles.imgContainer}>
             <Image 
               className={styles.img} 
               layout='fill' 
-              src="/img/fries.jpg"
-              style={{transform: 'rotate(-90deg)'}}
-              />
+              src="/img/shake2.jpg"/>
           </div>
           </div>
           </div>

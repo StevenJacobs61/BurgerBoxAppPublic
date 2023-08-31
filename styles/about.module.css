@@ -39,6 +39,9 @@
     background-position: center top;
   }
   .topContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 .contentHdr{
     font-size: 2.3rem;
@@ -50,14 +53,14 @@
     color: #393939;
 }
 .imgsContainer{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    margin: 2rem;
+    display: flex;
+    align-items: center;
+    margin: 2rem 0 1rem;
 }
 .imgContainer{
     position: relative;
-    width: 120px;
-    height: 120px;
+    width: 65px;
+    height: 65px;
 }
 .img{
     position: absolute;
@@ -78,11 +81,11 @@
         padding: 1rem 5rem;
     }
     .imgContainer{
-        width: 100px;
-        height: 100px;
+        width: 120px;
+        height: 120px;
     }
     .imgsContainer{
-        margin: 3rem 2rem 2rem;
+        margin: 1rem 2rem 2rem;
     }
     .topContainer{
         display: flex;
@@ -110,8 +113,8 @@
         padding: 2rem 0 0;
     }
     .imgContainer{
-        width: 120px;
-        height: 120px;
+        width: 130px;
+        height: 130px;
     }
 }
 @media screen and (min-width: 1350px){
@@ -124,10 +127,13 @@
         margin: 0 5rem 0 0;
     }
     .imgContainer{
-        width: 130px;
-        height: 130px;
+        width: 150px;
+        height: 150px;
     }
     .contentContainer{
         margin: 2rem 0;
+    }
+    .imgsContainer{
+        margin: 3rem 0 2rem;
     }
 }
