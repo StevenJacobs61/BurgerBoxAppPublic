@@ -29,7 +29,7 @@ function MyApp({ Component, pageProps }) {
           type="font/ttf"
           crossOrigin="anonymous"
         />
-        <script src="../public/epos-2.22.0" type="text/javascript" />
+        {/* <script src="../public/epos-2.22.0" type="text/javascript" /> */}
       </Head>
       <Provider store={store}>
         {path !== "/" ? (
