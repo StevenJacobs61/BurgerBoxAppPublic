@@ -21,9 +21,16 @@ function MyApp({ Component, pageProps }) {
 
   return (
     <>
-      {/* <Head>
+      <Head>
+      <link
+          rel="preload"
+          href="/Lust-Script.tff"
+          as="font"
+          type="font/ttf"
+          crossOrigin="anonymous"
+        />
         <script src="../public/epos-2.22.0" type="text/javascript" />
-      </Head> */}
+      </Head>
       <Provider store={store}>
         {path !== "/" ? (
           <Layout>
