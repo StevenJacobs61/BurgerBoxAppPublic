@@ -41,7 +41,7 @@
     /* line-height: 4.5rem; */
     transition: all 0.2s;
     animation: animate2 3s infinite alternate;
-    font-family: lust-script;
+    font-family: 'Lust Script Display';
 }
 @keyframes animate {
     40%{
