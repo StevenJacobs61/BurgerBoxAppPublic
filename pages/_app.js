@@ -24,7 +24,7 @@ function MyApp({ Component, pageProps }) {
       <Head>
       <link
           rel="preload"
-          href="/Lust-Script.tff"
+          href="/Lust-Script.ttf"
           as="font"
           type="font/ttf"
           crossOrigin="anonymous"
