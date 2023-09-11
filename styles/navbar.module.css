@@ -121,18 +121,18 @@
 .pagelink{
     color: #fff;
     margin: 3.5rem 3rem 0 1rem;
-    font-size: 2.5rem;
+    font-size: 2.2rem;
 }
 .text{
     color: #fff;
-    margin: 0 0 5px;
-    font-size: 2.2rem;
+    font-size: 2rem;
     text-transform: uppercase;
 }
 .contact{
     display: flex;
     transition: all 0.3s;
-    margin-right: 5rem;
+    margin-right: 7rem;
+    margin-top: 1.8rem;
 }
 
 /* Icon Links */
@@ -207,6 +207,10 @@
     .basket_icon{
         width: 30px;
     }
+    .text{
+        font-size: 1.6rem;
+        margin: 1rem 0 0 1.5rem;
+    }
 }
 @media screen and (max-width: 1200px){
     .pagelinks{
@@ -224,10 +228,13 @@
         margin: 0 0 0 1rem;
     }
     .text{
-        font-size: 2rem;
+        font-size: 1.5rem;
     }
     .container{
         padding: 0.5rem 1rem;
+    }
+    .contact{
+        font-size: 1rem;
     }
 }
 @media screen and (max-width: 1024px){
@@ -236,7 +243,8 @@
         /* width: 45%; */
     }
     .pagelink {
-        font-size: 1.8rem;
+        font-size: 1.5rem;
+        margin-right: 0.5rem;
     }
     .text{
         font-size: 2.1rem;
@@ -257,7 +265,7 @@
         font-size: 1.5rem;
     }
     .contact{
-        margin: 0.5rem 1rem;
+        margin: 0.5rem 1rem 0;
     }
     .text{
         font-size: 1.5rem;
@@ -354,7 +362,7 @@
         font-size: 1.4rem;
     }
     .pagelink, .text{
-        font-size: 1.8rem;
+        font-size: 1.5rem;
     }
 }
 @media screen and (max-width: 380px){
@@ -367,6 +375,12 @@
         }
         .social{
             margin: 0.5rem 0.3rem 0 0
+        }
+        .pagelinks{
+            margin: 0 2rem 0;
+        }
+        .contact{
+            margin: -10px -20px 0;
         }
 }
 

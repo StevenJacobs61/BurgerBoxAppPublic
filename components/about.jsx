@@ -6,7 +6,7 @@ const About = () => {
   return (
     <div className={styles.container}>
         <div className={styles.hdrContainer}>
-          <h1 className={styles.hdr}>About BurgerBox?</h1>
+          <h1 className={styles.hdr}>About BurgerBox</h1>
         </div>
         <div className={styles.contentContainer}>
           <div className={styles.topContainer}>

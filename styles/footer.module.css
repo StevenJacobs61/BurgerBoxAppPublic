@@ -15,8 +15,18 @@
     font-size: 1rem;
     text-align: center;
 }
+@media screen and (min-width: 769px){
+    .copyright{
+        font-size: 1.5rem;
+    }
+}
 @media screen and (min-width: 1024px){
     .copyright{
         font-size: 1.5rem;
+    }
+}
+@media screen and (min-width: 1350px){
+    .copyright{
+        font-size: 1.8rem;
     }
 }

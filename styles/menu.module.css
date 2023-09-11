@@ -154,16 +154,16 @@
     overflow: hidden;
     background-color: #101010;
     z-index: 70;
-    padding: 0.5rem 1rem;
+    padding: 0.8rem 1rem;
     border-radius: 7px;
-    margin: 1rem 0.5rem 0.5rem;
+    margin: 1.5rem 0.5rem;
     width: fit-content;
     max-width: 70%;
 }
 .discountMessage{
     color: #fff;
-    font-size: 2rem;
-    font-weight: 500;
+    font-size: 1.8rem;
+    font-weight: 400;
     /* animation: slide-in-out 7s linear infinite; */
     /* white-space: nowrap; */
     text-align: center;
@@ -218,9 +218,10 @@
 @media screen and (min-width:480px){
     .discountContainer{
         width: 350px;
+        margin-top: 2.5rem;
     }
     .discountMessage{
-        font-size: 2.5rem;
+        font-size: 2.3rem;
     }
     .checkout{
         margin: 1rem 2rem 1.2rem;
@@ -242,7 +243,10 @@
 @media screen and (min-width:769px){
     .discountContainer{
         width: 60%;
-        margin: 0 0 1rem;
+        margin-bottom: 2rem;
+    }
+    .discountMessage{
+        font-size: 2rem;
     }
     .hdr{
         font-size: 4.5rem;
@@ -281,4 +285,13 @@
         padding: 0.7rem;
         margin: 0;
     }
+}
+@media screen and (min-width:1350px){
+   .discountMessage{
+    font-size: 2.8rem;
+   }
+   .discountContainer{
+    width: fit-content;
+    padding: 1rem 1.5rem;
+   }
 }

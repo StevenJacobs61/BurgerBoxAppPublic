@@ -7,25 +7,26 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 1rem;
     transition: all 2s ease-in;
 }
 .open_container{
     display: flex;
     align-items: baseline;
+    padding: 0 0 0.5rem;
 }
 
 /* Open */
 .open_text, .open_word{
     color: #101010;
-    font-size: 3rem;
+    font-size: 2.4rem;
     text-transform: uppercase;
-    padding: 1rem;
+    padding: 0 1rem 0;
     font-weight: 400;
 }
 .open_word{
+    padding: 0;
     font-weight: 600;
-    font-size: 4rem;
+    font-size: 2.8rem;
     transition: all 0.2s;
     animation: 2s animate 10s infinite alternate;
 }
@@ -49,51 +50,52 @@
  
 .order_below{
     color: #101010;
-    font-size: 4rem;
-    font-weight: 300;
+    font-size: 2.2rem;
+    font-weight: 400;
     text-transform: uppercase;
-    padding: 0 0 0.5rem;
+    padding: 0 1.5rem 0.5rem;
     text-align: center;
     letter-spacing: 0.1rem;
-    margin-top: 1rem;
+    margin-top: 0.5rem;
 }
 .opening_times{
     color: #101010;
     font-size: 1.9rem;
-    font-weight: 500;
+    font-weight: 400;
     text-align: center;
-    margin: 1rem 0;
-    line-height: 2.5rem;
+    margin: 1rem 0 0;
+    line-height: 2.3rem;
 }
 @media screen and (min-width:480px){
     .open_text{
-        font-size: 4rem;
+        font-size: 3.5rem;
     }
     .open_word{
-        font-size: 5rem;
+        font-size: 3.7rem;
     }
     .order_below{
-        font-size: 4rem;
-        margin: 1rem 0 0.5rem;
+        font-size: 3.5rem;
+        margin: 2rem 2rem 0.5rem;
+        width: 60%;
         letter-spacing: 0.2rem;
+    }
+    .opening_times{
+        font-size: 2.5rem;
+        line-height: 3rem;
+        margin: 1.5rem 0 1rem;
     }
 }
 @media screen and (min-width:768px){
     .open_text{
-        font-size: 4.5rem;
+        font-size: 3.2rem;
     }
     .open_word{
-        font-size: 5rem;
-        margin: 0 0 0 2rem;
-
+        font-size: 3.5rem;
     }
     .opening_times{
-        font-size: 2rem;
+        font-size: 2.5rem;
         line-height: 3rem;
-    }
-    .order_below{
-        margin: 1rem 0 0;
-        font-size: 5rem;
+        margin: 2rem 0 1.5rem;
     }
 }
 @media screen and (min-width:1024px){
@@ -107,22 +109,22 @@
         font-size: 6rem;
     } */
 }
-/* @media screen and (min-width:1200px){
+@media screen and (min-width:1350px){
     .opening_times{
-        font-size: 2.8rem;
-        line-height: unset;
-        margin: 3rem 0 2rem;
+       font-size: 3rem;
+       line-height: 3.6rem;
     }
     .open_text{
-        font-size: 6rem;
+        font-size: 4rem;
     }
     .open_word{
-        font-size: 7rem;
+        font-size: 4.3rem;
     }
     .order_below{
-        font-size: 6rem;
+        font-size: 5rem;
+        letter-spacing: unset;
     }
-} */
+}
 
 /* * Offline */
 
@@ -133,16 +135,16 @@
     align-items: center;
 }
 .offline_notice{
-    font-size: 2rem;
+    font-size: 1.5rem;
     color: #101010;
     text-align: center;
-    line-height: 2.5rem;
+    line-height: 2rem;
     font-weight: 400;
 }
 .justeat, .deliveroo{
     color: #101010;
     text-align: center;   
-    font-size: 4rem;
+    font-size: 3.3rem;
     text-transform: uppercase;
     margin: 1rem 0 0;
     font-weight: 900;
@@ -158,7 +160,7 @@
     margin: 0.5rem 0 0;
     color: #00CDBC;
 }
-.justeat:hover{
+.justeat:hover, .deliveroo:hover{
     transform: scale(1.01);
     color: #101010;
 }
@@ -180,27 +182,35 @@
 }
 @media screen and (min-width:480px){
     .offline_notice_container{
-width: 410px;
+        width: 410px;
+    }
+    .offline_notice{
+        font-size: 2rem;
+        line-height: 2.3rem;
+        margin: 0.2rem 0 0;
+    }
+    .deliveroo, .justeat{
+        font-size: 4rem;
+        margin: 1.5rem 0 0;
     }
 }
 @media screen and (min-width:769px){
     .offline_notice_container{
- width: 500px;
+        width: 500px;
     }
     .offline_notice{
         font-size: 2.2rem;
         line-height: 2.6rem;
     }
+    .deliveroo, .justeat{
+        font-size: 4rem;
+    }
 }
-/* @media screen and (min-width:1024px){
-    .offline_notice_container{
- width: 550px;
-    }
-    .offline_notice{
-        font-size: 2.5rem;
-        line-height: 2.9rem;
-    }
-} */
+@media screen and (min-width:1350px){
+  .justeat, .deliveroo{
+    font-size: 5rem;
+  }
+}
 
 /* Icons */
 
@@ -243,7 +253,7 @@ width: 410px;
     color: var(--text--dark-red);
 }
 .notice{
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     line-height: 2rem;
     padding: 0.5rem 2rem 0.5rem;
     text-align: center;
@@ -270,13 +280,14 @@ width: 410px;
 }
 @media screen and (min-width:480px){
     .notice{
-      font-size: 1.5rem;
+      font-size: 1.8rem;
     }
     .notice_container{
-        width: 60%;
+        width: 70%;
+        max-width: 350px;
     }
     .notice_hdr{
-        font-size: 1.8rem;
+        font-size: 2rem;
     }
 }
 @media screen and (min-width:769px){

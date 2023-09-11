@@ -9,7 +9,7 @@
     padding: 1rem;
 }
 .hdr{
-    font-size: 3rem;
+    font-size: 2.3rem;
     font-weight: 400;
     color: rgb(231, 249, 255, 0.8);
     /* color: rgb(241, 252, 243, 0.9); */
@@ -44,7 +44,7 @@
     align-items: center;
   }
 .contentHdr{
-    font-size: 2.3rem;
+    font-size: 2rem;
     text-align: center;
     font-weight: 400;
     padding: 1rem 0 0;
@@ -67,18 +67,20 @@
 }
 .infoText{
     text-align: center;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     padding: 1rem 3rem;
 }
 @media screen and (min-width: 480px){
     .hdr{
-        font-size: 4rem;
+        font-size: 3.5rem;
     }
     .contentHdr{
         font-size: 2.4rem;
+        margin: 1rem 0;
     }
     .infoText{
         padding: 1rem 5rem;
+        font-size: 1.8rem;
     }
     .imgContainer{
         width: 120px;

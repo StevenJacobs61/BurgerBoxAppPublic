@@ -30,7 +30,7 @@ const Info = ({sections, settings, complete}) => {
         <h2 className={styles.deliveroo} onClick={() => router.push("https://deliveroo.co.uk/menu/brighton/seaford/burger-box-seaford")}>Deliveroo</h2>
       </div>
     : null}
-      <p className={styles.opening_times}>Open 6 days a week 3.30pm - 10pm <br></br>Closed Tuesdays </p>
+      <p className={styles.opening_times}>Open 6 days a week<br/> 3.30pm - 10pm <br></br>Closed Tuesdays </p>
         {  settings.noticeOn ? 
         <div className={styles.notice_container}>
     <h3 className={styles.notice_hdr} >Notice!</h3>
