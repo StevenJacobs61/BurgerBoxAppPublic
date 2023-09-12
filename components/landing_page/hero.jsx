@@ -7,6 +7,7 @@ const Hero = ({settings, complete, setComplete}) => {
   const text = "BurgerBox";
 
   const [currentTxt, setCurrentTxt] = useState('');
+  const [fontLoaded, setFontLoaded] = useState(false);
   
   useEffect(() => {
       if(currentTxt === "BurgerBox") return
@@ -25,6 +26,12 @@ const Hero = ({settings, complete, setComplete}) => {
         }
     }
   }, [currentTxt, setComplete])
+
+  useEffect(() => {
+    document.fonts.ready.then(() => {
+      setFontLoaded(true);
+    });
+  }, []);
   const h1Style ={
     boxShadow:  "0 0 10px var(--bg-color--blue)",
     // animation: "animate 3s infinite alternate"
@@ -33,6 +40,7 @@ const Hero = ({settings, complete, setComplete}) => {
   const h2Style = {
     textShadow: !complete ? null : "0 0 1px #101010", 
     animation: !complete ? "animate2 3s infinite alternate" : null,
+    display: fontLoaded ? 'visible' : 'hidden',
   }
 
   return (

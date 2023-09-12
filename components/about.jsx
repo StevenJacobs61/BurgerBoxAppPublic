@@ -1,6 +1,9 @@
 import React from 'react'
 import styles from '../styles/about.module.css'
 import Image from 'next/image'
+import Unique from '../public/img/unique.svg'
+import Quality from '../public/img/quality.svg'
+import Customer from '../public/img/customer.svg'
 
 const About = () => {
   return (
@@ -10,9 +13,26 @@ const About = () => {
         </div>
         <div className={styles.contentContainer}>
           <div className={styles.topContainer}>
-          <h2 className={styles.contentHdr}>
-            Unique tastes, <br/> Quality ingredients, <br/> customer driven service! 
-          </h2>
+            <div className={styles.descContainer}>
+              <div className={styles.subHdrContainer}>
+                <h2 className={styles.contentHdr}>Unique Tastes</h2>  
+                <div className={styles.svgContainer}>
+                <Image src={Unique} objectFit='fill'/>
+                </div>
+              </div>
+              <div className={styles.subHdrContainer}>
+                <h2 className={styles.contentHdr}>Quality Ingredients</h2>  
+                <div className={styles.svgContainer}>
+                <Image src={Quality} objectFit='fill'/>
+                </div>
+              </div>
+              <div className={styles.subHdrContainer}>
+                <h2 className={styles.contentHdr}>Customer-driven Service</h2>  
+                <div className={styles.svgContainer}>
+                <Image src={Customer} objectFit='fill'/>
+                </div>
+              </div>
+            </div>
           <div className={styles.imgsContainer}>
           <div className={styles.imgContainer}>
             <Image 

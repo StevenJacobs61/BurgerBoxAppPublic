@@ -34,6 +34,7 @@
     transition: all 0.2s;
     animation: 3s animate 10s infinite alternate;
     /* width: fit-content; */
+    font-display: block;
 }
 .title, .blink{
     color: #101010;
@@ -177,14 +178,14 @@
 }
 @media screen and (min-width:1350px){
     .title{
-        font-size: 12rem;
+        font-size: 11rem;
     }
     .blink{
         font-size: 7rem;
         margin-bottom: 0;
     }
     .title_container{
-        margin: 3.5rem 0 5rem;  
+        margin: 2.5rem 0 3.8rem;  
     }
     .header{
         font-size: 2rem;
@@ -192,6 +193,6 @@
         margin: 5rem 0 2rem;
     }
     .container{
-        padding: 110px 0 0;
+        padding: 90px 0 0;
     }
 }

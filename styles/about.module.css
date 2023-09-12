@@ -12,8 +12,6 @@
     font-size: 2.3rem;
     font-weight: 400;
     color: rgb(231, 249, 255, 0.8);
-    /* color: rgb(241, 252, 243, 0.9); */
-    
 }
 .contentContainer{
     padding: 0.5rem 1rem 1rem;
@@ -21,8 +19,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* background-color: rgb(231, 249, 255, 0.1); */
-    /* rgb(241, 252, 243, 0.5); */
 }
 .contentContainer::after {
     content: "";
@@ -38,19 +34,27 @@
     background-repeat: repeat;
     background-position: center top;
   }
-  .topContainer{
+  .topContainer, .descContainer, .subHdrContainer{
     display: flex;
     flex-direction: column;
     align-items: center;
   }
+  .descContainer{
+    margin: 1rem 0;
+  }
+  .svgContainer{
+    width: 35px;
+    height: unset;
+    aspect-ratio: 1/1;
+  }
 .contentHdr{
-    font-size: 2rem;
+    font-size: 1.8rem;
     text-align: center;
     font-weight: 400;
-    padding: 1rem 0 0;
+    padding: 1rem 0 0.5rem;
     text-transform: capitalize;
-    font-style: italic;
     color: #393939;
+    letter-spacing: -0.1rem;
 }
 .imgsContainer{
     display: flex;
@@ -74,17 +78,23 @@
     .hdr{
         font-size: 3.5rem;
     }
+    .descContainer{
+        margin: 1rem 0 2rem;
+    }
     .contentHdr{
-        font-size: 2.4rem;
-        margin: 1rem 0;
+        font-size: 2.3rem;
+        margin: 1rem 0 0.5rem;
+    }
+    .svgContainer{
+        width: 45px;
     }
     .infoText{
         padding: 1rem 5rem;
         font-size: 1.8rem;
     }
     .imgContainer{
-        width: 120px;
-        height: 120px;
+        width: 100px;
+        height: 100px;
     }
     .imgsContainer{
         margin: 1rem 2rem 2rem;
@@ -97,8 +107,10 @@
 }
 @media screen and (min-width: 769px){
     .contentHdr{
-        font-size: 2.7rem;
-        margin: 1.3rem 0;
+        font-size: 2.5rem;
+    }
+    .svgContainer{
+        width: 45px;
     }
     .infoText{
         font-size: 2rem;
@@ -111,26 +123,36 @@
         width: 70%;
     }
     .contentHdr{
-        font-size: 3.2rem;
-        padding: 2rem 0 0;
+        font-size: 2.7rem;
+        margin: 1.5rem 0 1rem;
+    }
+    .svgContainer{
+        width: 50px;
+    }
+    .imgContainer{
+        width: 120px;
+        height: 120px;
+    }
+}
+@media screen and (min-width: 1350px){
+    .hdr{
+        font-size: 5rem;
+    }
+    .infoText{
+        padding: 3rem 3rem;
+        width: 70%;
+        font-size: 2.8rem;
+    }
+    .contentHdr{
+        font-size: 3.5rem;
+        margin: 1.8rem 0 1.3rem;
+    }
+    .svgContainer{
+        width: 55px;
     }
     .imgContainer{
         width: 130px;
         height: 130px;
-    }
-}
-@media screen and (min-width: 1350px){
-    .infoText{
-        padding: 2rem 3rem 3rem;
-        width: 60%;
-    }
-    .contentHdr{
-        font-size: 4rem;
-        margin: 0 5rem 0 0;
-    }
-    .imgContainer{
-        width: 150px;
-        height: 150px;
     }
     .contentContainer{
         margin: 2rem 0;

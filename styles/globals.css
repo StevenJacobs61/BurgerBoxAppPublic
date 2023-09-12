@@ -3,6 +3,7 @@
 @font-face {
   font-family: lust-script;
   src: url('/Lust-Script.ttf') format('truetype');
+  font-display: block;
 }
 
 html,

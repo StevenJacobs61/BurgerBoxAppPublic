@@ -26,8 +26,10 @@ const Info = ({sections, settings, complete}) => {
       {settings.offline && open ?
       <div className={styles.offline_notice_container}>
         <h3 className={styles.offline_notice}> We are not accepting orders here at the moment, please order using the Just Eat from the link below.. We aim to be be back soon! </h3>
+        <div className={styles.deliveryContainer}>
         <h2 className={styles.justeat} onClick={() => router.push("https://www.just-eat.co.uk/restaurants-burger-box-east-blatchington-bn25/menu")}>Just eat</h2>
         <h2 className={styles.deliveroo} onClick={() => router.push("https://deliveroo.co.uk/menu/brighton/seaford/burger-box-seaford")}>Deliveroo</h2>
+        </div>
       </div>
     : null}
       <p className={styles.opening_times}>Open 6 days a week<br/> 3.30pm - 10pm <br></br>Closed Tuesdays </p>

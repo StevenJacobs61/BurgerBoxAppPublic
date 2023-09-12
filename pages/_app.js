@@ -22,13 +22,9 @@ function MyApp({ Component, pageProps }) {
   return (
     <>
       <Head>
-      <link
-          rel="preload"
-          href="/Lust-Script.ttf"
-          as="font"
-          type="font/ttf"
-          crossOrigin="anonymous"
-        />
+      {/* <link rel="preload" href="https://db.onlinewebfonts.com/c/2c6559d94a7fa38ce73eaa827ca22ce2?family=Lust+Script+Display" as="style" /> */}
+<link href="https://db.onlinewebfonts.com/c/2c6559d94a7fa38ce73eaa827ca22ce2?family=Lust+Script+Display" rel="stylesheet" />
+
         {/* <script src="../public/epos-2.22.0" type="text/javascript" /> */}
       </Head>
       <Provider store={store}>
