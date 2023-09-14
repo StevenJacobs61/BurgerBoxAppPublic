@@ -111,20 +111,20 @@
 }
 @media screen and (min-width:1350px){
     .opening_times{
-       font-size: 2.5rem;
+       font-size: 1.9rem;
        line-height: unset;
        margin: 1rem 0 0;
        font-weight: 500;
     }
     .open_text{
-        font-size: 3rem;
+        font-size: 2.6rem;
     }
     .open_word{
-        font-size: 3.3rem;
+        font-size: 2.8rem;
     }
     .order_below{
-        font-size: 4rem;
-        margin: 2rem 0 0;
+        font-size: 3rem;
+        margin: 3rem 0 0;
     }
 }
 
@@ -222,12 +222,12 @@
 }
 @media screen and (min-width:1350px){
   .justeat, .deliveroo{
-    font-size: 3.7rem;
-    font-weight: 800;
-    margin: 1.5rem 0 0;
+    font-size: 3rem;
+    font-weight: 700;
+    margin: 1rem 0 0;
   }
   .offline_notice{
-    font-size: 2rem;
+    font-size: 1.7rem;
 }
 }
 
@@ -254,7 +254,7 @@
 }
 @media screen and (min-width:1350px){
     .icon{
-        width: 55px;
+        width: 45px;
         margin: 0 0 1rem;
     }
 }
@@ -348,13 +348,13 @@
 }
 @media screen and (min-width:1350px){
     .notice_container{
-        margin: 2rem 0 1rem;
+        margin: 1.5rem 0 0;
     }
     .notice{
-      font-size: 1.8rem;
+      font-size: 1.5rem;
     }
     .notice_hdr{
-        font-size: 2.5rem;
+        font-size: 1.8rem;
     }
 }
 

@@ -34,6 +34,7 @@ const contStyle = {
 const titleStyle= {
   color: !section.available ? "#fff" : expand || selected ? "var(--text--light-green)" : "#101010",
   textShadow: expand || selected ? "0 0 8px" : "",
+  fontFamily: 'Lust-Script'
 }
 
   return (

@@ -7,7 +7,7 @@
     z-index: 999;
 }
 .container{
-    padding: 0rem 1rem;
+    padding: 0.5rem 1rem;
     height: 100%;
     background-color: #101010;
     display: flex;
@@ -18,13 +18,13 @@
 /* Location */
 .locationsContainer{
     background-color: rgb(16, 16, 16, 0.7);
-    border-radius: 8px;
+    border-radius: 5px;
     width: fit-content;
-    padding: 1rem 2rem;
+    padding: 1rem;
     display: flex;
     flex-direction: column;
     align-items:flex-start;
-    margin: -0.5rem 0 0 1rem;
+    margin: -0.5rem 0 0 4rem;
 }
 .location{
     display: flex;
@@ -32,18 +32,18 @@
 }
 .location p:nth-child(1){
     color: #fff;
-    font-size: 1.5rem;
+    font-size: 1.4rem;
 }
 .location p:nth-child(2){
     color: var(--color-aqua);
     margin: 0 0 0 0.5rem;
-    font-size: 2.2rem;
+    font-size: 1.6rem;
 }
 .changeLocation{
     margin: 0.5rem 0 0 0;
 }
 .changeLocationText{
-    font-size: 1.4rem;
+    font-size: 1.1rem;
     color: rgb(168, 168, 250);
     cursor: pointer;
 }
@@ -120,31 +120,30 @@
 }
 .pagelink{
     color: #fff;
-    margin: 3.5rem 3rem 0 1rem;
-    font-size: 2.2rem;
+    margin: 2.5rem 3rem 0 1rem;
+    font-size: 1.6rem;
 }
 .text{
     color: #fff;
-    font-size: 2rem;
+    font-size: 1.5rem;
     text-transform: uppercase;
 }
 .contact{
     display: flex;
     transition: all 0.3s;
     margin-right: 7rem;
-    margin-top: 1.8rem;
+    margin-top: 1rem;
 }
 
 /* Icon Links */
 .logo{
     cursor: pointer;
-    width: 160px;
+    width: 130px;
     height: inherit;
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    margin: 0 15rem 0 0;
-    padding: 0.5rem 0;
+    margin: 0 3rem 0 0;
 }
 .socials{
     margin: 1rem 0 -2.5rem 5rem;
@@ -152,12 +151,12 @@
     align-items: center;
 }
 .social{
-    margin: 0 1.5rem;
+    margin: 0 1.5rem 1.5rem;
     cursor: pointer;
 }
 .insta, .facebook, .snap{
     fill: #fff;
-    width: 40px;
+    width: 32px;
     aspect-ratio: 1/1;
     height: unset;
 }

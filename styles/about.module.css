@@ -6,12 +6,13 @@
 }
 .hdrContainer{
     background-color: #5c5c5c;
-    padding: 1rem;
+    padding: 1rem 0 0.5rem;
 }
 .hdr{
     font-size: 2.3rem;
     font-weight: 400;
     color: rgb(231, 249, 255, 0.8);
+    font-family: 'Lust-Script';
 }
 .contentContainer{
     padding: 0.5rem 1rem 1rem;
@@ -136,28 +137,28 @@
 }
 @media screen and (min-width: 1350px){
     .hdr{
-        font-size: 5rem;
+        font-size: 3.5rem;
     }
     .infoText{
-        padding: 3rem 3rem;
+        padding: 2rem 3rem 2.5rem;
         width: 70%;
-        font-size: 2.8rem;
+        font-size: 1.8rem;
     }
     .contentHdr{
-        font-size: 3.5rem;
-        margin: 1.8rem 0 1.3rem;
+        font-size: 2.5rem;
+        margin: 1.5rem 0 0.5rem;
     }
     .svgContainer{
         width: 55px;
     }
     .imgContainer{
-        width: 130px;
-        height: 130px;
+        width: 110px;
+        height: 110px;
     }
     .contentContainer{
-        margin: 2rem 0;
+        margin: 0;
     }
     .imgsContainer{
-        margin: 3rem 0 2rem;
+        margin: 1rem 0 2rem;
     }
 }
