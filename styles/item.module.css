@@ -136,12 +136,20 @@
     margin: 0.2rem;
    }
 }
+.printer{
+    fill: #101010;
+    width: 35px;
+    margin: 0 0 0.5rem;
+    height: unset;
+    aspect-ratio: 1/1;
+}
 .btn_container{
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     margin: 1rem 0 0.5rem;
+    gap: 2rem;
 }
 .btn_container>*{
     font-size: 1.5rem;

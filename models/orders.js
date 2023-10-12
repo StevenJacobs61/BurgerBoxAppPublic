@@ -53,6 +53,7 @@ discount:{
    },
 deliveryCost:{
     type: Number,
+    default:0
    },
 delivery:{
     type: Boolean,

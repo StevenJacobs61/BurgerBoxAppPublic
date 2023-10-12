@@ -17,6 +17,7 @@
     "axios": "^0.27.2",
     "cookie": "^0.5.0",
     "css-loader": "^6.8.1",
+    "luxon": "^3.4.3",
     "micro": "^10.0.1",
     "mini-css-extract-plugin": "^2.7.6",
     "mongoose": "^6.4.4",

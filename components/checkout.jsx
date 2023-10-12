@@ -39,7 +39,7 @@ const [showDeliver, setShowDeliver] = useState(()=> {
   else return false;
 });
 
-const [deliveryCost, setDeliveryCost] = useState();
+const [deliveryCost, setDeliveryCost] = useState(0);
 
 const handleSeafordDeliveryCosts = (outcode) =>{
   if(!showDeliver){
@@ -82,7 +82,6 @@ const handleOrder = async ()=>{
     setAlert(true)
     return
   }
-
   else if(showDeliver){
     try {
       verify = await verifySeafordPostcode();

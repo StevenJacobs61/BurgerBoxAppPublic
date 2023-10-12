@@ -11,6 +11,7 @@ import { useRouter } from 'next/router'
 
 const CurrentOrders = ({orders, sets, setAlert, setAlertDetails}) => {
 
+
   const router = useRouter()
   const [settings, setSettings] = useState(sets)
   const [time, setTime] = useState(null)
@@ -854,6 +855,9 @@ const CurrentOrders = ({orders, sets, setAlert, setAlertDetails}) => {
            setNote={setNote}
            settings={settings}
            setTime={setTime}
+           setAlert={setAlert}
+           setAlertDetails={setAlertDetails}
+           time={time}
            /> 
          </Show>
 

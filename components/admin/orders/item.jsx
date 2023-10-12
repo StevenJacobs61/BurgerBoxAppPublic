@@ -1,8 +1,57 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styles from '../../../styles/item.module.css'
 import { useState } from 'react';
+import {usePrinter} from '../../../context/printerContext.js'
+import {AiOutlinePrinter} from 'react-icons/ai'
 
-const Item = ({order, setNote, handleData, settings, setTime}) => {
+const Item = ({order, setNote, handleData, settings, setTime, setAlert, setAlertDetails, time}) => {
+ 
+
+  const printerContext = usePrinter();
+
+  const handlePrinter = () => {
+    if(time){
+      order.time = parseInt(time);
+    }
+    if(printerContext.printer){
+      printerContext.handlePrint(order);
+    }else{
+      setAlertDetails({
+        header: "Alert",
+        message: "Printer is connecting...",
+        type: "alert",
+        onClose: ()=>setAlert(false),
+        onConfirm: null,
+      });
+      setAlert(true);
+      connectPrinter();
+    }
+  }
+  const connectPrinter = async () => {
+    const localIp = await localStorage.getItem('ip')
+    if(!localIp && !printerContext.printer){
+      setAlertDetails({
+        header: "Alert",
+        message: "Please enter printer IP address in settings in order to use printer.",
+        type: "alert",
+        onClose: ()=>setAlert(false),
+        onConfirm: null,
+      });
+      setAlert(true);
+    }else{
+      if(!printerContext.printer){
+       await printerContext.handleConnect(localIp)
+      }
+    }
+  }
+
+  useEffect(()=>{
+    connectPrinter();
+  }, [printerContext.printer])
+
+  useEffect(()=>{
+    connectPrinter();
+  }, [])
 
   const status = order.status
   const  [refundAm, setRefundAm] = useState(0)
@@ -19,6 +68,12 @@ const Item = ({order, setNote, handleData, settings, setTime}) => {
             </h1>
             {/* Buttons */}
         <div className={styles.btn_container}>
+          {status === 1 ? null :
+            <AiOutlinePrinter 
+              className={styles.printer} 
+              onClick={()=>handlePrinter()}
+              style={{fill: !printerContext.printer ? 'red' : ''}}/>
+          }
         {status === 0 ? 
             <button 
             className={styles.btn_del} 
@@ -30,7 +85,7 @@ const Item = ({order, setNote, handleData, settings, setTime}) => {
             <>
               <button 
               className={styles.btn_accept} 
-              onClick={() => (handleData("accept", order))}>
+              onClick={() => (handleData("accept", order), handlePrinter(), handlePrinter())}>
                Accept
               </button>
               <button 
