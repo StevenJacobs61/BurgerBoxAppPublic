@@ -144,8 +144,7 @@
 .menu_hdr{
     font-size: 2rem;
     padding: 0.5rem 0;
-    color: var(--text--light-green);
-    opacity: 0.8;
+    color: #fff;
     text-shadow: 0 0 8px;
     font-family: 'Lust-Script';
     font-weight: 600;

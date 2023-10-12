@@ -11,8 +11,8 @@ const Info = ({sections, settings, complete}) => {
     
     const openWordStyle = {
         animation: !complete ? "10s animate 3s infinite alternate" : null,
-        color: open && !settings.offline ? "#0ba800" : "#be0606", 
-        textShadow: !open || settings.offline ? "none" : complete ? "var(--textShadow-green)" : null, 
+        // color: open && !settings.offline ? "#0ba800" : "#be0606", 
+        // textShadow: !open || settings.offline ? "none" : complete ? "var(--textShadow-green)" : null, 
       }
     
 
