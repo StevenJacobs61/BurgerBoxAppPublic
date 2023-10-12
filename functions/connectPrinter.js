@@ -35,7 +35,7 @@ const connect = async (ePosDev, ipAddress, setConnectionStatus, callback_connect
 
 const callback_connect = (ePosDev, setConnectionStatus, callback_createDevice, resultConnect) => {
   const deviceId = 'local_printer';
-  const options = { 'crypto': false, 'buffer': false };
+  const options = { 'crypto': true, 'buffer': false };
   if (resultConnect === 'OK' || resultConnect === 'SSL_CONNECT_OK') {
     setConnectionStatus(STATUS_CONNECTED);
     // Retrieves the Printer object
