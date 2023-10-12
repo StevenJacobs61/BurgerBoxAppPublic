@@ -5,7 +5,6 @@ import store from '../redux/store';
 import Head from 'next/head';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import Script from 'next/script';
 import { PrinterProvider } from '../context/printerContext';
 
 function MyApp({ Component, pageProps }) {
@@ -25,7 +24,6 @@ function MyApp({ Component, pageProps }) {
     <>
       <Head>
         <link href="https://db.onlinewebfonts.com/c/2c6559d94a7fa38ce73eaa827ca22ce2?family=Lust+Script+Display" rel="stylesheet" />
-        <Script type='text/javascript' src='./epos-2.23.0.js'/>
       </Head>
       <Provider store={store}>
         <PrinterProvider>
