@@ -10,6 +10,7 @@ const Printer = () => {
 
   const connectToPrinter = () => {
     const ipAddress = printerIPRef.current.value;
+    console.log(ipAddress);
     localStorage.setItem('ip', ipAddress)
     printerContext.handleConnect(ipAddress);
   }
