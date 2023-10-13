@@ -64,10 +64,12 @@ const createData = (printer, data) => {
 
   // Burger Box
   printer.addTextAlign(printer.ALIGN_CENTER);
-  printer.addTextSize(2, 2);
+  printer.addTextSize(3, 3);
+  printer.addTextStyle(false, false, true, undefined);
   printer.addText('Burger Box \n \n');
 
 //   // Contact
+printer.addTextStyle(false, false, false, undefined);
   printer.addTextSize(1, 1)
   if(data.location === 'Seaford'){
     printer.addText('Tel: 01323 899221 \n \n')
@@ -137,7 +139,7 @@ const orderTime = orderDateTime.toFormat('HH:mm:ss');
     !order.extraOptions.length  
       ? printer.addText('No Extras \n\n') 
       : printer.addTextStyle(false, false, true, undefined)+
-      printer.addText("Extra Toppings:\n")+
+      printer.addText("Extra Toppings:\n\n")+
       printer.addTextStyle(false, false, false, undefined)+
       order.extraOptions.map((extra) => {
         return printer.addTextAlign(printer.ALIGN_CENTER),
@@ -152,7 +154,7 @@ const orderTime = orderDateTime.toFormat('HH:mm:ss');
     !order.extraUpgrades.length  
       ? printer.addText('No Upgrades \n\n') 
       : printer.addTextStyle(false, false, true, undefined)+
-      printer.addText("Upgrades:\n")+
+      printer.addText("Upgrades:\n\n")+
       printer.addTextStyle(false, false, false, undefined)+
       order.extraUpgrades.map((upgrade) => {
         return printer.addTextAlign(printer.ALIGN_CENTER),
@@ -190,10 +192,10 @@ const orderTime = orderDateTime.toFormat('HH:mm:ss');
   // // Delivery
   printer.addTextAlign(printer.ALIGN_CENTER),
   printer.addText('Delivery:\n'),
+  printer.addTextAlign(printer.ALIGN_RIGHT),
   data.deliveryCost === 0 && data.delivery === true ?
   printer.addText('Free\n')
   :
-  printer.addTextAlign(printer.ALIGN_RIGHT)+
   printer.addText(`${data.deliveryCost}\n`),
 
   // Refund

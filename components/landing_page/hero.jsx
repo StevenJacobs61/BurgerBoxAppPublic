@@ -33,12 +33,12 @@ const Hero = ({settings, complete, setComplete}) => {
     });
   }, []);
   const h1Style ={
-    boxShadow:  "0 0 10px var(--bg-color--blue)",
+    // boxShadow:  "0 0 10px var(--bg-color--blue)",
     // animation: "animate 3s infinite alternate"
   }
 
   const h2Style = {
-    textShadow: !complete ? null : "0 0 1px #101010", 
+    // textShadow: !complete ? null : "0 0 1px #101010", 
     animation: !complete ? "animate2 3s infinite alternate" : null,
     display: fontLoaded ? 'visible' : 'hidden',
   }
@@ -47,7 +47,7 @@ const Hero = ({settings, complete, setComplete}) => {
     <div className={styles.container} style={{padding: !settings.bannerOn ? "120px 0 0" : null}}>
              {settings.bannerOn ? 
               <h1 className={styles.header} 
-                style={{boxShadow:  complete ? "0 0 10px var(--bg-color--blue)" : null}}>{settings.banner} </h1>: null}
+                >{settings.banner} </h1>: null}
           <div className={styles.title_container}>
             <h2 className={styles.title} 
               style={h2Style}>{currentTxt}</h2>

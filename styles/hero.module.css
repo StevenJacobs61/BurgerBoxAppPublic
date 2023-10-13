@@ -35,6 +35,7 @@
     animation: 3s animate 10s infinite alternate;
     /* width: fit-content; */
     font-display: block;
+    box-shadow: 0 0 15px #605e5e;
 }
 .title, .blink{
     color: #101010;
@@ -43,6 +44,7 @@
     transition: all 0.2s;
     animation: animate2 3s infinite alternate;
     font-family: 'Lust Script Display';
+    text-shadow: 0 0 10px #605e5e;
 }
 @keyframes animate {
     40%{

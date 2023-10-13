@@ -151,7 +151,7 @@
 }
 .discountContainer{
     /* border: 1px solid; */
-    box-shadow: 0 0 3px #101010;
+    box-shadow: 0 0 10px #605e5e;
     overflow: hidden;
     background-color: #101010;
     z-index: 70;
@@ -163,6 +163,7 @@
 }
 .discountMessage{
     color: #fff;
+    text-shadow: 0 0 10px #fff;
     font-size: 1.8rem;
     font-weight: 400;
     /* animation: slide-in-out 7s linear infinite; */
