@@ -242,6 +242,7 @@ const CurrentOrders = ({orders, sets, setAlert, setAlertDetails, alertDetails}) 
     }
   }
   const handleAccept = async (order) => {
+    let handlePrintCalled = false;
     if(!printerContext.printer){
       setAlertDetails({
         header: "Alert",
@@ -302,7 +303,10 @@ const CurrentOrders = ({orders, sets, setAlert, setAlertDetails, alertDetails}) 
       if(time){
         order.time = parseInt(time);
       }
+      if (!handlePrintCalled) {
         await printerContext.handlePrint(order);
+        handlePrintCalled = true;
+      }
     }catch(err){
       console.log(err);
       setAlertDetails({
