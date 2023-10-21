@@ -296,16 +296,13 @@ const CurrentOrders = ({orders, sets, setAlert, setAlertDetails, alertDetails}) 
       }
       setSettings(tSets)
       socket.current.emit("respond", {id, accepted: true, note, deliveryTime: newTime, collectionTime: newTime});
-      console.log("response submitted");
       setNote()
       setTime()
       setShow(false);
       if(time){
         order.time = parseInt(time);
       }
-      if(printerContext.printer){
         await printerContext.handlePrint(order);
-      }
     }catch(err){
       console.log(err);
       setAlertDetails({
@@ -623,6 +620,7 @@ const CurrentOrders = ({orders, sets, setAlert, setAlertDetails, alertDetails}) 
         location: location
       }
     })
+    console.log(resDel.data + "\n" + resCol.data);
     setOrdersList(ordersList.map((item) => {
       if(item.status === 1){
         item.status = 2;
@@ -633,9 +631,7 @@ const CurrentOrders = ({orders, sets, setAlert, setAlertDetails, alertDetails}) 
         if(!item.delivery){
           item.time = updateCollection.time
         } 
-        if(printerContext.printer){
-          printerContext.handlePrint(item);
-        }
+        // printerContext.handlePrint(item);
       }
       return item;
     }));

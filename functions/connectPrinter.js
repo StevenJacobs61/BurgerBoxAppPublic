@@ -60,15 +60,13 @@ const callback_connect = (ePosDev, setConnectionStatus, callback_createDevice, r
 };
 
 const createData = (printer, data) => {
-  // console.log(data);
-
   // Burger Box
   printer.addTextAlign(printer.ALIGN_CENTER);
   printer.addTextSize(3, 3);
   printer.addTextStyle(false, false, true, undefined);
   printer.addText('Burger Box \n \n');
 
-//   // Contact
+// //   // Contact
 printer.addTextStyle(false, false, false, undefined);
   printer.addTextSize(1, 1)
   if(data.location === 'Seaford'){
@@ -77,7 +75,7 @@ printer.addTextStyle(false, false, false, undefined);
     printer.addText('Tel: ??? \n')
   }
 
-//   // // Delivery
+// //   // // Delivery
   printer.addTextStyle(false, false, true, undefined)
   printer.addTextSize(2, 2);
   if(data.delivery === true){
@@ -86,38 +84,35 @@ printer.addTextStyle(false, false, false, undefined);
     printer.addText("Collection \n")
   }
 
-// // Space
+// // // Space
 printer.addText('\n')
 
-//   // // Due date/time
+// //   // // Due date/time
   printer.addTextStyle(false, false, false, undefined);
   printer.addTextSize(1, 1);
-  const dateTime = data.acceptedAt;
-  if(typeof(dateTime === 'object')){
-    dateTime = DateTime.fromJSDate(data.acceptedAt);
-  } else if(typeof(dateTime) === 'string'){
-    dateTime = DateTime.fromISO(data.acceptedAt);
-  }
+  const dateTime = new Date(data.acceptedAt);
+    dateTime = DateTime.fromJSDate(dateTime);
   const newDateTime = dateTime.plus({ minutes: data.time });
   const newDate = newDateTime.toFormat('yyyy-MM-dd');
-const newTime = newDateTime.toFormat('HH:mm:ss');
+const newTime = newDateTime.toFormat('HH:mm');
   printer.addText(`Due: ${newDate}  ${newTime}\n`);
 
-//   // Space
+// //   // Space
   printer.addText('\n')
 
-//   // // Order Number
+// //   // // Order Number
   printer.addText(`Order Number: ...${data._id.slice(-3)}\n`)
 
-  printer.addText('\n')
-  const orderDateTime = DateTime.fromISO(data.acceptedAt);
+//   printer.addText('\n')
+    const timeDate = new Date(data.acceptedAt);
+  const orderDateTime = DateTime.fromJSDate(timeDate);
   const orderDate = orderDateTime.toFormat('yyyy-MM-dd');
-const orderTime = orderDateTime.toFormat('HH:mm:ss');
+  const orderTime = orderDateTime.toFormat('HH:mm');
   printer.addText(`Accepted at:  ${orderDate}  ${orderTime}`)
 
-//   // // Space
+// //   // // Space
   printer.addText('\n')
-//   // Order
+// //   // Order
   printer.addTextAlign(printer.ALIGN_RIGHT)
   printer.addText('GBP \n')
   printer.addTextSize(1, 1)
@@ -130,7 +125,7 @@ const orderTime = orderDateTime.toFormat('HH:mm:ss');
     printer.addTextSize(1, 1),
     printer.addText(`${order.product.price * order.quantity}\n`),
     printer.addTextAlign(printer.ALIGN_CENTER),
-  //   // Fries
+//   //   // Fries
     !order.fries ? 
     printer.addText('No Fries') 
     : 
@@ -140,7 +135,7 @@ const orderTime = orderDateTime.toFormat('HH:mm:ss');
     //   // space
     printer.addTextAlign(printer.ALIGN_CENTER),
     printer.addText('\n\n'),
-  //   // Extras
+//   //   // Extras
     !order.extraOptions.length  
       ? printer.addText('No Extras \n\n') 
       : printer.addTextStyle(false, false, true, undefined)+
@@ -152,10 +147,10 @@ const orderTime = orderDateTime.toFormat('HH:mm:ss');
         printer.addTextAlign(printer.ALIGN_RIGHT),
         printer.addText(`${extra.price}\n`)
       }),
-  //     // space
+//   //     // space
       printer.addTextAlign(printer.ALIGN_CENTER),
       printer.addText('\n'),
-  //     // Upgrades
+//   //     // Upgrades
     !order.extraUpgrades.length  
       ? printer.addText('No Upgrades \n\n') 
       : printer.addTextStyle(false, false, true, undefined)+
@@ -168,7 +163,7 @@ const orderTime = orderDateTime.toFormat('HH:mm:ss');
         printer.addText(`${upgrade.price}\n`)
       }),
 
-  //     // Subtotal
+//   //     // Subtotal
       printer.addTextAlign(printer.ALIGN_CENTER),
       printer.addTextStyle(false, false, true, undefined),
       printer.addText('Subtotal\n'),
@@ -176,7 +171,7 @@ const orderTime = orderDateTime.toFormat('HH:mm:ss');
       printer.addText(`${order.price + '(x' + order.quantity})\n`),
       printer.addTextStyle(false, false, false, undefined),
 
-  //     // Note
+//   //     // Note
       order.note &&
       printer.addTextAlign(printer.ALIGN_CENTER)+
       printer.addTextStyle(false, false, true, undefined)+
@@ -184,17 +179,17 @@ const orderTime = orderDateTime.toFormat('HH:mm:ss');
       printer.addText(`${order.note}\n`)+
       printer.addTextStyle(false, false, false, undefined)
   })
-  // // space
+//   // // space
   printer.addText('\n'),
 
-  // // Discount
+//   // // Discount
   data.discount > 0 && 
   printer.addTextAlign(printer.ALIGN_CENTER)+
   printer.addText('Discount\n')+
   printer.addTextAlign(printer.ALIGN_RIGHT)+
   printer.addText(`-${data.disocunt}\n`),
 
-  // // Delivery
+//   // // Delivery
   printer.addTextAlign(printer.ALIGN_CENTER),
   printer.addText('Delivery:\n'),
   printer.addTextAlign(printer.ALIGN_RIGHT),
@@ -203,7 +198,7 @@ const orderTime = orderDateTime.toFormat('HH:mm:ss');
   :
   printer.addText(`${data.deliveryCost}\n`),
 
-  // Refund
+//   // Refund
   data.refunded > 0 &&
   printer.addTextAlign(printer.ALIGN_CENTER)+
   printer.addText('Refunded:\n')+
@@ -211,50 +206,50 @@ const orderTime = orderDateTime.toFormat('HH:mm:ss');
   printer.addText(`-${data.refunded}\n`)
 
 
-  // // Total
+//   // // Total
   printer.addTextSize(2, 2),
   printer.addTextAlign(printer.ALIGN_CENTER),
   printer.addText('Total:\n'),
   printer.addTextAlign(printer.ALIGN_RIGHT),
   printer.addText(`${data.total + data.deliveryCost - data.refunded}\n`)
 
-  // // Allergen 
+//   // // Allergen 
 
   printer.addTextAlign(printer.ALIGN_CENTER),
   printer.addTextStyle(false, false, true, undefined),
   printer.addTextSize(1, 2),
   printer.addText('For Allergen Information \n please contact restaurant.\n')
 
-  // Space
+//   // Space
   printer.addText('\n')
 
   printer.addTextAlign(printer.ALIGN_LEFT),
-// Name
+// // Name
   printer.addTextStyle(false, false, false, undefined),
   printer.addText(`${data.details.name}\n`),
   printer.addText(`${data.details.number}\n`),
   printer.addText(`${data.details.email}\n`),
 
-  // space
-  printer.addText('\n'),
+//   // space
+//   printer.addText('\n'),
 
-  data.delivery &&
+//   data.delivery &&
   printer.addText(`${data.details.address.street}\n`)+
   printer.addText(`${data.details.address.postcode}\n`)
 
-  // space
+//   // space
   printer.addText('\n')
-// Instructions
+// // Instructions
   printer.addTextSize(1, 1),
   printer.addTextStyle(false, false, true, undefined),
   data.details.address.instructions && 
   printer.addText('Delivery Instructions:\n')+
   printer.addText(`${data.details.address.instructions}`)
 
-  // space
+//   // space
   printer.addText('\n\n')
 
-  // thanks
+//   // thanks
   printer.addTextSize(2, 2),
   printer.addTextAlign(printer.ALIGN_CENTER),
   printer.addText('Thank you for ordering \n Enjoy your food!\n')

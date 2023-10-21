@@ -11,7 +11,7 @@ const Item = ({order, setNote, handleData, settings, setTime, setAlert, setAlert
   const printerContext = usePrinter();
   const [connectionStatus, setConnectionStatus] = useState(printerContext.connectionStatus);
 
-  console.log(typeof(order.acceptedAt));
+  
   const handlePrinter = () => {
     if(time){
       order.time = parseInt(time);
@@ -72,15 +72,26 @@ const Item = ({order, setNote, handleData, settings, setTime, setAlert, setAlert
   }, [printerContext.connectionStatus])
   useEffect(()=>{
     connectPrinter();
-  }, [printerContext.printer])
+  }, [printerContext.printer]);
+
+  const [newDate, setNewDate] = useState();
+  const [newTime, setNewTime] = useState();
 
   useEffect(()=>{
     if(!printerContext.printer){
       connectPrinter();
     }
-  }, [])
-  const status = order.status
-  const  [refundAm, setRefundAm] = useState(0)
+    const dateTime = new Date(order.acceptedAt);
+    dateTime = DateTime.fromJSDate(dateTime);
+  const newDateTime = dateTime.plus({ minutes: order.time });
+  console.log(newDateTime);
+  setNewDate(newDateTime.toFormat('yyyy-MM-dd'));
+  setNewTime(newDateTime.toFormat('HH:mm'));
+  }, []);
+console.log(newDate);
+console.log(newTime);
+  const status = order.status;
+  const  [refundAm, setRefundAm] = useState(0);
 
   const acceptedTime = new Date(order.acceptedAt).toLocaleString("en-GB", {
     day: "numeric",
@@ -107,7 +118,7 @@ const Item = ({order, setNote, handleData, settings, setTime, setAlert, setAlert
       minute: "numeric",
       timeZone: "Europe/London",
   });
-console.log();
+
   return (
     <div className={styles.container}>
             <h1 className={styles.hdr}>
@@ -179,6 +190,7 @@ console.log();
         <div className={styles.item}><p className={styles.title}>Method: </p><p className={styles.info}>{order.delivery ? 'Delivery' : 'Collection'}</p></div>
         <div className={styles.item}><p className={styles.title}>Ordered: </p><p className={styles.info}>{createdTime}</p></div>
        {order.updatedAt !== order.createdAt && <div className={styles.item}><p className={styles.title}>Updated: </p><p className={styles.info}>{updatedTime}</p></div>}
+        <div className={styles.item}><p className={styles.title}>Due: </p><p className={styles.info}>{newTime}</p></div>
         <div className={styles.item}> <p className={styles.title}>Name: </p><p className={styles.info}>{order.details.name}</p></div>
        {order.delivery ? 
        <div className={styles.item}> 

@@ -26,7 +26,10 @@ const envToken = query.location === "Seaford" ? process.env.NEXT_PUBLIC_SEAFORD_
       if(!token || token !== envToken){
         return res.status(401).json("Not authenticated!")
       }
-        const {filter, update} = req.body;
+        const {filterDelivery, filterCollection, updateDelivery, updateCollection} = req.body;
+        const filter = filterDelivery ? filterDelivery : filterCollection;
+        const update = updateDelivery ? updateDelivery : updateCollection;
+        
         try {
           await orders.updateMany(filter, update, {new:true});
           res.status(200).json("Order Status Updated."); 
