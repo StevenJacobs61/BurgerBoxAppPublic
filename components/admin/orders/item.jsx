@@ -88,8 +88,7 @@ const Item = ({order, setNote, handleData, settings, setTime, setAlert, setAlert
   setNewDate(newDateTime.toFormat('yyyy-MM-dd'));
   setNewTime(newDateTime.toFormat('HH:mm'));
   }, []);
-console.log(newDate);
-console.log(newTime);
+
   const status = order.status;
   const  [refundAm, setRefundAm] = useState(0);
 
@@ -149,7 +148,7 @@ console.log(newTime);
             <>
               <button 
               className={styles.btn_accept} 
-              onClick={() => (handleData("accept", order), handlePrinter())}>
+              onClick={() => (handleData("accept", order))}>
                Accept
               </button>
               <button 
