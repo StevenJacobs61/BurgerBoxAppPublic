@@ -25,6 +25,7 @@ export function PrinterProvider({ children }) {
   const handlePrint = async (data) => {
     try {
       await createData(printer, data);
+      await createData(printer, data);
     } catch (error) {
       console.error(error);
     }

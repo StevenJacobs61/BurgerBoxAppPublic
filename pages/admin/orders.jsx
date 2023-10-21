@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import styles from '../../styles/admin/orders.module.css'
 import axios from 'axios'
 import CurrentOrders from '../../components/admin/orders/current-orders'
@@ -18,6 +18,7 @@ const Orders = ({ordersList, settings}) => {
     onClose: ()=>setAlert(false),
     onConfirm: null,
   });
+
   return (
     <div className={styles.container}>
       <Script src='/epos-2.23.0.js'/>
@@ -32,7 +33,7 @@ const Orders = ({ordersList, settings}) => {
         <CurrentOrders 
         orders={ordersList} 
         sets={settings} 
-        {...{setAlert, setAlertDetails}}/>
+        {...{setAlert, setAlertDetails, alertDetails}}/>
     </div>
   )
 }

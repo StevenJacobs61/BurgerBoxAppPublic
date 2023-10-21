@@ -92,11 +92,16 @@ printer.addText('\n')
 //   // // Due date/time
   printer.addTextStyle(false, false, false, undefined);
   printer.addTextSize(1, 1);
-  const dateTime = DateTime.fromISO(data.acceptedAt);
+  const dateTime = data.acceptedAt;
+  if(typeof(dateTime === 'object')){
+    dateTime = DateTime.fromJSDate(data.acceptedAt);
+  } else if(typeof(dateTime) === 'string'){
+    dateTime = DateTime.fromISO(data.acceptedAt);
+  }
   const newDateTime = dateTime.plus({ minutes: data.time });
-  const date = newDateTime.toFormat('yyyy-MM-dd');
-const time = newDateTime.toFormat('HH:mm:ss');
-  printer.addText(`Due: ${date}  ${time}\n`);
+  const newDate = newDateTime.toFormat('yyyy-MM-dd');
+const newTime = newDateTime.toFormat('HH:mm:ss');
+  printer.addText(`Due: ${newDate}  ${newTime}\n`);
 
 //   // Space
   printer.addText('\n')
@@ -168,7 +173,7 @@ const orderTime = orderDateTime.toFormat('HH:mm:ss');
       printer.addTextStyle(false, false, true, undefined),
       printer.addText('Subtotal\n'),
       printer.addTextAlign(printer.ALIGN_RIGHT),
-      printer.addText(`${order.price}\n`),
+      printer.addText(`${order.price + '(x' + order.quantity})\n`),
       printer.addTextStyle(false, false, false, undefined),
 
   //     // Note

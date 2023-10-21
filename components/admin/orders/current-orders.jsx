@@ -8,8 +8,9 @@ import Item from '../orders/item'
 import { useSelector } from 'react-redux'
 import Show from '../../show'
 import { useRouter } from 'next/router'
+import { usePrinter } from '../../../context/printerContext'
 
-const CurrentOrders = ({orders, sets, setAlert, setAlertDetails}) => {
+const CurrentOrders = ({orders, sets, setAlert, setAlertDetails, alertDetails}) => {
 
 
   const router = useRouter()
@@ -26,9 +27,27 @@ const CurrentOrders = ({orders, sets, setAlert, setAlertDetails}) => {
   const audio = useMemo(() => new Audio('/sounds/alert.mp3'), []);
   const cart = useSelector((state) => state.cart);
   const socket = useRef(null);
+  const printerContext = usePrinter();
+
+  useEffect(() => {
+    const localIp = localStorage.getItem('ip');
+    const checkAndConnect = () => {
+      if (!printerContext.printer && localIp) {
+        printerContext.handleConnect(localIp);
+      }
+    };
+    window.onload = () => {
+      checkAndConnect();
+    };
+  
+  }, []);
 
 
-  const handleSectionShow = (section) => {
+  const handleSectionShow = async (section) => {
+    const localIp = await localStorage.getItem('ip')
+    if(!printerContext.printer && localIp){
+      printerContext.handleConnect(localIp);
+    }
    const match = sectionShow.some((sect) => section === sect)
    if(match){
     setSectionShow(sectionShow.filter((sect) => sect !== section))
@@ -92,7 +111,6 @@ const CurrentOrders = ({orders, sets, setAlert, setAlertDetails}) => {
       const orderRes = await axios.get(`/api/orders/${id}`);
       const foundOrder = orderRes.data;
   
-      console.log("Order received");
       if (foundOrder) {
         if (notifications) {
           showItem(foundOrder);
@@ -224,6 +242,16 @@ const CurrentOrders = ({orders, sets, setAlert, setAlertDetails}) => {
     }
   }
   const handleAccept = async (order) => {
+    if(!printerContext.printer){
+      setAlertDetails({
+        header: "Alert",
+        message: "Printer is not connected.",
+        type: "alert",
+        onClose: ()=>setAlert(false),
+        onConfirm: null,
+      });
+      setAlert(true);
+    }
     const id = order._id
     const delivery = order.delivery
     const newTime = time ? parseInt(time) : delivery ? settings.delTime : settings.colTime
@@ -272,6 +300,12 @@ const CurrentOrders = ({orders, sets, setAlert, setAlertDetails}) => {
       setNote()
       setTime()
       setShow(false);
+      if(time){
+        order.time = parseInt(time);
+      }
+      if(printerContext.printer){
+        await printerContext.handlePrint(order);
+      }
     }catch(err){
       console.log(err);
       setAlertDetails({
@@ -593,13 +627,16 @@ const CurrentOrders = ({orders, sets, setAlert, setAlertDetails}) => {
       if(item.status === 1){
         item.status = 2;
         item.acceptedAt = new Date();
+        if(item.delivery){
+          item.time = updateDelivery.time
+        } 
+        if(!item.delivery){
+          item.time = updateCollection.time
+        } 
+        if(printerContext.printer){
+          printerContext.handlePrint(item);
+        }
       }
-      if(item.delivery){
-        item.time = updateDelivery.time
-      } 
-      if(!item.delivery){
-        item.time = updateCollection.time
-      } 
       return item;
     }));
     socket.current.emit("respond", {
@@ -794,6 +831,7 @@ const CurrentOrders = ({orders, sets, setAlert, setAlertDetails}) => {
   return (
     <div className={styles.container}>
         <h1 className={styles.hdr} style={{margin: sectionShow.some((s)=> s === 1) ? null : "0 0 2.5rem"}}>Orders</h1>
+        <h2 className={styles.status}>Printer: {printerContext.connectionStatus}</h2>
          {orderSections.map((orderSection) =>
        <div className={styles.sections_container} key={orderSection}>
           <div className={styles.title_container}>
@@ -858,6 +896,7 @@ const CurrentOrders = ({orders, sets, setAlert, setAlertDetails}) => {
            setAlert={setAlert}
            setAlertDetails={setAlertDetails}
            time={time}
+           alertDetails={alertDetails}
            /> 
          </Show>
 

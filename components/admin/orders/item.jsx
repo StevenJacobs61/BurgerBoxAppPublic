@@ -3,22 +3,28 @@ import styles from '../../../styles/item.module.css'
 import { useState } from 'react';
 import {usePrinter} from '../../../context/printerContext.js'
 import {AiOutlinePrinter} from 'react-icons/ai'
+import { DateTime } from "luxon";
 
-const Item = ({order, setNote, handleData, settings, setTime, setAlert, setAlertDetails, time}) => {
+const Item = ({order, setNote, handleData, settings, setTime, setAlert, setAlertDetails, time, alertDetails}) => {
  
 
   const printerContext = usePrinter();
+  const [connectionStatus, setConnectionStatus] = useState(printerContext.connectionStatus);
 
+  console.log(typeof(order.acceptedAt));
   const handlePrinter = () => {
     if(time){
       order.time = parseInt(time);
     }
     if(printerContext.printer){
+      // order.updatedAt = updatedTime;
+      // order.createdAt = createdTime;
+      // order.acceptedAt = acceptedTime;
       printerContext.handlePrint(order);
     }else{
       setAlertDetails({
         header: "Alert",
-        message: "Printer is connecting...",
+        message: 'Connecting...', 
         type: "alert",
         onClose: ()=>setAlert(false),
         onConfirm: null,
@@ -27,7 +33,9 @@ const Item = ({order, setNote, handleData, settings, setTime, setAlert, setAlert
       connectPrinter();
     }
   }
+
   const connectPrinter = async () => {
+    
     const localIp = await localStorage.getItem('ip')
     if(!localIp && !printerContext.printer){
       setAlertDetails({
@@ -40,21 +48,66 @@ const Item = ({order, setNote, handleData, settings, setTime, setAlert, setAlert
       setAlert(true);
     }else{
       if(!printerContext.printer){
-       await printerContext.handleConnect(localIp)
+        try {
+          await printerContext.handleConnect(localIp);
+          } catch (error) {
+            setAlertDetails({
+              header: "Alert",
+              message: "There was an error connecting the printer.",
+              type: "alert",
+              onClose: ()=>setAlert(false),
+              onConfirm: null,
+            });
+            setAlert(true)
+          }
+        }
       }
     }
-  }
+  useEffect(()=>{
 
+    if(printerContext.connectionStatus === "Connected" && alertDetails.message === "Connecting..."){
+      setAlert(false);
+    }
+
+  }, [printerContext.connectionStatus])
   useEffect(()=>{
     connectPrinter();
   }, [printerContext.printer])
 
   useEffect(()=>{
-    connectPrinter();
+    if(!printerContext.printer){
+      connectPrinter();
+    }
   }, [])
-
   const status = order.status
   const  [refundAm, setRefundAm] = useState(0)
+
+  const acceptedTime = new Date(order.acceptedAt).toLocaleString("en-GB", {
+    day: "numeric",
+    month: "numeric",
+    year: "numeric",
+      hour: "numeric",
+      minute: "numeric",
+      timeZone: "Europe/London",
+  });
+  
+  const updatedTime = new Date(order.updatedAt).toLocaleString("en-GB", {
+    day: "numeric",
+    month: "numeric",
+    year: "numeric",
+      hour: "numeric",
+      minute: "numeric",
+      timeZone: "Europe/London",
+  });
+  const createdTime = new Date(order.createdAt).toLocaleString("en-GB", {
+    day: "numeric",
+    month: "numeric",
+    year: "numeric",
+      hour: "numeric",
+      minute: "numeric",
+      timeZone: "Europe/London",
+  });
+console.log();
   return (
     <div className={styles.container}>
             <h1 className={styles.hdr}>
@@ -85,7 +138,7 @@ const Item = ({order, setNote, handleData, settings, setTime, setAlert, setAlert
             <>
               <button 
               className={styles.btn_accept} 
-              onClick={() => (handleData("accept", order), handlePrinter(), handlePrinter())}>
+              onClick={() => (handleData("accept", order), handlePrinter())}>
                Accept
               </button>
               <button 
@@ -124,8 +177,8 @@ const Item = ({order, setNote, handleData, settings, setTime, setAlert, setAlert
     <div className={styles.details}>
         <div className={styles.item}><p className={styles.title}>ID: </p><p className={styles.info}>{order._id.slice(21, 24)}</p></div>
         <div className={styles.item}><p className={styles.title}>Method: </p><p className={styles.info}>{order.delivery ? 'Delivery' : 'Collection'}</p></div>
-        <div className={styles.item}><p className={styles.title}>Ordered: </p><p className={styles.info}>{order.createdAt.slice(0, 10)}  {order.createdAt.slice(11, 19)}</p></div>
-       {order.updatedAt !== order.createdAt && <div className={styles.item}><p className={styles.title}>Updated: </p><p className={styles.info}>{order.updatedAt.slice(0, 10)}  {order.updatedAt.slice(11, 19)}</p></div>}
+        <div className={styles.item}><p className={styles.title}>Ordered: </p><p className={styles.info}>{createdTime}</p></div>
+       {order.updatedAt !== order.createdAt && <div className={styles.item}><p className={styles.title}>Updated: </p><p className={styles.info}>{updatedTime}</p></div>}
         <div className={styles.item}> <p className={styles.title}>Name: </p><p className={styles.info}>{order.details.name}</p></div>
        {order.delivery ? 
        <div className={styles.item}> 

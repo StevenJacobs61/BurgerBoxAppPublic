@@ -179,6 +179,7 @@ const createOrder = async (data) => {
   }
   try {
       const res = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/api/orders`, data);
+      console.log(res.data);
       if (res.status === 201) {
         // Change quantity for redux state (basket icon)
         dispatch(addQuantity(0));

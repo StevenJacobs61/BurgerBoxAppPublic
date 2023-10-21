@@ -10,7 +10,6 @@ const Printer = () => {
 
   const connectToPrinter = () => {
     const ipAddress = printerIPRef.current.value;
-    console.log(ipAddress);
     localStorage.setItem('ip', ipAddress)
     printerContext.handleConnect(ipAddress);
   }
@@ -23,7 +22,6 @@ const Printer = () => {
     }
   }, [])
   
-  console.log(localIp);
   return (
     <div className={styles.container}>
       <h2 className={styles.hdr}>Status: {printerContext.connectionStatus}</h2>
