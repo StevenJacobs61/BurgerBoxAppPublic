@@ -3,6 +3,7 @@ import Stripe from 'stripe';
 const stripe = new Stripe(process.env.NEXT_PUBLIC_SECRET_KEY);
 
 export default async function handler(req, res) {
+    
     const {method} = req;
     const id = req.query.id;
     try {
