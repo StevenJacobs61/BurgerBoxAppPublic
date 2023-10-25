@@ -304,7 +304,7 @@ const CurrentOrders = ({orders, sets, setAlert, setAlertDetails, alertDetails}) 
         order.time = parseInt(time);
       }
       if (!handlePrintCalled) {
-        await printerContext.handlePrint(order);
+        printerContext.handlePrint(order);
         handlePrintCalled = true;
       }
     }catch(err){
@@ -624,7 +624,6 @@ const CurrentOrders = ({orders, sets, setAlert, setAlertDetails, alertDetails}) 
         location: location
       }
     })
-    console.log(resDel.data + "\n" + resCol.data);
     setOrdersList(ordersList.map((item) => {
       if(item.status === 1){
         item.status = 2;
@@ -635,7 +634,7 @@ const CurrentOrders = ({orders, sets, setAlert, setAlertDetails, alertDetails}) 
         if(!item.delivery){
           item.time = updateCollection.time
         } 
-        // printerContext.handlePrint(item);
+        printerContext.handlePrint(item);
       }
       return item;
     }));
