@@ -1,11 +1,9 @@
 import Layout from '../components/layout/layout';
 import '../styles/globals.css';
-import { Provider } from 'react-redux';
-import store from '../redux/store';
 import Head from 'next/head';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { PrinterProvider } from '../context/printerContext';
+import AppContexts from '../context/appContext';
 
 function MyApp({ Component, pageProps }) {
   const [path, setPath] = useState(null);
@@ -25,8 +23,7 @@ function MyApp({ Component, pageProps }) {
       <Head>
         <link href="https://db.onlinewebfonts.com/c/2c6559d94a7fa38ce73eaa827ca22ce2?family=Lust+Script+Display" rel="stylesheet" />
       </Head>
-      <Provider store={store}>
-        <PrinterProvider>
+      <AppContexts>
         {path !== "/" ? (
           <Layout>
             <Component {...pageProps} />
@@ -34,8 +31,7 @@ function MyApp({ Component, pageProps }) {
         ) : (
           <Component {...pageProps} />
         )}
-        </PrinterProvider>
-      </Provider>
+     </AppContexts>
     </>
   );
 }

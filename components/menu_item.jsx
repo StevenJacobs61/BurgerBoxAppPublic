@@ -5,12 +5,16 @@ import { useRouter } from 'next/router';
 import {MdChildCare} from "react-icons/md"
 import {GiHotMeal, GiKetchup} from "react-icons/gi"
 import redirectWithQuery from "../functions/redirect"
+import {useAlert} from "../context/alertContext"
+import { useSettings } from '../context/settingsContext';
 
-const MenuItem = ({item, section, settings, setAlert, setAlertDetails}) => {
+const MenuItem = ({item, section}) => {
   const router = useRouter()
 
+  const {setAlert, setAlertDetails} = useAlert();
+  const{settings} = useSettings();
   const handleSelect = async () => {
-    if(!item.available){
+    if(!item.available || !section.available){
       setAlertDetails({
         header: "Alert",
         message: "Sorry, this product is currently unavailable.",

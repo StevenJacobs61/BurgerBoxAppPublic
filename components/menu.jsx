@@ -6,16 +6,19 @@ import {  useRouter } from 'next/router'
 import MenuItem from './menu_item'
 import redirectWithQuery from '../functions/redirect'
 import { getTotal } from '../functions/local'
+import { useSettings } from '../context/settingsContext'
+import { useMenu } from '../context/menuContext'
 
 
-const Menu = ({sectionsList, productsList, settings, setAlert, setAlertDetails}) => {
+const Menu = () => {
   
-const [currentSection, setCurrentSection] = useState(sectionsList[0])  
+  const {settings} = useSettings();
+  const {sections, products} = useMenu();
+  const [currentSection, setCurrentSection] = useState(sections[0])  
   
 const [width, setWidth] = useState();
 const [total, setTotal] = useState(() => getTotal()) 
 const router = useRouter();
-
 
 const handleWidth = () => {
   setWidth(window.innerWidth)
@@ -29,24 +32,20 @@ useEffect(() => {
   return (
     <section className={styles.section}>
         <div className={styles.container}>
-          {/* <h1 className={styles.hdr}>ORDER</h1> */}
-          {settings.discount.active ? 
+          {settings.discount?.active ? 
           <div className={styles.discountContainer}> 
             <h2 className={styles.discountMessage}>{settings.discount.message}</h2> 
           </div>
           :null}
           <div className={styles.menu_container}>
             <div className={styles.sections_container}>
-              {sectionsList.map((section) =>(
+              {sections.map((section) =>(
               <MenuSection key={section._id} 
               width={width} 
               setCurrentSection={setCurrentSection} 
               currentSection={currentSection} 
-              settings={settings} 
-              productsList={productsList} 
               section={section}
-              setAlert={setAlert}
-              setAlertDetails={setAlertDetails}/>
+              />
               ))}
                 {width > 768 ? <div className={styles.checkout}>
             {!settings.offline ? <><p className={styles.text}>Total: {total.toLocaleString("en-US", {style: "currency", currency: "GBP"})}</p>
@@ -58,13 +57,13 @@ useEffect(() => {
           </div> : null}
             </div>
             <div className={styles.items_container}>
-              <h2 className={styles.menu_hdr}>{currentSection.title}</h2>
+              <h2 className={styles.menu_hdr}>{currentSection?.title}</h2>
               <div className={styles.items_wrapper}>
-              {productsList.filter((i) => i.section === currentSection?.title).map((item)=>
+              {products.filter((i) => i.section === currentSection?.title).map((item)=>
                 <MenuItem key={item._id} 
                 item={item} 
                 section={currentSection} 
-                settings={settings}/>
+                />
               )}  
               </div>
             </div>

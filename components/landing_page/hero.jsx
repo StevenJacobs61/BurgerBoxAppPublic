@@ -1,13 +1,17 @@
 import React from 'react'
 import { useState, useEffect} from 'react'
 import styles from '../../styles/hero.module.css'
+import { useSettings } from '../../context/settingsContext';
 
-const Hero = ({settings, complete, setComplete}) => {
+const Hero = ({complete, setComplete}) => {
 
   const text = "BurgerBox";
 
   const [currentTxt, setCurrentTxt] = useState('');
   const [fontLoaded, setFontLoaded] = useState(false);
+
+  const {settings} = useSettings();
+
   
   useEffect(() => {
       if(currentTxt === "BurgerBox") return

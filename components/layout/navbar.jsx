@@ -11,9 +11,14 @@ import { useRouter } from 'next/router';
 import logo from "../../public/img/logo-light.svg";
 import redirectWithQuery from '../../functions/redirect';
 import { addQuantity } from '../../redux/cartSlice';
-import axios from 'axios';
+import {useSettings} from "../../context/settingsContext"
+import { links } from '../../data/links';
+import LocationComp from './locationComp';
 
-const Navbar = ({setAlert, setAlertDetails}) => {
+const Navbar = () => {
+
+  const {settings} = useSettings();
+
   const cart = useSelector((state) => state.cart)
   const dispatch = useDispatch()
   
@@ -22,68 +27,41 @@ const Navbar = ({setAlert, setAlertDetails}) => {
   const router = useRouter();
   const [showNav, setShowNav] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
-  const [settings, setSettings] = useState(null);
-  const [open, setOpen] = useState(true);
 
-  const location = router.query.location;
-  const loginPage = router.pathname === "/admin/login";
-  const cartPage = router.pathname === "/cart";
-  const orderPage = router.pathname === "/order/[id]";
-  const franchisePage = router.pathname === "/franchise";
-  const showBasket = !loginPage && !cartPage && !settings?.offline && !franchisePage && open
-  const showLocations = !orderPage && !franchisePage
+  const showBasket = 
+    router.pathname !== "/admin/login" && 
+    router.pathname !== "/cart" && 
+    !settings?.offline && 
+    router.pathname !== "/franchise";
+
+  const showLocations = 
+    router.pathname !== "/order/[id]" && 
+    router.pathname !== "/franchise";
 
   useEffect(() => {
-    const getStoreData = async () => {
-      const params = {
-        location: location
-      };
-      try {
-        const settingsRes = await axios.get(`/api/settings`, {params});
-        const sectionsRes = await axios.get(`/api/sections`, {params});
-        setOpen(sectionsRes?.data.some((section) => section.available));
-        setSettings(settingsRes.data);
-      } catch (error) {
-        console.error(error);
-        setAlertDetails({
-          header: "Alert",
-          message: "There was an error whilst retrieving store data. Please reload the page.",
-          type: "alert",
-          onClose: ()=>setAlert(false),
-          onConfirm: null,
-        });
-        setAlert(true);
-      }
-    }
-    // Update Quantity
     const localQuantity = parseInt(localStorage.getItem("Quantity"));
     const localOrders = JSON.parse(localStorage.getItem("Orders"));
+    function handleQuantity(){
+      dispatch(addQuantity(0))
+      localStorage.setItem("Quantity", "0")
+      localStorage.setItem("Orders", "[]")
+    }
     if(localQuantity && localOrders.length > 0){
       dispatch(addQuantity(localQuantity));
-    }else{
-      dispatch(addQuantity(0))
-      localStorage.setItem("Quantity", "0")
-      localStorage.setItem("Orders", "[]")
+    }else if(router.query?.success === "true"){
+      handleQuantity();
     }
-    if(router.query?.success === "true"){
-      dispatch(addQuantity(0))
-      localStorage.setItem("Quantity", "0")
-      localStorage.setItem("Orders", "[]")
-    }
-    // Get settings
-    getStoreData()
-  }, [router, dispatch, location, setAlert, setAlertDetails])
+  }, [router, dispatch, location])
 
   const sizeDetector = () => {
-  if(window.innerWidth > 768){
-    setMobileScreen(false)
-  } else {
-    setMobileScreen(true)
-  }
+    if(window.innerWidth > 768){
+      setMobileScreen(false)
+    } else {
+      setMobileScreen(true)
+    }
   }
 
   useEffect(() => {
-    // Hide navbar on scroll down 
     sizeDetector()
     window.addEventListener('resize', sizeDetector)
     return () => {
@@ -111,20 +89,7 @@ const Navbar = ({setAlert, setAlertDetails}) => {
     }
   }, [lastScrollY]);
 
-  const handleLocationChange = () => {
-    setAlertDetails({
-      header: "Confirm",
-      message: "Changing location will reset your basket to empty. Please confirm you wish to do this.",
-      type: "confirm",
-      onClose: ()=>setAlert(false),
-      onConfirm: ()=>changeLocation(),
-    });
-    setAlert(true);
-  }
-  const changeLocation = () => {
-      localStorage.setItem("Orders", "[]");
-      router.push("/")
-  }
+ 
   return (
   <>
      <div className={styles.navbar} style={{top: showNav ? '0' : '-110%'}}>
@@ -147,23 +112,23 @@ const Navbar = ({setAlert, setAlertDetails}) => {
               alt='logo'
               />
             </div>
-            { click && mobileScreen ? null :<div className={styles.pagelinks} style={{display: click && mobileScreen ?"none":"flex"}}>
-              <div className={styles.pagelink} onClick={async () => {return setClick(!click), await redirectWithQuery("/home", router)}}>Order</div>
-              <div className={styles.pagelink} onClick={async () => {return setClick(!click), redirectWithQuery("/cart", router)}}>Checkout</div>
-              <div className={styles.pagelink} onClick={async () => {return setClick(!click), redirectWithQuery("/franchise", router)}}>Franchise</div>
-              <div className={styles.pagelink} onClick={async () => {return setClick(!click), redirectWithQuery("/admin", router)}}>Admin</div>
+
+            {click && mobileScreen ? null :<div className={styles.pagelinks} style={{display: click && mobileScreen ?"none":"flex"}}>
+              {links.map((link) => 
+              <div className={styles.pagelink} onClick={async () => {return setClick(!click), await redirectWithQuery(link.route, router)}}>{link.text}</div>
+              )}
           </div>}
-          { click && mobileScreen ? null :<div className={styles.contact}>
+
+          {click && mobileScreen ? null :<div className={styles.contact}>
             <div className={styles.texts}>
               <div className={styles.text}>Contact Us</div>
               <div className={styles.text}>01323 899221</div>
             </div>
           </div>}
         </div>
-        {showLocations ? <div className={styles.locationsContainer}>
-        <div className={styles.location}><p>Branch:</p><p>{location}</p></div>
-        <div className={styles.changeLocation}><p className={styles.changeLocationText} onClick={()=>handleLocationChange()}>Wrong Store? (Change Location)</p></div>
-        </div> :null}
+        {showLocations ?  
+          <LocationComp/>
+        :null}
         </div>
     {showBasket ? <div className={styles.basket} style={{top: showNav && mobileScreen ? "10rem" : showNav && !mobileScreen ? "11rem" : !showNav ? "2rem" : ""}}>
           <p className={styles.quantity}>{cart.quantity}</p>

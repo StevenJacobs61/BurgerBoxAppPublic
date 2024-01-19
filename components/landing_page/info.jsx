@@ -2,10 +2,14 @@ import React from 'react'
 import styles from '../../styles/LandingPage/info.module.css'
 import {AiOutlineArrowDown} from 'react-icons/ai';
 import { useRouter } from 'next/router';
+import { useSettings } from '../../context/settingsContext';
+import { useMenu } from '../../context/menuContext';
 
 
-const Info = ({sections, settings, complete}) => {
+const Info = ({complete}) => {
 
+    const {settings} = useSettings();
+    const {sections} = useMenu();
     const router = useRouter();
     const open = sections.some((section) => section.available); 
     
