@@ -1,31 +1,28 @@
 import styles from '../styles/orders.module.css'
 import { useRouter } from 'next/router';
-import { useDispatch } from 'react-redux'
-import { addQuantity } from '../redux/cartSlice'
-import { getTotal } from '../functions/local';
 import redirectWithQuery from '../functions/redirect';
+import { useOrder } from '../context/orderContext';
 
-const Orders = ({total, setTotal, setOrders, orders}) => {
+const Orders = () => {
 
-const dispatch = useDispatch();
+  const {addQuantity, setQuantity, quantity, total, getTotal, orders, setOrders} = useOrder();
+
 const router = useRouter()
-// ** Delete item from cart/local storage and local state 
+
 const handleDelete = (order, i) => {
-  // Update local storage orders
   filterLocalOrders(i)
-  setTotal(() => getTotal())
-  updateQuantity(parseInt(order.quantity));
+  getTotal();
+  updateQuantity(order);
 }
 const handleEdit = async (order, i) => {
   filterLocalOrders(i)
   updateQuantity(order.quantity);
   await redirectWithQuery(`/product/${order.product._id}`, router)
 }
-const updateQuantity = (quantity) => {
-  const localQuantity = parseInt(localStorage.getItem("Quantity"))
-  const newQuantity = localQuantity - quantity;
-  localStorage.setItem("Quantity", JSON.stringify(newQuantity))
-  dispatch(addQuantity(newQuantity))
+const updateQuantity = (order) => {
+  const newQuantity = parseInt(quantity) - parseInt(order.quantity);
+  setQuantity(newQuantity);
+  localStorage.setItem("quantity", `${newQuantity}`);
 }
 const filterLocalOrders = (i) => {
   const newOrders = orders.filter((_, index) => index !== i)
@@ -37,23 +34,19 @@ const filterLocalOrders = (i) => {
 const handleClear = () => {
   localStorage.setItem("Orders", "[]");
   setOrders([]);
-  dispatch(addQuantity(0));
-  setTotal(()=> getTotal())
+  addQuantity(0);
+  getTotal();
 }
-
+const cartSections = ["Name", "Fries", "Extras", "Quant", "Note", "Price", "Action"];
 
   return (
     <>
       <h1 className={styles.title}> <br/>Cart </h1>
       <div className={styles.container}>
         <div className={styles.hdr_container}>
-            <h2 className={styles.hdr}>Name</h2>
-            <h2 className={styles.hdr}>Fries</h2>
-            <h2 className={styles.hdr}>Extras</h2>
-            <h2 className={styles.hdr}>Quant</h2>
-            <h2 className={styles.hdr}>Note</h2>
-            <h2 className={styles.hdr}>Price</h2>
-            <h2 className={styles.hdr}>Action</h2>
+            {cartSections.map((section) => 
+            <h2 className={styles.hdr} key={section}>{section}</h2>
+            )}
         </div>
 
         {orders.map((order, i) => 

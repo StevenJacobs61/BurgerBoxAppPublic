@@ -1,16 +1,15 @@
 import styles from '../../styles/product.module.css'
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import { useDispatch } from 'react-redux';
-import { addQuantity } from '../../redux/cartSlice';
 import axios from "axios"
 import redirectWithQuery from "../../functions/redirect"
 import Image from 'next/image';
+import {useOrder} from "../../context/orderContext"
 
 const Product = ({products, product, settings, sections}) => {
 
-  const dispatch = useDispatch();
   const router = useRouter();
+  const {addQuantity} = useOrder();
   
   const section = product.section.toLowerCase();
   const available = sections.find((section) => section.title === product.section).available && product.available;
@@ -28,7 +27,7 @@ const Product = ({products, product, settings, sections}) => {
   const [fries, setFries] = useState(false)
   const [extraOptions, setExtraOptions] = useState([])
   const [extraUpgrades, setExtraUpgrades] =useState ([])
-  const [quantity, setQuantity] = useState(1)
+  const [productQuantity, setProductQuantity] = useState(1)
   const [note, setNote] = useState(null);
 
   // Resize detenction to show element on 1024px+ display
@@ -42,7 +41,7 @@ const Product = ({products, product, settings, sections}) => {
   }, [])
 
   const changePrice = (number) => {
-    const priceSum = (price + number) * quantity;
+    const priceSum = (price + number) * productQuantity;
     const totalPrice = Math.round(priceSum * 100)/100;
     setPrice(totalPrice < 0 ? 0 : totalPrice);
   };
@@ -86,30 +85,18 @@ const Product = ({products, product, settings, sections}) => {
       localStorage.setItem("Orders", "[]");
     }
     const localOrders = JSON.parse(localStorage.getItem("Orders"));
-    localOrders.push({location, product, fries, extraOptions, extraUpgrades, price, quantity, id, note});
+    localOrders.push({location, product, fries, extraOptions, extraUpgrades, price, quantity:productQuantity, id, note});
     localStorage.setItem('Orders', JSON.stringify(localOrders));  
-    updateQuantity();  
+    addQuantity(productQuantity);
     await redirectWithQuery("/home", router);
   }
-  // Update quantity in local storage and redux state
-  const updateQuantity = () => {
-    const localQuantity = localStorage.getItem("Quantity");
-    if(localQuantity){
-      const updatedQuantity = parseInt(localQuantity) + parseInt(quantity)
-      localStorage.setItem("Quantity", JSON.stringify(updatedQuantity));
-      dispatch(addQuantity(updatedQuantity));
-    }else{
-      localStorage.setItem("Quantity", JSON.stringify(quantity));
-      dispatch(addQuantity(parseInt(quantity)));
-    }
-  }
+
   useEffect(()=>{
     if(price < product.price){
       setPrice(product.price)
     }
   }, [price, product.price])
   
-
 return (
   <div className={styles.container}>
     <div className={styles.left}>
@@ -117,7 +104,7 @@ return (
           <Image src="/img/cart.svg" width="70%" height="70%" className={styles.icon}/>
       </div>
        <h1 className={styles.title}>{product.title}</h1>
-       {settings.offline || !available ? <h2 className={styles.offline}>Unavailable</h2> : <h2 className={styles.price}>Total: {(Math.round(price * quantity * 100) / 100).toLocaleString('en-US', {
+       {settings.offline || !available ? <h2 className={styles.offline}>Unavailable</h2> : <h2 className={styles.price}>Total: {(Math.round(price * productQuantity * 100) / 100).toLocaleString('en-US', {
           style: 'currency',
           currency: 'GBP',
         })}</h2>}
@@ -194,9 +181,9 @@ return (
               const value = e.target.value;
               const parsedValue = parseInt(value);
               if (!isNaN(parsedValue) && parsedValue >= 1) {
-                setQuantity(parsedValue);
+                setProductQuantity(parsedValue);
               } else {
-                setQuantity(1);
+                setProductQuantity(1);
               }
             }}
             defaultValue="1"
@@ -220,7 +207,7 @@ return (
         {settings.offline || !available ? 
           <p onClick={async ()=> await redirectWithQuery("/home", router)} className={styles.offline}>Unavailable</p> 
         : <>
-        <h3 className={styles.finalPrice}>Total: {(Math.round(price * quantity * 100) / 100).toLocaleString('en-US', {
+        <h3 className={styles.finalPrice}>Total: {(Math.round(price * productQuantity * 100) / 100).toLocaleString('en-US', {
           style: 'currency',
           currency: 'GBP',
         })}</h3>

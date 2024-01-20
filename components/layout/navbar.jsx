@@ -6,22 +6,19 @@ import {FiFacebook} from 'react-icons/fi';
 import {RiSnapchatLine} from 'react-icons/ri';
 import {HiMenu, HiMenuAlt3} from 'react-icons/hi';
 import {BsBasket} from 'react-icons/bs';
-import { useSelector, useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
 import logo from "../../public/img/logo-light.svg";
 import redirectWithQuery from '../../functions/redirect';
-import { addQuantity } from '../../redux/cartSlice';
 import {useSettings} from "../../context/settingsContext"
 import { links } from '../../data/links';
 import LocationComp from './locationComp';
+import { useOrder } from '../../context/orderContext';
 
 const Navbar = () => {
 
   const {settings} = useSettings();
+  const {addQuantity, quantity, setQuantity} = useOrder();
 
-  const cart = useSelector((state) => state.cart)
-  const dispatch = useDispatch()
-  
   const [click, setClick] = useState(true);
   const[mobileScreen, setMobileScreen] = useState(true);
   const router = useRouter();
@@ -39,19 +36,11 @@ const Navbar = () => {
     router.pathname !== "/franchise";
 
   useEffect(() => {
-    const localQuantity = parseInt(localStorage.getItem("Quantity"));
-    const localOrders = JSON.parse(localStorage.getItem("Orders"));
-    function handleQuantity(){
-      dispatch(addQuantity(0))
-      localStorage.setItem("Quantity", "0")
-      localStorage.setItem("Orders", "[]")
+    const localQuantity = parseInt(localStorage.getItem("quantity"));
+    if(localQuantity){
+      setQuantity(localQuantity)
     }
-    if(localQuantity && localOrders.length > 0){
-      dispatch(addQuantity(localQuantity));
-    }else if(router.query?.success === "true"){
-      handleQuantity();
-    }
-  }, [router, dispatch, location])
+  }, [router, location])
 
   const sizeDetector = () => {
     if(window.innerWidth > 768){
@@ -131,7 +120,7 @@ const Navbar = () => {
         :null}
         </div>
     {showBasket ? <div className={styles.basket} style={{top: showNav && mobileScreen ? "10rem" : showNav && !mobileScreen ? "11rem" : !showNav ? "2rem" : ""}}>
-          <p className={styles.quantity}>{cart.quantity}</p>
+          <p className={styles.quantity}>{quantity}</p>
           <BsBasket className={styles.basket_icon} onClick={async () => await redirectWithQuery("/cart", router)}/>
               </div>:null}
      </>

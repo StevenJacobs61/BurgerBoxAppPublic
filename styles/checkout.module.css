@@ -19,6 +19,12 @@
     padding: 1rem 0 2rem;
     align-items: center;
 }
+.delivery_costs_container{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+}
 
 .details_container{
     display: flex;

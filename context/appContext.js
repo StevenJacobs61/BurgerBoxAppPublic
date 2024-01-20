@@ -5,17 +5,20 @@ import { Provider } from 'react-redux';
 import { PrinterProvider } from './printerContext';
 import store from '../redux/store';
 import MenuContextProvider from './menuContext';
+import OrderContextProvider from './orderContext';
 
 
 const AppContexts = ({ children }) => (
   <MenuContextProvider>
     <AlertContextProvider>
       <SettingsContextProvider>
-        <Provider store={store}>
-          <PrinterProvider>
-            {children}
+        <OrderContextProvider>
+          <Provider store={store}>
+            <PrinterProvider>
+              {children}
           </PrinterProvider>
         </Provider>
+        </OrderContextProvider>
       </SettingsContextProvider>
     </AlertContextProvider>
   </MenuContextProvider>

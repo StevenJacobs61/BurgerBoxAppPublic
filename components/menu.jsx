@@ -5,19 +5,19 @@ import { useState, useEffect } from 'react'
 import {  useRouter } from 'next/router'
 import MenuItem from './menu_item'
 import redirectWithQuery from '../functions/redirect'
-import { getTotal } from '../functions/local'
 import { useSettings } from '../context/settingsContext'
 import { useMenu } from '../context/menuContext'
+import { useOrder } from '../context/orderContext'
 
 
 const Menu = () => {
   
   const {settings} = useSettings();
   const {sections, products} = useMenu();
+  const {total} = useOrder;
   const [currentSection, setCurrentSection] = useState(sections[0])  
   
 const [width, setWidth] = useState();
-const [total, setTotal] = useState(() => getTotal()) 
 const router = useRouter();
 
 const handleWidth = () => {
@@ -48,7 +48,7 @@ useEffect(() => {
               />
               ))}
                 {width > 768 ? <div className={styles.checkout}>
-            {!settings.offline ? <><p className={styles.text}>Total: {total.toLocaleString("en-US", {style: "currency", currency: "GBP"})}</p>
+            {!settings.offline ? <><p className={styles.text}>Total: {total?.toLocaleString("en-US", {style: "currency", currency: "GBP"})}</p>
             <button className={styles.basketButton} onClick={async () => await redirectWithQuery("/cart", router)}>basket</button>
             </> 
             : 
@@ -71,7 +71,7 @@ useEffect(() => {
           {width < 769 ? <div className={styles.checkout}>
             {!settings.offline ? 
             <>
-            <p className={styles.text}>Total: {total.toLocaleString("en-US", {style: "currency", currency: "GBP"})}</p>
+            <p className={styles.text}>Total: {total?.toLocaleString("en-US", {style: "currency", currency: "GBP"})}</p>
             <button className={styles.basketButton} onClick={async () => await redirectWithQuery("/cart", router)}>basket</button>
             </> 
             : 

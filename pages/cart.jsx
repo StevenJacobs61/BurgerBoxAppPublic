@@ -1,26 +1,28 @@
-import React, { useState } from 'react'
+import React, { useEffect} from 'react'
 import Checkout from '../components/checkout'
 import Orders from '../components/orders'
 import styles from '../styles/cart.module.css'
 import axios from 'axios'
-import {getOrders, getTotal} from '../functions/local'
+import { useSettings } from "../context/settingsContext"
 
 
 const Cart = ({settings}) => {
-  const [total, setTotal] = useState(()=>getTotal());
-  const [orders, setOrders] = useState(()=>getOrders());
+
+  const { setSettings } = useSettings();
+  
+  useEffect(()=>{
+    setSettings(settings);
+  }, [setSettings])
 
   return (
     <div className={styles.container}>
 
       <div className={styles.wrapper}>
         <div className={styles.products}>
-            <Orders 
-            {...{setTotal, total, orders, setOrders }}/>
+            <Orders/>
         </div>
         <div className={styles.checkout}>
-          <Checkout 
-            {...{ settings, total, orders}}/>
+          <Checkout/>
         </div>
       </div>
 
