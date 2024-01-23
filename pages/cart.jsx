@@ -12,7 +12,7 @@ const Cart = ({settings}) => {
   
   useEffect(()=>{
     setSettings(settings);
-  }, [setSettings])
+  }, [setSettings, settings])
 
   return (
     <div className={styles.container}>

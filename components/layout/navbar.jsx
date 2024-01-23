@@ -40,7 +40,7 @@ const Navbar = () => {
     if(localQuantity){
       setQuantity(localQuantity)
     }
-  }, [router, location])
+  }, [router, location, setQuantity])
 
   const sizeDetector = () => {
     if(window.innerWidth > 768){
@@ -104,7 +104,7 @@ const Navbar = () => {
 
             {click && mobileScreen ? null :<div className={styles.pagelinks} style={{display: click && mobileScreen ?"none":"flex"}}>
               {links.map((link) => 
-              <div className={styles.pagelink} onClick={async () => {return setClick(!click), await redirectWithQuery(link.route, router)}}>{link.text}</div>
+              <div className={styles.pagelink} key={link} onClick={async () => {return setClick(!click), await redirectWithQuery(link.route, router)}}>{link.text}</div>
               )}
           </div>}
 

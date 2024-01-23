@@ -21,7 +21,7 @@ export default function Home({ productsList, sections, settings}) {
     setSettings(settings);
     setProducts(productsList);
     setSections(sections.filter((section) => section.title !== "Extra Toppings" && section.title !== "Upgrades"));
-  }, [setSettings, settings, productsList, setProducts]);
+  }, [setSettings, settings, productsList, setProducts, sections, setSections]);
   
   return (
     <div className={styles.container}>
@@ -34,7 +34,7 @@ export default function Home({ productsList, sections, settings}) {
       <LandingPage />
       <Menu 
       />
-      <About/>
+      {/* <About/> */}
   </div> 
   )
 }

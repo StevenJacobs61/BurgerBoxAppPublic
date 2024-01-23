@@ -40,7 +40,7 @@ const CurrentOrders = ({orders, sets, setAlert, setAlertDetails, alertDetails}) 
       checkAndConnect();
     };
   
-  }, []);
+  }, [printerContext]);
 
 
   const handleSectionShow = async (section) => {

@@ -69,10 +69,10 @@ const Item = ({order, setNote, handleData, settings, setTime, setAlert, setAlert
       setAlert(false);
     }
 
-  }, [printerContext.connectionStatus])
+  }, [printerContext.connectionStatus, alertDetails.message, setAlert])
   useEffect(()=>{
     connectPrinter();
-  }, [printerContext.printer]);
+  }, [printerContext.printer, connectPrinter, order.acceptedAt, order.time]);
 
   const [newDate, setNewDate] = useState();
   const [newTime, setNewTime] = useState();
