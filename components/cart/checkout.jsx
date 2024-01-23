@@ -1,16 +1,17 @@
 import React, { useState, useEffect, useRef } from 'react'
-import styles from '../styles/checkout.module.css'
+import styles from '../../styles/checkout.module.css'
 import { useRouter } from 'next/router';
 import axios from 'axios';
-import redirectWithQuery from "../functions/redirect"
-import Alert from './alert';
-import { useSettings } from '../context/settingsContext';
-import { useAlert } from '../context/alertContext';
-import { useOrder } from '../context/orderContext';
-import verifySeafordPostcode from '../functions/verifyPostcode';
+import redirectWithQuery from "../../functions/redirect"
+import Alert from '../alert';
+import { useSettings } from '../../context/settingsContext';
+import { useAlert } from '../../context/alertContext';
+import { useOrder } from '../../context/orderContext';
+import verifySeafordPostcode from '../../functions/verifyPostcode';
 import Details from './details';
-import handleDeliveryCosts from "../functions/deliveryCosts"
+import handleDeliveryCosts from "../../functions/deliveryCosts"
 import DeliveryCostsDetails from "./deliveryCostsDetails"
+import SelectDeliveryOption from './selectDeliveryOption';
 
 
 const Checkout = () => {
@@ -20,7 +21,7 @@ const Checkout = () => {
   const {alert, setAlert, setAlertDetails} = useAlert();
   const {addQuantity, orders, total} = useOrder();
   const [postcodeVerified, setPostcodeVerified] = useState(false)
-  const [showDeliver, setShowDeliver] = useState();
+  const [showDeliver, setShowDeliver] = useState(true);
   const [deliveryCost, setDeliveryCost] = useState(0);
   const postcodeRef = useRef(null);
   const [details, setDetails] = useState({
@@ -34,11 +35,6 @@ const Checkout = () => {
         email: "",
       
   })
-
-  
-useEffect(()=>{
-  setShowDeliver(settings?.del)
-},[])
 
 const handleOrder = async ()=>{
   if(total < 10 && showDeliver){
@@ -152,41 +148,17 @@ return (
     {alert ? <Alert/> : null}
   {router.query.location === "Seaford" ? 
   <>
-    <h1 className={styles.title}>{settings?.del ? "Delivery options" : "collection details"}</h1>
+    <h1 className={styles.title}>{settings?.del ? "Delivery options" : "Collection details"}</h1>
     { 
       settings?.del ? 
-        <>
           <h3 className={styles.time_hdr}>Delivery time approx {settings?.delTime}mins</h3>
-          <h3 className={styles.time_hdr}>Collection time approx {settings?.colTime}mins</h3>
-        </>
-      : null
+      : null        
     } 
+    <h3 className={styles.time_hdr}>Collection time approx {settings?.colTime}mins</h3>
 
-      <div className={styles.container}>
-        <div className={styles.deliver_container}>
-          {
-          settings?.del ? 
-          <>
-            <button className={styles.btn_deliver}
-            onClick={() => setShowDeliver(true)} 
-            style={{ 
-              background: showDeliver ? '#101010' : '#fff', 
-              color: showDeliver ? '#fff' : '#101010' }}>
-            Deliver
-            </button>
-            <p className={styles.or}>OR</p>            
-            <button className={styles.btn_collection}
-            style={{ 
-              background: !showDeliver ? '#101010' : '#fff', 
-              color: !showDeliver ? '#fff' : '#101010' }}
-            onClick={() => setShowDeliver(false)}>
-              Collect
-            </button>
-          </> 
-          : 
-          <p className={styles.del_unavialable}>Delivery unavailable!</p>
-          }
-        </div>
+    <div className={styles.container}>
+
+          <SelectDeliveryOption setShowDeliver={setShowDeliver} showDeliver={showDeliver}/>
           
           <DeliveryCostsDetails location={router?.query?.location}/>
             

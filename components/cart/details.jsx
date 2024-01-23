@@ -1,7 +1,7 @@
 import React from 'react'
-import styles from '../styles/checkout.module.css'
-import verifySeafordPostcode from '../functions/verifyPostcode'
-import { useAlert } from '../context/alertContext'
+import styles from '../../styles/checkout.module.css'
+import verifySeafordPostcode from '../../functions/verifyPostcode'
+import { useAlert } from '../../context/alertContext'
 import { useRouter } from 'next/router';
 
 export default function Details({setDetails, postcodeRef, showDeliver}) {

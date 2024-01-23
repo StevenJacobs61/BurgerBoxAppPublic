@@ -1,6 +1,6 @@
 import React, { useEffect} from 'react'
-import Checkout from '../components/checkout'
-import Orders from '../components/orders'
+import Checkout from '../components/cart/checkout'
+import Orders from '../components/cart/orders'
 import styles from '../styles/cart.module.css'
 import axios from 'axios'
 import { useSettings } from "../context/settingsContext"

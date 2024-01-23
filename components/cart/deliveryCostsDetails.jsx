@@ -1,8 +1,8 @@
 import React from 'react'
-import styles from '../styles/checkout.module.css'
+import styles from '../../styles/checkout.module.css'
 
 export default function DeliveryCostsDetails({location}) {
-    console.log(location);
+  
   return (
         location === "Seaford" ?
         <div className={styles.delivery_costs_container}>

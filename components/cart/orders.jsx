@@ -1,7 +1,7 @@
-import styles from '../styles/orders.module.css'
+import styles from '../../styles/orders.module.css'
 import { useRouter } from 'next/router';
-import redirectWithQuery from '../functions/redirect';
-import { useOrder } from '../context/orderContext';
+import redirectWithQuery from '../../functions/redirect';
+import { useOrder } from '../../context/orderContext';
 
 const Orders = () => {
 
