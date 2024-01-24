@@ -1,7 +1,6 @@
 import React from 'react'
 import styles from "../../styles/heroComp.module.css"
 import Image from 'next/image'
-import background from "../../public/img/burger.png"
 import { useSettings } from '../../context/settingsContext'
 import { useMenu } from '../../context/menuContext'
 import justeat from '../../public/img/justeat.svg'
@@ -17,7 +16,7 @@ export default function HeroComp({menuRef}) {
   return (
     <div className={styles.pageContainer}>
       <div className={styles.imgContainer}>
-      <Image className={styles.img} src={background} objectFit='cover'/>
+      <img className={styles.img} src="/img/burger.png" alt='logo' />
       </div>
       {
         settings?.offline  && open ?
