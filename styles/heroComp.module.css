@@ -16,7 +16,7 @@
   left: 10%;
 }
 .img{
-  width: 100vw;
+  width: 100%;
 }
 .offlineHdr{
   color: var(--btn--del);

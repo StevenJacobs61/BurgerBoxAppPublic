@@ -16,7 +16,7 @@ export default function HeroComp({menuRef}) {
   return (
     <div className={styles.pageContainer}>
       <div className={styles.imgContainer}>
-      <img className={styles.img} src="/img/burger.png" alt='logo' />
+      <img className={styles.img} src="/img/burger1.webp" loading="eager" alt='logo' />
       </div>
       {
         settings?.offline  && open ?
