@@ -3,18 +3,14 @@ import styles from '../styles/menu_section.module.css'
 import {FiChevronDown} from 'react-icons/fi';
 import MenuItem from './menu_item';
 import { useMenu } from '../context/menuContext';
+import { useSettings } from '../context/settingsContext';
 
-const MenuSection = ({section, width, setCurrentSection, currentSection}) => {
+const MenuSection = ({section, setCurrentSection, currentSection}) => {
+
     const {products} = useMenu();
+    const {width} = useSettings();
     const [expand, setExpand] = useState(false);
-    const selected = currentSection === section && width > 768
-
-    const handleClick = (e) => {
-    setCurrentSection(section)
-    if(e.target.id == 1){
-      setExpand(!expand);
-      };
-    }
+    const selected = currentSection === section && width > 768;
 
     useEffect(() => {
     if(width>768){
@@ -40,7 +36,12 @@ const MenuSection = ({section, width, setCurrentSection, currentSection}) => {
     return (
       <div className={styles.container} 
           style={contStyle}
-          onClick={(e) => handleClick(e)} 
+          onClick={(e) => {
+            setCurrentSection(section)
+            if(e.target.id == 1){
+              setExpand(!expand);
+            };
+          }} 
           id={1}>
           <div className={styles.title_wrapper} id={1}>
               <h2 className={styles.title} id={1} style={titleStyle}>{section.title}</h2>
@@ -52,14 +53,18 @@ const MenuSection = ({section, width, setCurrentSection, currentSection}) => {
               <FiChevronDown  id={1} className={styles.icon} 
               style={chevStyle}/>}
           </div>
-          {expand ? <div className={styles.items_container} id={1}>
-          {products.map((item) =>  item.section === section.title ? 
-          <MenuItem 
-          key={item._id} 
-          section={section} 
-          item={item}
-            /> : null)}
-          </div>
+
+          {/* Menu items in sm screen */}
+          {expand ? 
+            <div className={styles.items_container} id={1}>
+              {products.map((item) =>  item.section === section.title ? 
+                <MenuItem 
+                key={item._id} 
+                section={section} 
+                item={item}
+                /> 
+              : null)}
+            </div>
           : null}
       </div>
     )

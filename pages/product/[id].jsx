@@ -5,11 +5,13 @@ import axios from "axios"
 import redirectWithQuery from "../../functions/redirect"
 import Image from 'next/image';
 import {useOrder} from "../../context/orderContext"
+import {useSettings} from "../../context/settingsContext"
 
 const Product = ({products, product, settings, sections}) => {
 
   const router = useRouter();
   const {addQuantity} = useOrder();
+  const {width} = useSettings();
   
   const section = product.section.toLowerCase();
   const available = sections.find((section) => section.title === product.section).available && product.available;
@@ -29,16 +31,6 @@ const Product = ({products, product, settings, sections}) => {
   const [extraUpgrades, setExtraUpgrades] =useState ([])
   const [productQuantity, setProductQuantity] = useState(1)
   const [note, setNote] = useState(null);
-
-  // Resize detenction to show element on 1024px+ display
-  const [width, setWidth] = useState();
-  useEffect(() => {
-    setWidth(window.innerWidth)
-  }, [])
-
-  useEffect(() => {
-    window.addEventListener("resize", () =>setWidth(window.innerWidth));
-  }, [])
 
   const changePrice = (number) => {
     const priceSum = (price + number) * productQuantity;
