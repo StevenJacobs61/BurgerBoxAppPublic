@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from "../../styles/heroComp.module.css"
 import Image from 'next/image'
-import Background from "../../public/img/burger.webp"
+import background from "../../public/img/burger.png"
 import { useSettings } from '../../context/settingsContext'
 import { useMenu } from '../../context/menuContext'
 import justeat from '../../public/img/justeat.svg'
@@ -11,13 +11,13 @@ import { useRouter } from 'next/router'
 export default function HeroComp({menuRef}) {
 
   const {settings} = useSettings();
-  const {sections, open} = useMenu();
+  const {open} = useMenu();
   const router = useRouter();
 
   return (
     <div className={styles.pageContainer}>
       <div className={styles.imgContainer}>
-      <Image className={styles.img} src={Background} objectFit='cover'/>
+      <Image className={styles.img} src={background} objectFit='cover'/>
       </div>
       {
         settings?.offline  && open ?

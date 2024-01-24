@@ -16,7 +16,8 @@ const Menu = ({menuRef}) => {
   const {settings} = useSettings();
   const {sections, products} = useMenu();
   const {total} = useOrder;
-  const [currentSection, setCurrentSection] = useState(sections[0])  
+  const [currentSection, setCurrentSection] = useState();
+
   
 const [width, setWidth] = useState();
 const router = useRouter();
@@ -26,6 +27,7 @@ const handleWidth = () => {
 }
 
 useEffect(() => {
+  setCurrentSection(sections[0])
   setWidth(window.innerWidth)
   window.addEventListener("resize", handleWidth)
 }, [])
