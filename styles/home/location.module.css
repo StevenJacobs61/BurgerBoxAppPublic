@@ -1,5 +1,5 @@
 .container, .iconContainer{
-    background-color: #101010;
+    background-color: #343434;
     width: 100%;
     display: flex;
     align-items: center;
@@ -7,12 +7,11 @@
     z-index: 997;
 }
 .hdr{
-    font-size: 2.1rem;
+    font-size: 1.3rem;
     color: #fff;
     text-align: center;
     text-transform: uppercase;
-    letter-spacing: 0.1rem;
-    padding: 0.5rem 0 0.2rem;
+    padding: 0.6rem 0 0;
     width: 100%;
     font-weight: 400;
     border: 0;
@@ -23,7 +22,7 @@
     justify-content: center;
     gap: 10vw;
     width: 100%;
-    margin: 0.5rem 0;
+    margin: 0.5rem 0 0;
 }
 .storeContainer{
     display: flex;
@@ -33,12 +32,12 @@
 }
 .storeTitle{
     color: #fff;
-    font-size: 1.5rem;
-    padding: 0 0 0.5rem;
+    font-size: 1rem;
+    padding: 0 0 0.4rem;
     font-weight: 500;
 }
 .icon{
-    width: 27px;
+    width: 20px;
     height: unset;
     aspect-ratio: 1/1;
     fill: #fff;
@@ -46,34 +45,36 @@
 }
 @media screen and (min-width:480px){
     .hdr{
-        font-size: 2.5rem;
+        font-size: 1.8rem;
     }
     .icon{
-        width: 40px;
-        margin: 0.3rem  0 1rem;
+        width: 30px;
+        margin: 0.3rem 0 1rem;
     }
     .storeTitle{
-        font-size: 1.9rem;
+        font-size: 1.5rem;
     }
 }
 @media screen and (min-width:769px){
     .storeTitle{
-        font-size: 2.5rem;
-        font-weight: 400;
-    }
-    .icon{
-        width: 55px;
-    }
-    .hdr{
-        font-size: 2.8rem;
-        margin: 1rem 0 0.5rem;
-    }
-}
-@media screen and (min-width:1024px){
-    .storeTitle{
         font-size: 2.2rem;
         font-weight: 400;
     }
+    .icon{
+        width: 40px;
+    }
+    .hdr{
+        font-size: 2.2rem;
+        margin: 1rem 0 1rem;
+    }
+    .container{
+    padding: 0  0 1.5rem;
+    }
+}
+@media screen and (min-width:1024px){
+   .container{
+    padding: 0.3rem 0 1.5rem;
+   }
 }
 
 /* Hover */

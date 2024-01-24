@@ -10,7 +10,7 @@ const Hero = ({complete, setComplete}) => {
   const [currentTxt, setCurrentTxt] = useState('');
   const [fontLoaded, setFontLoaded] = useState(false);
 
-  const {settings} = useSettings();
+  const {settings} = useSettings()
 
   
   useEffect(() => {

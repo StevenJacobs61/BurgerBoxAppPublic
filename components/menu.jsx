@@ -8,9 +8,10 @@ import redirectWithQuery from '../functions/redirect'
 import { useSettings } from '../context/settingsContext'
 import { useMenu } from '../context/menuContext'
 import { useOrder } from '../context/orderContext'
+import { GiShoppingCart } from "react-icons/gi";
 
 
-const Menu = () => {
+const Menu = ({menuRef}) => {
   
   const {settings} = useSettings();
   const {sections, products} = useMenu();
@@ -30,32 +31,43 @@ useEffect(() => {
 }, [])
 
   return (
-    <section className={styles.section}>
+    <section className={styles.section} ref={menuRef}>
         <div className={styles.container}>
-          {settings.discount?.active ? 
-          <div className={styles.discountContainer}> 
-            <h2 className={styles.discountMessage}>{settings.discount.message}</h2> 
-          </div>
-          :null}
+        {total ? 
+          <p className={styles.text}>Total: {total ? total?.toLocaleString("en-US", {style: "currency", currency: "GBP"}) : "£0.00"}</p>
+          : null
+        }
+
           <div className={styles.menu_container}>
             <div className={styles.sections_container}>
               {sections.map((section) =>(
-              <MenuSection key={section._id} 
-              width={width} 
-              setCurrentSection={setCurrentSection} 
-              currentSection={currentSection} 
-              section={section}
-              />
+                <MenuSection key={section._id} 
+                width={width} 
+                setCurrentSection={setCurrentSection} 
+                currentSection={currentSection} 
+                section={section}
+                />
               ))}
-                {width > 768 ? <div className={styles.checkout}>
-            {!settings.offline ? <><p className={styles.text}>Total: {total?.toLocaleString("en-US", {style: "currency", currency: "GBP"})}</p>
-            <button className={styles.basketButton} onClick={async () => await redirectWithQuery("/cart", router)}>basket</button>
-            </> 
-            : 
-            <p className={styles.offline}>Offline</p>
-            } 
-          </div> : null}
+              {width > 768 ? <div className={styles.checkout}>
+                  {!settings.offline ? 
+                  <>
+                    <button 
+                      className={styles.basketButton} 
+                      onClick={async () => await redirectWithQuery("/cart", router)}>
+                      <GiShoppingCart width={100} height={100}/>
+                    </button>
+                    <p className={styles.text}>
+                      Total:{" "}
+                      {total?.toLocaleString("en-US", {style: "currency", currency: "GBP"})}
+                    </p>
+                  </> 
+                  : 
+                  <p className={styles.offline}>Offline</p>
+                  } 
+                  </div> 
+              : null}
             </div>
+
             <div className={styles.items_container}>
               <h2 className={styles.menu_hdr}>{currentSection?.title}</h2>
               <div className={styles.items_wrapper}>
@@ -71,8 +83,12 @@ useEffect(() => {
           {width < 769 ? <div className={styles.checkout}>
             {!settings.offline ? 
             <>
-            <p className={styles.text}>Total: {total?.toLocaleString("en-US", {style: "currency", currency: "GBP"})}</p>
-            <button className={styles.basketButton} onClick={async () => await redirectWithQuery("/cart", router)}>basket</button>
+            <button 
+              className={styles.basketButton} 
+              onClick={async () => await redirectWithQuery("/cart", router)}
+            >
+            <GiShoppingCart width={100} height={100}/>
+            </button>
             </> 
             : 
             <p className={styles.offline}>Offline</p>

@@ -23,7 +23,6 @@
     background-color: #101010;
     font-size: 1.3rem;
     z-index: 777;
-    /* border: 1px solid; */
     border-radius: 10px;
     padding: 0.5rem 0.8rem;
     margin: 5.5rem 0 0;
@@ -33,7 +32,6 @@
     line-height: 2.5rem;
     transition: all 0.2s;
     animation: 3s animate 10s infinite alternate;
-    /* width: fit-content; */
     font-display: block;
     box-shadow: 0 0 15px #605e5e;
 }

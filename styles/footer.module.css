@@ -1,6 +1,6 @@
 .section{
     width: 100vw;
-    background-color: #fff;
+    background: var(--color-offBlack);
     z-index: 999;
 }
 .container{
@@ -9,24 +9,21 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 1rem;
+    padding: 0.3rem 1rem;
 }
 .copyright{
-    font-size: 1rem;
+    font-size: 0.5rem;
     text-align: center;
+    color: #fff;
+    font-weight: 400;
 }
 @media screen and (min-width: 769px){
     .copyright{
         font-size: 1.5rem;
     }
 }
-@media screen and (min-width: 1024px){
-    .copyright{
-        font-size: 1.5rem;
-    }
-}
 @media screen and (min-width: 1350px){
-    .copyright{
-        font-size: 1.8rem;
+    .container{
+        padding: 0.5rem 1rem;
     }
 }

@@ -28,12 +28,12 @@ const MenuSection = ({section, width, setCurrentSection, currentSection}) => {
     width: selected ? "37px" : null
     }
     const contStyle = {
-    background: !section.available ? "#101010" : expand || selected ? "#101010" : "#fff", 
+    background: !section.available ? "#101010" : expand || selected ? "#101010" : "", 
     width: expand && width >= 480 ? "90vw" : null,
     }
     const titleStyle= {
     color: !section.available ? "#fff" : expand || selected ? "#fff" : "#101010",
-    textShadow: expand || selected ? "0 0 8px" : "",
+    textShadow: expand || selected ? "0 0 8px var(--color-secondary)" : "",
     fontFamily: 'Lust-Script'
     }
 

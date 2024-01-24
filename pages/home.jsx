@@ -1,7 +1,6 @@
 import Head from 'next/head'
 import Menu from '../components/menu'
 import styles from '../styles/Home.module.css'
-import LandingPage from '../components/landing_page/landing_page'
 import axios from 'axios'
 import Alert from '../components/alert'
 import dbConnect from '../utils/mongodb'
@@ -9,19 +8,22 @@ import About from '../components/about'
 import { useAlert } from '../context/alertContext'
 import { useSettings } from '../context/settingsContext'
 import { useMenu } from '../context/menuContext'
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
+import HeroComp from '../components/landing_page/heroComp'
 
 
 export default function Home({ productsList, sections, settings}) {
 
   const {setSettings} = useSettings();
-  const {setSections, setProducts} = useMenu();
+  const {setSections, setProducts, setOpen} = useMenu();
   const { alert } = useAlert();
   useEffect(() => {
+    setOpen(!sections.every((sect) => sect === false))
     setSettings(settings);
     setProducts(productsList);
     setSections(sections.filter((section) => section.title !== "Extra Toppings" && section.title !== "Upgrades"));
   }, [setSettings, settings, productsList, setProducts, sections, setSections]);
+  const menuRef = useRef();
   
   return (
     <div className={styles.container}>
@@ -31,10 +33,10 @@ export default function Home({ productsList, sections, settings}) {
         <link rel="icon" href="/img/order-box.webp" />
       </Head>
       {alert ? <Alert/> : null}
-      <LandingPage />
-      <Menu 
-      />
-      {/* <About/> */}
+
+      <HeroComp menuRef={menuRef} />
+      <Menu menuRef={menuRef}/>
+      <About/>
   </div> 
   )
 }

@@ -1,0 +1,100 @@
+/* Location */
+.locationsContainer{
+    background-color: rgb(16, 16, 16, 0.7);
+    border-radius: 5px;
+    width: fit-content;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items:flex-start;
+    margin: -0.5rem 0 0 4rem;
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+    overflow: hidden;
+}
+.locationsContainer:hover{
+    height: fit-content;
+}
+.location{
+    display: flex;
+    align-items: baseline;
+}
+.location p:nth-child(1){
+    color: #fff;
+    font-size: 1.4rem;
+}
+.location p:nth-child(2){
+    color: var(--color-aqua);
+    margin: 0 0 0 0.5rem;
+    font-size: 1.6rem;
+}
+.changeLocationText{
+    font-size: 1.1rem;
+    color: rgb(168, 168, 250);
+    cursor: pointer;
+}
+.changeLocationText:hover{
+    color: var(--btn--del);
+}
+.locationListItem:hover{
+    color: var(--text--light-green);
+}
+@media screen and (max-width: 1200px){
+    .location p:nth-child(1){
+        font-size: 1.3rem;
+    }
+    .location p:nth-child(2){
+        font-size: 2rem;
+    }
+    .changeLocationText{
+        font-size: 1.3rem;
+    }
+}
+@media screen and (max-width: 1024px){
+    .location p:nth-child(1){
+        font-size: 1.2rem;
+    }
+    .location p:nth-child(2){
+        font-size: 1.7rem;
+    }
+    .changeLocationText{
+        font-size: 1.2rem;
+    }
+}
+@media screen and (max-width: 768px){
+    .locationsContainer{
+        margin: -0.5rem 0 0 1rem;
+        padding: 0.8rem 1rem;
+    }
+    .location p:nth-child(1){
+        font-size: 1.4rem;
+    }
+    .location p:nth-child(2){
+        font-size: 1.8rem;
+    }
+    .changeLocationText{
+        font-size: 1.2rem;
+    }
+}
+@media screen and (max-width: 480px){
+    .locationsContainer{
+        margin: -0.8rem 0 0 0.5rem;
+        padding: 0.8rem 1rem 0.4rem;
+        transition: all 0.2s;
+    }
+    .changeLocationText{
+        margin: 0.2rem 0;
+    }
+    .location p:nth-child(1){
+        font-size: 0.9rem;
+    }
+    .location p:nth-child(2){
+        font-size: 1.2rem;
+    }
+    .changeLocationText{
+        font-size: 0.8rem;
+    }
+    .locationListItem{
+    font-size: 1.25rem;
+    }
+}

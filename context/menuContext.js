@@ -5,10 +5,19 @@ const MenuContext = createContext(null);
 export default function MenuContextProvider({children}) {
 
     const [sections, setSections] = useState([]);
-    const [products, setProducts] = useState([])
+    const [products, setProducts] = useState([]);
+    const [open, setOpen] = useState(true);
 
   return (
-    <MenuContext.Provider value={{sections, setSections, products, setProducts}}>
+    <MenuContext.Provider 
+      value={{
+        sections, 
+        setSections, 
+        products, 
+        setProducts, 
+        open, 
+        setOpen
+        }}>
         {children}
     </MenuContext.Provider>
     

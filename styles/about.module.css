@@ -1,164 +1,104 @@
-.container, .hdrContainer, .contentContainer{
+.container, .contentContainer{
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
+    background: var(--color-gray);
 }
-.hdrContainer{
-    background-color: #5c5c5c;
-    padding: 1rem 0 0.5rem;
+.container{
+    padding: 1rem 1rem 2rem;
 }
 .hdr{
-    font-size: 2.3rem;
+    font-size: 2.6rem;
     font-weight: 400;
-    color: #fff;
+    margin: 0.2rem 0.5rem 0.5rem;
+    color: #101010;
     font-family: 'Lust-Script';
 }
-.contentContainer{
-    padding: 0.5rem 1rem 1rem;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-.contentContainer::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url("../public/img/burgerbox-logo_dark.svg");
-    background-size: 30px 20px;
-    opacity: 0.05;
-    z-index: 1;
-    background-repeat: repeat;
-    background-position: center top;
-  }
-  .topContainer, .descContainer, .subHdrContainer{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  .descContainer{
-    margin: 1rem 0;
-  }
-  .svgContainer{
-    width: 35px;
-    height: unset;
-    aspect-ratio: 1/1;
-  }
-.contentHdr{
-    font-size: 1.8rem;
+.text{
+    font-size: 1.1rem;
+    margin: 0 0 1rem;
     text-align: center;
-    font-weight: 400;
-    padding: 1rem 0 0.5rem;
-    text-transform: capitalize;
-    color: #393939;
-    letter-spacing: -0.1rem;
-}
-.imgsContainer{
-    display: flex;
-    align-items: center;
-    margin: 2rem 0 1rem;
-}
-.imgContainer{
-    position: relative;
-    width: 65px;
-    height: 65px;
-}
-.img{
-    position: absolute;
 }
 .infoText{
     text-align: center;
-    font-size: 1.3rem;
-    padding: 1rem 3rem;
+    font-size: 1rem;
+    line-height: 1.4rem;
+    text-underline-offset: 0.2rem;
 }
-@media screen and (min-width: 480px){
-    .hdr{
-        font-size: 3.5rem;
-    }
-    .descContainer{
-        margin: 1rem 0 2rem;
-    }
-    .contentHdr{
-        font-size: 2.3rem;
-        margin: 1rem 0 0.5rem;
-    }
-    .svgContainer{
-        width: 45px;
-    }
-    .infoText{
-        padding: 1rem 5rem;
-        font-size: 1.8rem;
-    }
-    .imgContainer{
-        width: 100px;
-        height: 100px;
-    }
-    .imgsContainer{
-        margin: 1rem 2rem 2rem;
-    }
-    .topContainer{
-        display: flex;
-        align-items: center;
-        margin: 0 10vw;
-    }
+.noticeHdr{
+    margin: 1.2rem 0 0.3rem;
+    font-size: 1.2rem;
+    text-align: center;
 }
-@media screen and (min-width: 769px){
-    .contentHdr{
-        font-size: 2.5rem;
-    }
-    .svgContainer{
-        width: 45px;
-    }
-    .infoText{
-        font-size: 2rem;
-        padding-bottom: 2.5rem;
-    }
-}
-@media screen and (min-width: 1024px){
-    .infoText{
-        padding: 1rem 3rem 3rem;
-        width: 70%;
-    }
-    .contentHdr{
-        font-size: 2.7rem;
-        margin: 1.5rem 0 1rem;
-    }
-    .svgContainer{
-        width: 50px;
-    }
-    .imgContainer{
-        width: 120px;
-        height: 120px;
-    }
-}
-@media screen and (min-width: 1350px){
-    .hdr{
-        font-size: 3.5rem;
-    }
-    .infoText{
-        padding: 2rem 3rem 2.5rem;
-        width: 70%;
-        font-size: 1.8rem;
-    }
-    .contentHdr{
-        font-size: 2.5rem;
-        margin: 1.5rem 0 0.5rem;
-    }
-    .svgContainer{
-        width: 55px;
-    }
-    .imgContainer{
-        width: 110px;
-        height: 110px;
-    }
+@media screen and (min-width:480px){
     .contentContainer{
-        margin: 0;
+        width: 90%;
     }
-    .imgsContainer{
-        margin: 1rem 0 2rem;
+    .text{
+        font-size: 1.4rem;
+    }
+    .infoText{
+        font-size: 1.2rem;
+        line-height: 1.8rem;
+    }
+    .noticeHdr{
+        font-size: 1.4rem;
+    }
+    .hdr{
+        font-size: 2.8rem;
+    }
+}
+@media screen and (min-width:769px){
+    .contentContainer{
+        width: 80%;
+        padding-bottom: 2rem;
+    }
+    .text{
+        font-size: 2rem;
+        margin: 0.5rem 0 1.5rem;
+    }
+    .infoText{
+        font-size: 1.6rem;
+        line-height: 2.2rem;
+        margin: 0 0 0.5rem;
+    }
+    .noticeHdr{
+        font-size: 1.9rem;
+        margin: 2rem 0 1rem;
+    }
+    .hdr{
+        font-size: 3.2rem;
+        margin: 0.5rem 0 1rem;
+    }
+}
+@media screen and (min-width:1024px){
+    .contentContainer{
+        width: 75%;
+        padding: 0 0 2rem;
+    }
+    .text{
+        font-size: 2.2rem;
+        margin: 0.5rem 0 1.5rem;
+    }
+    .infoText{
+        font-size: 1.8rem;
+        line-height: 2.5rem;
+        margin: 0 0 0.5rem;
+    }
+    .noticeHdr{
+        font-size: 2.2rem;
+        margin: 2rem 0 1rem;
+    }
+    .hdr{
+        font-size: 3.4rem;
+        margin: 1rem 0 1rem;
+    }
+}
+@media screen and (min-width:1200px){
+    .infoText{
+        font-size: 1.8rem;
+        line-height: 2.8rem;
+        margin: 0 0 0.5rem;
     }
 }

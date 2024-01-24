@@ -1,9 +1,11 @@
 import { useRouter } from "next/router"
-import styles from '../../styles/navbar.module.css'
+import styles from '../../styles/locationComp.module.css'
 import {useAlert} from "../../context/alertContext"
+import { useState } from "react";
 
 export default function LocationComp() {
     const router = useRouter();
+    const [isHovered, setIsHovered] = useState(false);
     const {setAlert, setAlertDetails} = useAlert();
     const handleLocationChange = () => {
         setAlertDetails({
@@ -19,10 +21,26 @@ export default function LocationComp() {
           localStorage.setItem("Orders", "[]");
           router.push("/")
       }
+
+      function handleHover(){
+        setIsHovered(!isHovered)
+      }
   return (
-    <div className={styles.locationsContainer}>
+    <div className={styles.locationsContainer}
+      onMouseEnter={handleHover}
+      onMouseLeave={handleHover}>
         <div className={styles.location}><p>Branch:</p><p>{router.query.location}</p></div>
-        <div className={styles.changeLocation}><p className={styles.changeLocationText} onClick={()=>handleLocationChange()}>Wrong Store? (Change Location)</p></div>
+        {
+          isHovered ? 
+        <p
+         className={styles.changeLocationText}
+         onClick={() => handleLocationChange()}
+         >
+          Wrong Store? <br/> (Change Location)
+        </p>
+
+          : null
+        }
         </div>
   )
 }

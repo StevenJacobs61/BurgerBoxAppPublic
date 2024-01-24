@@ -1,0 +1,109 @@
+.pageContainer{
+    background: var(--color-offBlack);    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    padding: 30px 0 0;
+}
+.offlineContainer{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  bottom: 15%;
+  left: 10%;
+}
+.offlineHdr{
+  color: var(--btn--del);
+  font-size: 0.6rem;
+  text-align: center;
+  margin-bottom: -0.2rem;
+}
+.buttonContainer{
+  display: flex;
+  align-items: center;
+  width: 100px;
+  padding: 0 0.5rem;
+  gap: 1rem;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: all 0.1s;
+}
+.button{
+  cursor: pointer;
+  color: #fff;
+  position: absolute;
+  bottom: 21%;
+  left: 15%;
+  outline: none;
+  background: var(--color-secondary);
+  border: none;
+  padding: 0.4rem 0.6rem;
+  border-radius: 50px;
+  font-size: 1rem;
+  letter-spacing: 0.1rem;
+}
+.icon:active, .button:active{
+  transform: scale(0.95);
+}
+.message{
+  color: #fff;
+  text-align: center;
+  padding: 0.5rem;
+  width: 80%;
+}
+@media screen and (min-width: 480px){
+  .button{
+    font-size: 1.5rem;
+    font-weight: 300;
+    bottom: 18%;
+  }
+}
+@media screen and (min-width: 769px){
+  .button{
+    font-size: 1.8rem;
+    font-weight: 300;
+    bottom: 17%;
+    left: 17%;
+  }
+  .message{
+    font-size: 1.7rem;
+  }
+  .imgContainer{
+    margin-top: -3rem;
+  }
+}
+@media screen and (min-width: 1024px){
+  .pageContainer{
+    padding-top: 0;
+  }
+  .imgContainer{
+    
+  }
+}
+@media screen and (min-width: 1200px){
+  .button{
+    font-size: 2.4rem;
+    padding: 0.8rem;
+    left: 20%;
+  }
+  .message{
+    font-size: 1.9rem;
+  }
+}
+@media screen and (min-width: 1350px){
+  .button{
+    font-size: 2.5rem;
+    bottom: 23%;
+    left: 20%;
+    padding: 0.8rem 1rem;
+  }
+  .message{
+    font-size: 2.2rem;
+  }
+  .imgContainer{
+    margin-top: -10rem;
+  }
+}

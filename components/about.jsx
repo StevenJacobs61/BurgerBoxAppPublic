@@ -1,72 +1,44 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from '../styles/about.module.css'
-import Image from 'next/image'
-import Unique from '../public/img/unique.svg'
-import Quality from '../public/img/quality.svg'
-import Customer from '../public/img/customer.svg'
+import { useSettings } from '../context/settingsContext'
+import { isMobile } from 'react-device-detect'
+import { handlePhoneNumberAction } from '../functions/phoneNumber'
 
 const About = () => {
+
+  const {settings} = useSettings();
+  const phoneNumber = '+44132389921';
+
   return (
     <div className={styles.container}>
-        <div className={styles.hdrContainer}>
           <h1 className={styles.hdr}>About BurgerBox</h1>
-        </div>
         <div className={styles.contentContainer}>
-          <div className={styles.topContainer}>
-            <div className={styles.descContainer}>
-              <div className={styles.subHdrContainer}>
-                <h2 className={styles.contentHdr}>Unique Tastes</h2>  
-                <div className={styles.svgContainer}>
-                <Image src={Unique} objectFit='fill'/>
-                </div>
-              </div>
-              <div className={styles.subHdrContainer}>
-                <h2 className={styles.contentHdr}>Quality Ingredients</h2>  
-                <div className={styles.svgContainer}>
-                <Image src={Quality} objectFit='fill'/>
-                </div>
-              </div>
-              <div className={styles.subHdrContainer}>
-                <h2 className={styles.contentHdr}>Customer-driven Service</h2>  
-                <div className={styles.svgContainer}>
-                <Image src={Customer} objectFit='fill'/>
-                </div>
-              </div>
-            </div>
-          <div className={styles.imgsContainer}>
-          <div className={styles.imgContainer}>
-            <Image 
-              className={styles.img} 
-              layout='fill' 
-              src="/img/burgerimg.jpg"
-              />
-          </div>
-          <div className={styles.imgContainer}>
-            <Image 
-              className={styles.img} 
-              layout='fill' 
-              src="/img/shake1.jpg"/>
-          </div>
-          <div className={styles.imgContainer}>
-            <Image 
-              className={styles.img} 
-              layout='fill' 
-              src="/img/fries.jpg"
-              style={{transform: 'rotate(-90deg)'}}
-              />
-          </div>
-          <div className={styles.imgContainer}>
-            <Image 
-              className={styles.img} 
-              layout='fill' 
-              src="/img/shake2.jpg"/>
-          </div>
-          </div>
-          </div>
+        <p className={styles.text}>Open 3.30pm - 10pm. Closed Tuesdays </p>
           <p className={styles.infoText}>
-            BurgerBox is a brand that prides itself on offering the best quality beef smash patty burgers and unique menu options all-around. We provide quality in both our ingredients used to formulate our menu items as-well as the customer service used to deliver them. 
-            We have a wide range of burgers, sides, drinks and deserts available to satisfy all our customers.
+           <strong>BurgerBox</strong>  is a brand that <u>prides</u> itself on offering the <em>best quality beef smash patty burgers</em>  and unique menu options all-round. We provide <strong>quality ingredients</strong> to formulate our menu items as well as top-tier <em>customer service</em>. 
+            We have a wide range of burgers, sides, drinks and deserts available to <u>satisfy</u> all our customers.
           </p>
+          {settings?.noticeOn ?
+          <>
+            <h2 className={styles.noticeHdr}>Notice:</h2>
+            <p className={styles.infoText}>{settings?.notice}</p>
+          </>
+            : null
+          }
+          <div>
+            <h2 className={styles.noticeHdr}>
+             Food Allergy?
+            </h2>
+            <p className={styles.infoText}>
+              If you require information about a food allergy or intolerance, call BurgerBox at{" "}  
+              <a style={{cursor:"pointer"}} 
+                onClick={() => handlePhoneNumberAction("+441323899221")}
+              >
+                <strong>{phoneNumber}</strong>
+              </a>
+              . Please ensure you get the advice you need before ordering.
+            </p>
+          </div>
         </div>
     </div>
   )

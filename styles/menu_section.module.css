@@ -1,15 +1,14 @@
 .container{
     width: 90%;
     height: 100%;
-    border: 1px solid #101010;
-    border-radius: 7px;
+    box-shadow: 2px 3px 7px 0 rgba(0, 0, 0, 0.5);
+    border-radius: 8px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 0 1rem;
-    margin: 0.5rem 2rem;
-    cursor: pointer;
-    z-index: 2;
+    padding: 0.2rem 1rem;
+    margin: 0.9rem 1.5rem;
+    background: var(--color-gray);
     
 }
 .title_wrapper{
@@ -20,7 +19,7 @@
     align-items: center;
 }
 .title{
-    font-size:2.2rem;
+    font-size: 1.8rem;
     font-family: 'Lust-Script';
     margin: 0.3rem 0.5rem 0;
     font-weight: 500;
@@ -33,7 +32,7 @@
     aspect-ratio: 1/1;
     height: unset;
     width: 40px;
-    margin: 0.5rem 1rem;
+    margin: 0 1rem 0.5rem;
     color: #101010;
 }
 .items_container{ 
@@ -42,18 +41,23 @@
     flex-direction: column;
     align-items: center;
     background-color: #101010;
+    gap: 2rem;
 }
 .item{
     margin: 1rem;
 }
 .text{
     color: #8d0000;
-    font-size: 2rem;
+    font-size: 1rem;
+    margin-top: 0.4rem;
+    /* margin-top: 1rem; */
 }
 .un_container{
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+
 }
 @media screen and (min-width:380px){
     .container{
@@ -71,7 +75,7 @@
         width: 420px;
     }
     .title{
-        font-size: 2.6rem;
+        font-size: 2.5rem;
         font-weight: 300;
     }
 } 
@@ -89,16 +93,17 @@
 @media screen and (min-width:769px){
     .container{
         width: 100%;
-        margin: 0.2rem 0;
         padding: 0.5rem;
-        border: 1px solid #101010;
     }
     .title{
-        font-size: 2rem;
+        font-size: 1.8rem;
     }
     .icon{
         width: 30px;
         margin: 0;
+    }
+    .text{
+        font-size: 0.6rem;
     }
 }
 @media screen and (min-width:1024px){
@@ -107,7 +112,7 @@
         margin: 0.3rem 0;
     }
     .title{
-        font-size: 2rem;
+        font-size: 1.8rem;
         font-weight: 300;
         margin-right: 0;
     }
@@ -127,6 +132,6 @@
 /* Hover */
 
 .container:hover{
-    box-shadow: 0 0 1px #787878;
+    box-shadow: inset 0 0 5px 0 #787878;
     transform: scale(1.005);
 }

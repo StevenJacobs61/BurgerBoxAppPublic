@@ -13,12 +13,12 @@ import {useSettings} from "../../context/settingsContext"
 import { links } from '../../data/links';
 import LocationComp from './locationComp';
 import { useOrder } from '../../context/orderContext';
+import { handlePhoneNumberAction } from '../../functions/phoneNumber';
 
 const Navbar = () => {
-
   const {settings} = useSettings();
   const {addQuantity, quantity, setQuantity} = useOrder();
-
+  
   const [click, setClick] = useState(true);
   const[mobileScreen, setMobileScreen] = useState(true);
   const router = useRouter();
@@ -103,15 +103,17 @@ const Navbar = () => {
             </div>
 
             {click && mobileScreen ? null :<div className={styles.pagelinks} style={{display: click && mobileScreen ?"none":"flex"}}>
-              {links.map((link) => 
-              <div className={styles.pagelink} key={link} onClick={async () => {return setClick(!click), await redirectWithQuery(link.route, router)}}>{link.text}</div>
+              {links.map((link, i) => 
+              <div className={styles.pagelink} key={i} onClick={async () => {return setClick(!click), await redirectWithQuery(link.route, router)}}>{link.text}</div>
               )}
           </div>}
 
           {click && mobileScreen ? null :<div className={styles.contact}>
             <div className={styles.texts}>
               <div className={styles.text}>Contact Us</div>
-              <div className={styles.text}>01323 899221</div>
+              <div className={styles.text}
+              onClick={()=> handlePhoneNumberAction("+441323899221")}
+              >01323 899221</div>
             </div>
           </div>}
         </div>
@@ -119,7 +121,8 @@ const Navbar = () => {
           <LocationComp/>
         :null}
         </div>
-    {showBasket ? <div className={styles.basket} style={{top: showNav && mobileScreen ? "10rem" : showNav && !mobileScreen ? "11rem" : !showNav ? "2rem" : ""}}>
+        
+    {showBasket && click ? <div className={styles.basket} style={{top: showNav && mobileScreen ? "7rem" : showNav && !mobileScreen ? "11rem" : !showNav ? "2rem" : ""}}>
           <p className={styles.quantity}>{quantity}</p>
           <BsBasket className={styles.basket_icon} onClick={async () => await redirectWithQuery("/cart", router)}/>
               </div>:null}

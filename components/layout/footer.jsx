@@ -9,7 +9,7 @@ const Footer = () => {
     <Location />
     <section className={styles.section}>
       <div className={styles.container}>
-        <h2 className={styles.copyright}> © Copyright, all rights reserved.</h2>
+        <h2 className={styles.copyright}> © 2023 AppStarter. All rights reserved.</h2>
       </div>
     </section>
   </>

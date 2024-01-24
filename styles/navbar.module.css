@@ -9,105 +9,13 @@
 .container{
     padding: 0.5rem 1rem;
     height: 100%;
-    background-color: #101010;
+    background-color: var(--color-offBlack);
     display: flex;
     align-items: center;
     justify-content: space-between;
     width: 100%;
 }
-/* Location */
-.locationsContainer{
-    background-color: rgb(16, 16, 16, 0.7);
-    border-radius: 5px;
-    width: fit-content;
-    padding: 1rem;
-    display: flex;
-    flex-direction: column;
-    align-items:flex-start;
-    margin: -0.5rem 0 0 4rem;
-}
-.location{
-    display: flex;
-    align-items: baseline;
-}
-.location p:nth-child(1){
-    color: #fff;
-    font-size: 1.4rem;
-}
-.location p:nth-child(2){
-    color: var(--color-aqua);
-    margin: 0 0 0 0.5rem;
-    font-size: 1.6rem;
-}
-.changeLocation{
-    margin: 0.5rem 0 0 0;
-}
-.changeLocationText{
-    font-size: 1.1rem;
-    color: rgb(168, 168, 250);
-    cursor: pointer;
-}
-.changeLocationText:hover{
-    color: var(--btn--del);
-}
-.locationListItem:hover{
-    color: var(--text--light-green);
-}
-@media screen and (max-width: 1200px){
-    .location p:nth-child(1){
-        font-size: 1.3rem;
-    }
-    .location p:nth-child(2){
-        font-size: 2rem;
-    }
-    .changeLocationText{
-        font-size: 1.3rem;
-    }
-}
-@media screen and (max-width: 1024px){
-    .location p:nth-child(1){
-        font-size: 1.2rem;
-    }
-    .location p:nth-child(2){
-        font-size: 1.7rem;
-    }
-    .changeLocationText{
-        font-size: 1.2rem;
-    }
-}
-@media screen and (max-width: 768px){
-    .locationsContainer{
-        margin: -0.5rem 0 0 1rem;
-        padding: 0.8rem 1rem;
-    }
-    .location p:nth-child(1){
-        font-size: 1.4rem;
-    }
-    .location p:nth-child(2){
-        font-size: 1.8rem;
-    }
-    .changeLocationText{
-        font-size: 1.2rem;
-    }
-}
-@media screen and (max-width: 480px){
-    .locationsContainer{
-        margin: -0.5rem 0 0 0.5rem;
-        padding: 0.8rem 1rem 0.4rem;
-    }
-    .location p:nth-child(1){
-        font-size: 1.2rem;
-    }
-    .location p:nth-child(2){
-        font-size: 1.6rem;
-    }
-    .changeLocationText{
-        font-size: 1rem;
-    }
-    .locationListItem{
-    font-size: 1.25rem;
-    }
-}
+
 /* Text Links */
 .pagelinks{
     display: flex;
@@ -334,18 +242,15 @@
 }
 @media screen and (max-width: 480px){
     .insta, .facebook, .snap{
-        width: 25px;
+        width: 22px;
         margin: 0 0.3rem 0;
         }
     .facebook{
         margin-right: -0.1rem;
     }
     .logo{
-       width: 110px;
-       height: unset;
-       aspect-ratio: 2.1/1;
-        left: 1%;
-        top: 0.6rem;
+       width: 95px;
+       margin-top: 0.25rem;
     }
     .chevron{
         width: 35px;
@@ -365,11 +270,18 @@
         font-size: 1.5rem;
     }
     .socials{
-        margin-right: 2rem;
+        margin-right: 0rem;
     }
     .social{
         margin-right: 0.8rem;
     }
+    /* .logo{
+        width: 80px;
+        /* height: unset;
+        aspect-ratio: 2.1/1;
+         left: 1%;
+         top: 0.6rem; */
+     
 }
 @media screen and (max-width: 380px){
     .insta, .snap{

@@ -11,7 +11,7 @@ const Location = () => {
 
   return (
     <div className={styles.container}>
-        <h1 className={styles.hdr}>Find our stores</h1>
+        <h1 className={styles.hdr}>our stores</h1>
             <div className={styles.storesContainer}>
                 {locations.map((l, i)=>
                 <div key={i} className={styles.storeContainer}>

@@ -36,7 +36,7 @@ const Info = ({complete}) => {
         </div>
       </div>
     : null}
-      <p className={styles.opening_times}>Open 6 days a week<br/> 3.30pm - 10pm <br></br>Closed Tuesdays </p>
+      <p className={styles.opening_times}>Open 6 days a week<br/> 3.30 - 10pm <br></br>Closed Tuesdays </p>
         {  settings.noticeOn ? 
         <div className={styles.notice_container}>
     <h3 className={styles.notice_hdr} >Notice!</h3>
