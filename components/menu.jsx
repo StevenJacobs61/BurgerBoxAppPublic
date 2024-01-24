@@ -27,7 +27,9 @@ const handleWidth = () => {
 }
 
 useEffect(() => {
-  setCurrentSection(sections[0])
+  if(!currentSection){
+    setCurrentSection(sections[0])
+  }
   setWidth(window.innerWidth)
   window.addEventListener("resize", handleWidth)
 }, [])

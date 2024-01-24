@@ -21,7 +21,6 @@
 .offlineHdr{
   color: var(--btn--del);
   font-size: 0.6rem;
-  text-align: center;
   margin-bottom: -0.2rem;
 }
 .buttonContainer{
@@ -43,7 +42,7 @@
   outline: none;
   background: var(--color-secondary);
   border: none;
-  padding: 0.4rem 0.6rem;
+  padding: 0.8rem 1rem;
   border-radius: 50px;
   font-size: 1rem;
   letter-spacing: 0.1rem;

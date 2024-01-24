@@ -38,6 +38,7 @@ h1, h2, h3, h4{
   --color-gray: rgb(247, 247, 247);
   --color-offBlack: #050001;
   --color-secondary: #eba40b;
+  --color-bg-gray: #343434;
   --bg-color--blue: rgb(231, 249, 255);
   --text--dark-red: rgb(104, 0, 0);
   --text--light-green: rgb(5, 156, 0);

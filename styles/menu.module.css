@@ -138,10 +138,10 @@
     font-weight: 400;
     padding: 0 0 0.5rem;
     text-transform: capitalize;
-    background: #fff;
+    background: var(--color-gray);
     z-index: 500;
     padding: 1rem;
-    border: 0.5px solid;
+    border: 0.5px solid var(--color-bg-gray);
     border-radius: 3px;
 }
 .menu_hdr{
