@@ -1,7 +1,6 @@
 import { isMobile } from "react-device-detect";
 
 export const handlePhoneNumberAction = (phoneNumber) => {
-    console.log(isMobile);
     if (isMobile) {
       window.location.href = `tel:${phoneNumber}`;
     } else {

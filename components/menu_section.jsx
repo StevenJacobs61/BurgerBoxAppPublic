@@ -26,10 +26,12 @@ const MenuSection = ({section, setCurrentSection, currentSection}) => {
     const contStyle = {
     background: !section.available ? "#101010" : expand || selected ? "#101010" : "", 
     width: expand && width >= 480 ? "90vw" : null,
+    transform: !expand && !section.available ? "scale(0.97)" : "",
+    opacity: !expand && !section.available ? "0.9" : "",
     }
     const titleStyle= {
     color: !section.available ? "#fff" : expand || selected ? "#fff" : "#101010",
-    textShadow: expand || selected ? "0 0 8px var(--color-secondary)" : "",
+    textShadow: section.available && (expand || selected) ? "0 0 8px var(--color-secondary)" : "",
     fontFamily: 'Lust-Script'
     }
 

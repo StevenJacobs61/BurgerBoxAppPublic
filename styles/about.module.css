@@ -1,4 +1,4 @@
-.container, .contentContainer{
+.container, .leftContainer, .rightContainer, .contentContainer, .leftSection{
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -32,7 +32,7 @@
     text-align: center;
 }
 @media screen and (min-width:480px){
-    .contentContainer{
+    .leftContainer{
         width: 90%;
     }
     .text{
@@ -50,9 +50,8 @@
     }
 }
 @media screen and (min-width:769px){
-    .contentContainer{
+    .leftContainer{
         width: 80%;
-        padding-bottom: 2rem;
     }
     .text{
         font-size: 2rem;
@@ -73,26 +72,39 @@
     }
 }
 @media screen and (min-width:1024px){
-    .contentContainer{
-        width: 75%;
-        padding: 0 0 2rem;
+    .leftContainer{
+        width: 62%;
+        gap: 3rem;
+    }
+    .rightContainer{
+        width: 38%;
+        justify-content: flex-start;
+        height: 100%;
+        margin-top: -0.8rem;
     }
     .text{
         font-size: 2.2rem;
         margin: 0.5rem 0 1.5rem;
     }
     .infoText{
-        font-size: 1.8rem;
-        line-height: 2.5rem;
+        font-size: 1.5rem;
+        line-height: 2.2rem;
         margin: 0 0 0.5rem;
     }
     .noticeHdr{
-        font-size: 2.2rem;
-        margin: 2rem 0 1rem;
+        font-size: 2rem;
+        margin: 0 0 1rem;
     }
     .hdr{
         font-size: 3.4rem;
         margin: 1rem 0 1rem;
+    }
+    .contentContainer{
+        flex-direction: row;
+        align-items: flex-start;
+        width: 92%;
+        gap: 3rem;
+        margin: 2rem 0 1rem;
     }
 }
 @media screen and (min-width:1200px){
@@ -101,4 +113,28 @@
         line-height: 2.8rem;
         margin: 0 0 0.5rem;
     }
+}
+@media screen and (min-width:1350px){
+   .contentContainer{
+    width: 85%;
+    gap: 5rem;
+    align-items: center;
+    justify-content: space-evenly;
+    margin: 3rem 0;
+   }
+   .leftContainer{
+    width: 50%;
+   }
+   .infoText{
+    font-size: 1.5rem;
+   }
+   .rightContainer{
+    margin-top: 0;
+   }
+   .text{
+    font-size: 1.8rem;
+   }
+   .mapContainer{
+    
+   }
 }
