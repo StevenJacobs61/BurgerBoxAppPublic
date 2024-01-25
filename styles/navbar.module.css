@@ -103,7 +103,7 @@
 }
 
 /* / */
-@media screen and (max-width: 1350px){
+/* @media screen and (max-width: 1350px){
     .logo{
         margin: 0 1rem;
         width: 150px;
@@ -117,39 +117,11 @@
     .text{
 
     }
-}
-/* @media screen and (max-width: 1200px){
-    .pagelinks{
-        justify-content: space-evenly;
-    }
-    .pagelink{
-        margin: 3.5rem 2rem 0 1rem;
-        font-size: 2rem;
-    }
-    .texts{
-        display: flex;
-        flex-direction: column;
-        justify-content: baseline;
-        align-items: flex-start;
-        margin: 0 0 0 1rem;
-    }
-    .text{
-        font-size: 1.5rem;
-    }
-    .container{
-        padding: 0.5rem 1rem;
-    }
-    .contact{
-        font-size: 1rem;
-    }
 } */
 @media screen and (max-width: 1200px){
     .pagelink {
         font-size: 1.5rem;
         margin-right: 0.5rem;
-    }
-    .text{
-        font-size: 2.1rem;
     }
     .socials{
         margin: 0 1.5rem -2rem;
@@ -219,6 +191,7 @@
     }
     .contact{
         flex-direction: column;
+        justify-content: flex-end;
         margin: -1rem 2.4rem 0 0;
     }
     .chevron{

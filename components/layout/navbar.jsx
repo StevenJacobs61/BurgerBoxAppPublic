@@ -110,10 +110,9 @@ const Navbar = () => {
 
           {click && mobileScreen ? null :<div className={styles.contact}>
             <div className={styles.texts}>
-              <div className={styles.text}>Contact Us</div>
               <div className={styles.text}
               onClick={()=> handlePhoneNumberAction("+441323899221")}
-              >01323 899221</div>
+              >+441323 899221</div>
             </div>
           </div>}
         </div>
