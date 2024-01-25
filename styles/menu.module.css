@@ -205,7 +205,8 @@
         font-size: 2.1rem;
     }
     .basketButton{
-        font-size: 2.5rem;
+        font-size: 4rem;
+        margin: auto auto 0.8rem;
     }
 }
 @media screen and (min-width:769px){

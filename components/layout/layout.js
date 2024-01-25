@@ -4,12 +4,12 @@ import Navbar from './navbar'
 import { useRouter } from 'next/router'
 import AdminNav from '../admin/admin_nav'
 import Alert from "../alert.jsx"
-import { useAlert } from '../../context/alertContext.js'
+import { useSettings } from '../../context/settingsContext.js'
 
 const Layout = ({ children }) => {
     const router =useRouter()
     const [admin, setAdmin] = useState()
-    const {alert} = useAlert();
+    const {alert} = useSettings();
 
     useEffect(() => { 
       if(!router.query.location){

@@ -37,15 +37,21 @@
   cursor: pointer;
   color: #fff;
   position: absolute;
-  bottom: 21%;
-  left: 15%;
+  bottom: 23.5%;
+  left: 16%;
   outline: none;
   background: var(--color-secondary);
   border: none;
-  padding: 0.8rem 1rem;
+  padding: 0.4rem 0.5rem;
   border-radius: 50px;
-  font-size: 1rem;
-  letter-spacing: 0.1rem;
+  font-size: 0.6rem;
+  font-weight: 200;
+  transition: all 0.1s ease-in-out;
+  text-transform: uppercase;
+  box-shadow: 2px 3px 3px 0 #474646;
+}
+.button:hover{
+  transform: scale(1.05);
 }
 .icon:active, .button:active{
   transform: scale(0.95);
@@ -58,17 +64,18 @@
 }
 @media screen and (min-width: 480px){
   .button{
-    font-size: 1.5rem;
+    font-size: 0.8rem;
     font-weight: 300;
-    bottom: 18%;
+    bottom: 17%;
+    padding: 0.5rem 0.7rem;
   }
 }
 @media screen and (min-width: 769px){
   .button{
-    font-size: 1.8rem;
+    font-size: 1rem;
     font-weight: 300;
-    bottom: 17%;
-    left: 17%;
+    bottom: 20%;
+    left: 15%;
   }
   .message{
     font-size: 1.7rem;
@@ -86,32 +93,32 @@
   }
 }
 @media screen and (min-width: 1200px){
-  .button{
+  /* .button{
     font-size: 2.4rem;
     padding: 0.8rem;
     left: 20%;
+  } */
+  .button{
+    font-size: 1.3rem;
+    bottom: 20%;
+    left: 18.5%;
+    padding: 0.8rem 1rem;
   }
   .message{
     font-size: 1.9rem;
   }
 }
 @media screen and (min-width: 1350px){
-  .button{
-    font-size: 2.5rem;
-    bottom: 23%;
-    left: 20%;
-    padding: 0.8rem 1rem;
-  }
   .message{
     font-size: 2.2rem;
   }
   .imgContainer{
-    margin-top: -5rem;
+    margin-top: -4rem;
     display: flex;
     align-items: center;
     justify-content: center;
   }
   .img{
-    width:80%;
+    width: 87.5%;
   }
 }

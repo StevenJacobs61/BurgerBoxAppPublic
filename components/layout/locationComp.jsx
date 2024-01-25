@@ -1,12 +1,12 @@
 import { useRouter } from "next/router"
 import styles from '../../styles/locationComp.module.css'
-import {useAlert} from "../../context/alertContext"
+import {useSettings} from "../../context/settingsContext"
 import { useState } from "react";
 
 export default function LocationComp() {
     const router = useRouter();
     const [isHovered, setIsHovered] = useState(false);
-    const {setAlert, setAlertDetails} = useAlert();
+    const {setAlert, setAlertDetails} = useSettings();
     const handleLocationChange = () => {
         setAlertDetails({
           header: "Confirm",

@@ -3,14 +3,14 @@ import React from 'react'
 import styles from '../styles/menu_item.module.css'
 import { useRouter } from 'next/router';
 import redirectWithQuery from "../functions/redirect"
-import {useAlert} from "../context/alertContext"
+import { useSettings } from '../context/settingsContext';
 import burger from '../public/img/justeat-burger.png'
 import { FaCirclePlus } from "react-icons/fa6";
 
 const MenuItem = ({item, section}) => {
   const router = useRouter()
 
-  const {setAlert, setAlertDetails} = useAlert();
+  const {setAlert, setAlertDetails} = useSettings();
 
   const handleSelect = async () => {
     if(!item.available || !section.available){

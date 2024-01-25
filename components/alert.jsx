@@ -1,9 +1,9 @@
 import React from 'react'
 import styles from '../styles/alert.module.css'
-import { useAlert } from '../context/alertContext';
+import { useSettings } from '../context/settingsContext';
 
 const Alert = () => {
-  const {alertDetails} = useAlert();
+  const {alertDetails} = useSettings();
   const {header, message, type, onClose, onConfirm} = alertDetails;
   const handleConfirm = () => {
     onConfirm(); 

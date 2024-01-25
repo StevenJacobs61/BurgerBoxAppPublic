@@ -5,7 +5,6 @@ import axios from 'axios'
 import Alert from '../components/alert'
 import dbConnect from '../utils/mongodb'
 import About from '../components/about'
-import { useAlert } from '../context/alertContext'
 import { useSettings } from '../context/settingsContext'
 import { useMenu } from '../context/menuContext'
 import { useEffect, useRef } from 'react'
@@ -14,9 +13,8 @@ import HeroComp from '../components/landing_page/heroComp'
 
 export default function Home({ productsList, sections, settings}) {
 
-  const {setSettings} = useSettings();
+  const {setSettings, alert} = useSettings();
   const {setSections, setProducts, setOpen} = useMenu();
-  const { alert } = useAlert();
   useEffect(() => {
     setOpen(!sections.every((sect) => sect === false))
     setSettings(settings);

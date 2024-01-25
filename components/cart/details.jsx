@@ -1,11 +1,11 @@
 import React from 'react'
 import styles from '../../styles/checkout.module.css'
 import verifySeafordPostcode from '../../functions/verifyPostcode'
-import { useAlert } from '../../context/alertContext'
+import { useSettings } from '../../context/settingsContext'
 import { useRouter } from 'next/router';
 
 export default function Details({setDetails, postcodeRef, showDeliver}) {
-    const {setAlert, setAlertDetails} = useAlert();
+    const {setAlert, setAlertDetails} = useSettings();
     const router = useRouter();
 
     function handleDetails(e){

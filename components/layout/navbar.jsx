@@ -81,7 +81,7 @@ const Navbar = () => {
  
   return (
   <>
-     <div className={styles.navbar} style={{top: showNav ? '0' : '-110%'}}>
+     <div className={styles.navbar} >
         <div className={styles.container}>
             <div className={styles.chevron_container}>
             <div className={styles.socials}>
@@ -89,10 +89,15 @@ const Navbar = () => {
                   <div className={styles.social} onClick={() => {setClick(!click), router.push('https://www.instagram.com/burgerboxseaford/')}}> <AiOutlineInstagram className={styles.insta}/> </div>
                   <div className={styles.social} onClick={() => {setClick(!click), router.push('https://www.instagram.com/burgerboxseaford/')}}> <RiSnapchatLine className={styles.snap}/> </div>
             </div>
-             {click ?  <HiMenu className={styles.chevron} onClick={() => setClick(!click)}/> :  <HiMenuAlt3 className={styles.chevron} onClick={() => setClick(!click)}/>}
+             {click ?  
+             <HiMenu className={styles.chevron} onClick={() => setClick(!click)}/> 
+             :  
+             <HiMenuAlt3 className={styles.chevron} onClick={() => setClick(!click)}/>
+             }
             </div>
             <div className={styles.logo}
-            style={{transform: !click ? "scale(1.05)" : '', left: !click ? "2%" : ''}}>
+            style={{transform: !click ? "scale(1.05)" : '', left: !click ? "2%" : ''}}
+            >
               <Image
               onClick={async ()=> await redirectWithQuery('/home', router)} 
               className={styles.img} 
@@ -121,11 +126,16 @@ const Navbar = () => {
         :null}
         </div>
         
-    {showBasket && click ? <div className={styles.basket} style={{top: showNav && mobileScreen ? "7rem" : showNav && !mobileScreen ? "11rem" : !showNav ? "2rem" : ""}}>
-          <p className={styles.quantity}>{quantity}</p>
-          <BsBasket className={styles.basket_icon} onClick={async () => await redirectWithQuery("/cart", router)}/>
-              </div>:null}
-     </>
+      {showBasket && click ? 
+        <div className={styles.basket} >
+            <p className={styles.quantity}>
+              {quantity}
+            </p>
+            <BsBasket className={styles.basket_icon} onClick={async () => await redirectWithQuery("/cart", router)}/>
+        </div>
+        :null
+      }
+    </>
   )
 }
 

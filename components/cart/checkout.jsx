@@ -5,7 +5,6 @@ import axios from 'axios';
 import redirectWithQuery from "../../functions/redirect"
 import Alert from '../alert';
 import { useSettings } from '../../context/settingsContext';
-import { useAlert } from '../../context/alertContext';
 import { useOrder } from '../../context/orderContext';
 import verifySeafordPostcode from '../../functions/verifyPostcode';
 import Details from './details';
@@ -17,8 +16,7 @@ import SelectDeliveryOption from './selectDeliveryOption';
 const Checkout = () => {
 
   const router = useRouter();
-  const { settings } = useSettings();
-  const {alert, setAlert, setAlertDetails} = useAlert();
+  const { settings, alert, setAlert, setAlertDetails } = useSettings();
   const {addQuantity, orders, total} = useOrder();
   const [postcodeVerified, setPostcodeVerified] = useState(false)
   const [showDeliver, setShowDeliver] = useState(true);
