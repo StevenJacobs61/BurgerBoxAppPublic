@@ -31,8 +31,14 @@ const CurrentOrders = ({orders, sets, setAlert, setAlertDetails, alertDetails}) 
 
   useEffect(() => {
     const localIp = localStorage.getItem('ip');
+    console.log(localIp);
+    if(!localIp && location === "Seaford"){
+      localIp = process.env.NEXT_PUBLIC_SEAFORD_IP
+    }else{
+      localIp = process.env.NEXT_PUBLIC_SEAFORD_IP
+    }
     const checkAndConnect = () => {
-      if (!printerContext.printer && localIp) {
+      if (!printerContext.printer) {
         printerContext.handleConnect(localIp);
       }
     };
@@ -42,7 +48,7 @@ const CurrentOrders = ({orders, sets, setAlert, setAlertDetails, alertDetails}) 
   
   }, [printerContext]);
 
-
+// console.log(printerContext);
   const handleSectionShow = async (section) => {
     const localIp = await localStorage.getItem('ip')
     if(!printerContext.printer && localIp){
@@ -829,7 +835,9 @@ const CurrentOrders = ({orders, sets, setAlert, setAlertDetails, alertDetails}) 
 
   return (
     <div className={styles.container}>
-        <h1 className={styles.hdr} style={{margin: sectionShow.some((s)=> s === 1) ? null : "0 0 2.5rem"}}>Orders</h1>
+        <h1 className={styles.hdr} 
+        onClick={()=>printerContext.handlePrint()}
+        style={{margin: sectionShow.some((s)=> s === 1) ? null : "0 0 2.5rem"}}>Orders</h1>
         <h2 className={styles.status}>Printer: {printerContext.connectionStatus}</h2>
          {orderSections.map((orderSection) =>
        <div className={styles.sections_container} key={orderSection}>

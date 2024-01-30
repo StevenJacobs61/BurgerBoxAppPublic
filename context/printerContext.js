@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
 import { connect, callback_connect, createData, send, maintainConnection } from '../functions/connectPrinter';
 
 const PrinterContext = createContext();
@@ -21,15 +21,27 @@ export function PrinterProvider({ children }) {
       }, resultConnect);
     });
   };
-
+async function printing(){
+  printer.addText('Test');
+  printer.addFeedLine(2)
+  printer.addCut(printer.CUT_FEED)
+  printer.send();
+}
   const handlePrint = async (data) => {
     try {
-      await createData(printer, data);
-      await createData(printer, data);
+
+      await printing()
+      // await createData(printer, data);
+      // await createData(printer, data);
     } catch (error) {
       console.error(error);
     }
   };
+
+  // useEffect(() => {
+  //   handleConnect()
+  // }, [])
+
 
   return (
     <PrinterContext.Provider value={{ printer, connectionStatus, handleConnect, handlePrint }}>

@@ -3,7 +3,7 @@
 import { DateTime } from "luxon";
 
 const STATUS_CONNECTED = "Connected";
-const printerPort = 8008;
+const printerPort = 443;
 
 const maintainConnection = (ePosDev, ipAddress, setConnectionStatus) => {
   // Set up a setInterval to check the connection status every N milliseconds (adjust the interval as needed)
@@ -29,7 +29,6 @@ const connect = async (ePosDev, ipAddress, setConnectionStatus, callback_connect
     setConnectionStatus("Type the printer IP address");
     return;
   }
-  setConnectionStatus("Connecting ...");
   await ePosDev.connect(ipAddress, printerPort, callback_connect);
 };
 
@@ -55,7 +54,7 @@ const callback_connect = (ePosDev, setConnectionStatus, callback_createDevice, r
       callback_createDevice(deviceObj);
     });
   } else {
-    // Displays error messages
+    // console.error(errorCode)
   }
 };
 
