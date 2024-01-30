@@ -29,24 +29,13 @@ const CurrentOrders = ({orders, sets, setAlert, setAlertDetails, alertDetails}) 
   const socket = useRef(null);
   const printerContext = usePrinter();
 
-  useEffect(() => {
-    const localIp = localStorage.getItem('ip');
-    console.log(localIp);
-    if(!localIp && location === "Seaford"){
-      localIp = process.env.NEXT_PUBLIC_SEAFORD_IP
-    }else{
-      localIp = process.env.NEXT_PUBLIC_SEAFORD_IP
-    }
-    const checkAndConnect = () => {
-      if (!printerContext.printer) {
-        printerContext.handleConnect(localIp);
-      }
-    };
-    window.onload = () => {
-      checkAndConnect();
-    };
+  // useEffect(() => {
+    
+  //   window.onload = () => {
+  //     checkAndConnect();
+  //   };
   
-  }, [printerContext]);
+  // }, [printerContext]);
 
 // console.log(printerContext);
   const handleSectionShow = async (section) => {

@@ -3,16 +3,68 @@
 import { DateTime } from "luxon";
 
 const STATUS_CONNECTED = "Connected";
-const printerPort = 443;
+const printerPort = 8043;
 
-const maintainConnection = (ePosDev, ipAddress, setConnectionStatus) => {
+
+const connect = async (ePosDev, ipAddress, setConnectionStatus, callback_connect) => {
+  setConnectionStatus("Connecting ...");
+  if (!ipAddress) {
+    setConnectionStatus("Incorrect IP address");
+    return;
+  }
+  await ePosDev.connect(ipAddress, printerPort, callback_connect);
+};
+
+const callback_connect = (ePosDev, setConnectionStatus, callback_createDevice, resultConnect) => {
+  
+  const deviceId = 'local_printer';
+  const options = { 'crypto': true, 'buffer': false };
+
+  if (resultConnect === 'OK' || resultConnect === 'SSL_CONNECT_OK') {
+
+    setConnectionStatus(STATUS_CONNECTED);
+    ePosDev.createDevice(
+      deviceId, 
+      ePosDev.DEVICE_TYPE_PRINTER, 
+      options, 
+      (deviceObj, errorCode) => {
+
+      if (deviceObj === null) {
+        setConnectionStatus("Device connection failed")
+        return;
+      }
+      // Registers the print complete event
+      deviceObj.onreceive = (response) => {
+        if (response.success) {
+          setConnectionStatus("Printer found ...")
+        } else {
+          setConnectionStatus("Could not find printer")
+        }
+      };
+      callback_createDevice(deviceObj);
+    });
+  } else {
+    setConnectionStatus("Unknown error")
+  }
+};
+
+const maintainConnection = (ePosDev, ipAddress, setConnectionStatus, setPrinter) => {
   // Set up a setInterval to check the connection status every N milliseconds (adjust the interval as needed)
   const connectionCheckInterval = setInterval(() => {
+    console.log("Checking connection status...");
     const connected =  ePosDev.isConnected();
-    if (!ePosDev.isConnected()) {
+    console.log("Status: " +  connected);
+    if (ePosDev.isConnected()) {
+      console.log('Connected');
+      setConnectionStatus("Connected")
       // If the connection is lost, attempt to reconnect here
+    }else{
       setConnectionStatus("Reconnecting ...");
-      connect(ePosDev, ipAddress, setConnectionStatus, callback_connect);
+      connect(ePosDev, ipAddress, setConnectionStatus, (resultConnect) => {
+        callback_connect(ePosDev, setConnectionStatus, (deviceObj) => {
+          setPrinter(deviceObj);
+        }, resultConnect);
+      });
     }
   }, 9000);
 
@@ -21,41 +73,6 @@ const maintainConnection = (ePosDev, ipAddress, setConnectionStatus) => {
   //   setConnectionStatus("Reconnecting ...");
   //   connect(ePosDev, ipAddress, setConnectionStatus, callback_connect);
   // }
-};
-
-const connect = async (ePosDev, ipAddress, setConnectionStatus, callback_connect) => {
-  setConnectionStatus("Connecting ...");
-  if (!ipAddress) {
-    setConnectionStatus("Type the printer IP address");
-    return;
-  }
-  await ePosDev.connect(ipAddress, printerPort, callback_connect);
-};
-
-const callback_connect = (ePosDev, setConnectionStatus, callback_createDevice, resultConnect) => {
-  const deviceId = 'local_printer';
-  const options = { 'crypto': true, 'buffer': false };
-  if (resultConnect === 'OK' || resultConnect === 'SSL_CONNECT_OK') {
-    setConnectionStatus(STATUS_CONNECTED);
-    // Retrieves the Printer object
-    ePosDev.createDevice(deviceId, ePosDev.DEVICE_TYPE_PRINTER, options, (deviceObj, errorCode) => {
-      if (deviceObj === null) {
-        // Displays an error message if the system fails to retrieve the Printer object
-        return;
-      }
-      // Registers the print complete event
-      deviceObj.onreceive = (response) => {
-        if (response.success) {
-          // Displays the successful print message
-        } else {
-          // Displays error messages
-        }
-      };
-      callback_createDevice(deviceObj);
-    });
-  } else {
-    // console.error(errorCode)
-  }
 };
 
 const createData = (printer, data) => {
